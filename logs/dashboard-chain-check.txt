@@ -1,0 +1,93 @@
+
+== checkpoint setup @ 16777231 (snapshot block 16777231, ts 1794667290)
+  trove true coll 0.048000 principal 2021.820000 interest 0.000014 capacity 2111.989511 price 65999.672210
+  totalCash 1820.800000 totalPrincipal 2021.820000 totalInterest 0.000004 overhead P/I/C 200.000000/0.000000/0.500000
+  vaultMusd 1820.800000 ownerMusd 6.994302 vendorMusd 3.460000 vaultBtc 0.000000 ownerBtc 0.001300
+  threshold 1.000000 ratioBps 15000 groupsClosed 0
+  block 1 Procurement cross=true cash 1800.000000 reserved 0.000000 debtCap 2500.000000 principal 1801.800000 interest 0.000004 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 2 Operations cross=true cash 20.000000 reserved 0.000000 debtCap 40.000000 principal 20.020000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 3 Vendor pocket cross=false cash 0.300000 reserved 0.000000 debtCap 0.000000 principal 0.000000 interest 0.000000 op=0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E active=true expiry=1795272032 perTx 1.500000 totalCap 3.000000 committed 1.700000 spent 1.700000 allowed=0x000000000000000000000000000000000000bEEF
+  payment 1 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.500000 evidence 'INV-001' status 2
+  payment 2 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.200000 evidence 'INV-002' status 2
+  tie-outs: PASS Mezo principal equals the vault ledger [2,021.820000 vs 2,021.820000 MUSD]
+            PASS Mezo interest is at least the settled interest [0.000014 vs 0.000004 MUSD]
+            PASS Block and overhead principal add up to the ledger [2,021.820000 vs 2,021.820000 MUSD]
+            PASS Block and overhead interest add up to the ledger [0.000004 vs 0.000004 MUSD]
+            PASS Vault MUSD equals the cash the vault tracks [1,820.800000 vs 1,820.800000 MUSD]
+
+== checkpoint repaid @ 16777386 (snapshot block 16777386, ts 1794667933)
+  trove true coll 0.048000 principal 2011.820000 interest 0.000000 capacity 2106.004145 price 65812.629540
+  totalCash 1810.799574 totalPrincipal 2011.820000 totalInterest 0.000000 overhead P/I/C 200.000000/0.000000/0.499958
+  vaultMusd 1810.799574 ownerMusd 6.994302 vendorMusd 3.460000 vaultBtc 0.000000 ownerBtc 0.001300
+  threshold 1.000000 ratioBps 15000 groupsClosed 0
+  block 1 Procurement cross=true cash 1789.999620 reserved 0.000000 debtCap 2500.000000 principal 1791.800000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 2 Operations cross=true cash 19.999996 reserved 0.000000 debtCap 40.000000 principal 20.020000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 3 Vendor pocket cross=false cash 0.300000 reserved 0.000000 debtCap 0.000000 principal 0.000000 interest 0.000000 op=0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E active=true expiry=1795272032 perTx 1.500000 totalCap 3.000000 committed 1.700000 spent 1.700000 allowed=0x000000000000000000000000000000000000bEEF
+  payment 1 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.500000 evidence 'INV-001' status 2
+  payment 2 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.200000 evidence 'INV-002' status 2
+  tie-outs: PASS Mezo principal equals the vault ledger [2,011.820000 vs 2,011.820000 MUSD]
+            PASS Mezo interest is at least the settled interest [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead principal add up to the ledger [2,011.820000 vs 2,011.820000 MUSD]
+            PASS Block and overhead interest add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Vault MUSD equals the cash the vault tracks [1,810.799574 vs 1,810.799574 MUSD]
+
+== checkpoint closed @ 16777394 (snapshot block 16777394, ts 1794667965)
+  trove false coll 0.000000 principal 0.000000 interest 0.000000 capacity 0.000000 price 65814.710890
+  totalCash 0.819937 totalPrincipal 0.000000 totalInterest 0.000000 overhead P/I/C 0.000000/0.000000/0.499956
+  vaultMusd 0.819937 ownerMusd 5.153918 vendorMusd 3.460000 vaultBtc 0.048000 ownerBtc 0.001300
+  threshold 1.000000 ratioBps 15000 groupsClosed 1
+  block 1 Procurement cross=true cash 0.009982 reserved 0.000000 debtCap 2500.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 2 Operations cross=true cash 0.010000 reserved 0.000000 debtCap 40.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 3 Vendor pocket cross=false cash 0.300000 reserved 0.000000 debtCap 0.000000 principal 0.000000 interest 0.000000 op=0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E active=true expiry=1795272032 perTx 1.500000 totalCap 3.000000 committed 1.700000 spent 1.700000 allowed=0x000000000000000000000000000000000000bEEF
+  payment 1 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.500000 evidence 'INV-001' status 2
+  payment 2 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.200000 evidence 'INV-002' status 2
+  tie-outs: PASS Mezo principal equals the vault ledger [0.000000 vs 0.000000 MUSD]
+            PASS Mezo interest is at least the settled interest [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead principal add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead interest add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Vault MUSD equals the cash the vault tracks [0.819937 vs 0.819937 MUSD]
+
+== checkpoint swept @ 16777398 (snapshot block 16777398, ts 1794667984)
+  trove false coll 0.000000 principal 0.000000 interest 0.000000 capacity 0.000000 price 65793.780000
+  totalCash 0.000000 totalPrincipal 0.000000 totalInterest 0.000000 overhead P/I/C 0.000000/0.000000/0.000000
+  vaultMusd 0.000000 ownerMusd 5.973855 vendorMusd 3.460000 vaultBtc 0.000000 ownerBtc 0.049300
+  threshold 1.000000 ratioBps 15000 groupsClosed 1
+  block 1 Procurement cross=true cash 0.000000 reserved 0.000000 debtCap 2500.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 2 Operations cross=true cash 0.000000 reserved 0.000000 debtCap 40.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 3 Vendor pocket cross=false cash 0.000000 reserved 0.000000 debtCap 0.000000 principal 0.000000 interest 0.000000 op=0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E active=true expiry=1795272032 perTx 1.500000 totalCap 3.000000 committed 1.700000 spent 1.700000 allowed=0x000000000000000000000000000000000000bEEF
+  payment 1 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.500000 evidence 'INV-001' status 2
+  payment 2 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.200000 evidence 'INV-002' status 2
+  tie-outs: PASS Mezo principal equals the vault ledger [0.000000 vs 0.000000 MUSD]
+            PASS Mezo interest is at least the settled interest [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead principal add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead interest add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Vault MUSD equals the cash the vault tracks [0.000000 vs 0.000000 MUSD]
+
+== checkpoint revoked @ 16777741 (snapshot block 16777741, ts 1794669408)
+  trove false coll 0.000000 principal 0.000000 interest 0.000000 capacity 0.000000 price 65730.433680
+  totalCash 1.100000 totalPrincipal 0.000000 totalInterest 0.000000 overhead P/I/C 0.000000/0.000000/0.000000
+  vaultMusd 1.100000 ownerMusd 4.673855 vendorMusd 3.660000 vaultBtc 0.000000 ownerBtc 0.049300
+  threshold 1.000000 ratioBps 15000 groupsClosed 1
+  block 1 Procurement cross=true cash 0.000000 reserved 0.000000 debtCap 2500.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 2 Operations cross=true cash 0.000000 reserved 0.000000 debtCap 40.000000 principal 0.000000 interest 0.000000 op=0x0000000000000000000000000000000000000000 active=false expiry=0 perTx 0.000000 totalCap 0.000000 committed 0.000000 spent 0.000000 allowed=
+  block 3 Vendor pocket cross=false cash 1.100000 reserved 1.100000 debtCap 0.000000 principal 0.000000 interest 0.000000 op=0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E active=false expiry=1795272032 perTx 1.500000 totalCap 3.000000 committed 3.000000 spent 1.900000 allowed=0x000000000000000000000000000000000000bEEF
+  payment 1 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.500000 evidence 'INV-001' status 2
+  payment 2 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.200000 evidence 'INV-002' status 2
+  payment 3 block 3 to 0x000000000000000000000000000000000000bEEF amount 0.200000 evidence 'INV-005' status 2
+  payment 4 block 3 to 0x000000000000000000000000000000000000bEEF amount 1.100000 evidence 'INV-006' status 1
+  tie-outs: PASS Mezo principal equals the vault ledger [0.000000 vs 0.000000 MUSD]
+            PASS Mezo interest is at least the settled interest [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead principal add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Block and overhead interest add up to the ledger [0.000000 vs 0.000000 MUSD]
+            PASS Vault MUSD equals the cash the vault tracks [1.100000 vs 1.100000 MUSD]
+
+== record verification
+  matched 37 of 37
+== refusals
+  REJECT slice: agent asks 1.6 MUSD, over the 1.5 per-transaction cap => {"name":"PerTransactionCapExceeded","args":["1600000000000000000","1500000000000000000"]}
+  REJECT slice: agent pays an address not on the allowlist => {"name":"RecipientNotAllowed","args":["3","0x000000000000000000000000000000000000c0DE"]}
+  REJECT block limit: block 2 draws 45 MUSD, over its 40 cap => {"name":"BlockDebtCapExceeded","args":["2","45045000000000000000","40000000000000000000"]}
+  REJECT group capacity: block 1 draws over the group capacity => {"name":"GroupCapacityExceeded","args":["2159201602073696172005","2111300400320000000000"]}
+  REJECT close: block 1 cannot yet cover its own debt => {"name":"DebtNotCovered","args":["1","1791800003974591715955","1789999620306485873545"]}
+  REJECT agent requests 0.1 MUSD after revocation => {"name":"MandateRevoked","args":["3"]}
+  REJECT owner approves waiting 1.1 MUSD payment after revocation => {"name":"MandateRevoked","args":["3"]}

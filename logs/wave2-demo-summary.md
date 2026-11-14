@@ -130,3 +130,29 @@ Notes:
 - Final state at block 16777399: vault MUSD 0, vault BTC 0, tracked cash 0. Owner MUSD 5.973855285536359733, which is 6.994301700133054621 minus 1.840383867922351937 plus 0.819937453325657049. Owner BTC 0.049299990267595366, which includes the returned 0.048 BTC less gas.
 - The residual sweep moved 0.819937453325657049 MUSD to the owner (block 1 0.00998, block 2 0.0099998, block 3 0.3, overhead 0.49996). The `ResidualSwept` event matches.
 - The earlier vault `0xf59962C8806E6D2a82808EB4c0b7886dF6fB31cf` still holds 0.819767 MUSD. It has no function that moves tracked cash.
+
+## Mandate revocation on the rerun vault (15:16 to 15:17 UTC, 14 Nov)
+
+Script `scripts/wave2_demo_revocation.py`, log `logs/wave2-revocation.log`. Same rerun vault. Testnet funds only. The script checks state after each step, and all 16 checks pass.
+
+Start state: block 3 cash 0, committed 1.7 MUSD, mandate active, vendor allowed. Vault MUSD 0. Owner MUSD 5.973855. Vendor MUSD 3.46.
+
+| Step | Block | Transaction | Result |
+|---|---|---|---|
+| Owner approves the vault for 1.3 MUSD | 16777733 | `0x8f8d58576c28460a7ad69b93c4512f54d9a0a8430b5476947d06ca16f04a02e8` | OK |
+| Owner funds block 3 with 1.3 MUSD | 16777734 | `0xf9ac03a53227d3cc9650ead64268fdfe2806523b26fb4ff32730d4ca171ae172` | OK |
+| Agent pays 0.2 MUSD to the vendor (under the 1.0 threshold) | 16777737 | `0x3c474e928e34b4d8640e21bd7a821d2d07f4528b2d1071159ff173b93088760d` | Executed |
+| Agent requests 1.1 MUSD (above threshold, waits for owner) | 16777739 | `0x5885513e2a4fd3eee1e1d4517b14a0ae7d15e3646a2a8832276030156584a87d` | Pending (payment 4) |
+| Owner revokes block 3's mandate | 16777741 | `0xc13c95f1e9e89ab45a414cd3978207b842765c5df853057c8aeb4a316b02de17` | OK. Mandate inactive |
+| REJECT: agent requests 0.1 MUSD after revocation | 16777743 | `0xcd4b02ebb2ba0d70516fa84cc65c64ea9cbf19d7652db977b88125f60808d2a9` | Reverted: `MandateRevoked(3)` |
+| REJECT: owner approves the waiting 1.1 MUSD payment | 16777745 | `0x5afb550153a49536adfcc38bc5ff4ead211ce4f2596b1126c5cef3a4b7eccd89` | Reverted: `MandateRevoked(3)`. Payment 4 stays pending |
+| Owner cancels payment 4 | 16777746 | `0x822d1eae25e4738b137bedbe7d4ebc2c5f95d70fa717e201017cd39af755bc18` | OK. Reservation released |
+| Owner sweeps the unspent 1.1 MUSD from block 3 to the owner | 16777750 | `0xa2d91b05cd935b1c865cd8320d20ed03838f6c5faeb9131ee343fe00bcaa4961` | OK |
+
+Final state: block 3 cash 0, reserved 0, committed 1.9 MUSD, mandate inactive, 4 payments counted. Vault MUSD 0. Owner MUSD 5.773855. Vendor MUSD 3.66.
+
+Notes:
+
+- "Committed" counts a pending request against the lifetime cap. The dashboard showed 3.00 of 3.00 at block 16777741, while the 1.1 MUSD request was still pending. The cancel returned it to 1.9.
+- The dashboard reads these transactions back from the chain. Its check covers all 37 rows of `app/src/demo-record.json` and all 7 refusals. Log: `logs/dashboard-chain-check.txt`.
+- The demo has 7 refusals in total: 4 in the setup, 1 at close, and 2 here.

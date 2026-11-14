@@ -1,0 +1,48 @@
+== revocation run start 2026-11-14T15:16:14Z chain=31611 vault=0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641 ==
+-- state at start --
+  block 3: cash 0.000000000000000000, reserved 0.000000000000000000, committed 1.700000000000000000, spent 1.700000000000000000, per-tx cap 1.500000000000000000, total cap 3.000000000000000000, mandate active True, vendor allowed True
+  payments counted 2, groups closed 1, trove active False
+  vault MUSD 0.000000000000000000, tracked cash 0.000000000000000000; owner MUSD 5.973855285536359733; vendor MUSD 3.460000000000000000
+[owner approves vault for 1.3 MUSD] SENT tx=0x8f8d58576c28460a7ad69b93c4512f54d9a0a8430b5476947d06ca16f04a02e8
+[owner approves vault for 1.3 MUSD] OK tx=0x8f8d58576c28460a7ad69b93c4512f54d9a0a8430b5476947d06ca16f04a02e8 block=16777733
+[owner funds block 3 with 1.3 MUSD] SENT tx=0xf9ac03a53227d3cc9650ead64268fdfe2806523b26fb4ff32730d4ca171ae172
+[owner funds block 3 with 1.3 MUSD] OK tx=0xf9ac03a53227d3cc9650ead64268fdfe2806523b26fb4ff32730d4ca171ae172 block=16777734
+-- after funding --
+  block 3: cash 1.300000000000000000, reserved 0.000000000000000000, committed 1.700000000000000000, spent 1.700000000000000000, per-tx cap 1.500000000000000000, total cap 3.000000000000000000, mandate active True, vendor allowed True
+  payments counted 2, groups closed 1, trove active False
+  vault MUSD 1.300000000000000000, tracked cash 1.300000000000000000; owner MUSD 4.673855285536359733; vendor MUSD 3.460000000000000000
+  check PASS: block 3 cash is 1.3
+  check PASS: vault MUSD equals tracked cash
+[agent pays 0.2 MUSD to vendor (under the 1.0 threshold)] SENT tx=0x3c474e928e34b4d8640e21bd7a821d2d07f4528b2d1071159ff173b93088760d
+[agent pays 0.2 MUSD to vendor (under the 1.0 threshold)] OK tx=0x3c474e928e34b4d8640e21bd7a821d2d07f4528b2d1071159ff173b93088760d block=16777737
+  check PASS: payment 3 executed for 0.2 MUSD
+  check PASS: block 3 cash is 1.1 after the payment
+  check PASS: vendor received 0.2 MUSD
+[agent requests 1.1 MUSD (above threshold, waits for owner)] SENT tx=0x5885513e2a4fd3eee1e1d4517b14a0ae7d15e3646a2a8832276030156584a87d
+[agent requests 1.1 MUSD (above threshold, waits for owner)] OK tx=0x5885513e2a4fd3eee1e1d4517b14a0ae7d15e3646a2a8832276030156584a87d block=16777739
+  check PASS: payment 4 pending for 1.1 MUSD
+  check PASS: 1.1 MUSD reserved in block 3
+[owner revokes block 3 mandate] SENT tx=0xc13c95f1e9e89ab45a414cd3978207b842765c5df853057c8aeb4a316b02de17
+[owner revokes block 3 mandate] OK tx=0xc13c95f1e9e89ab45a414cd3978207b842765c5df853057c8aeb4a316b02de17 block=16777741
+  check PASS: mandate inactive after revocation
+[REJECT agent requests 0.1 MUSD after revocation] SENT tx=0xcd4b02ebb2ba0d70516fa84cc65c64ea9cbf19d7652db977b88125f60808d2a9
+[REJECT agent requests 0.1 MUSD after revocation] REFUSED on chain as expected tx=0xcd4b02ebb2ba0d70516fa84cc65c64ea9cbf19d7652db977b88125f60808d2a9 block=16777743: Error: execution reverted: MandateRevoked(3)
+  check PASS: no new payment recorded after the refused request
+[REJECT owner approves waiting 1.1 MUSD payment after revocation] SENT tx=0x5afb550153a49536adfcc38bc5ff4ead211ce4f2596b1126c5cef3a4b7eccd89
+[REJECT owner approves waiting 1.1 MUSD payment after revocation] REFUSED on chain as expected tx=0x5afb550153a49536adfcc38bc5ff4ead211ce4f2596b1126c5cef3a4b7eccd89 block=16777745: Error: execution reverted: MandateRevoked(3)
+  check PASS: payment 4 still pending after refused approval
+[owner cancels waiting payment 4] SENT tx=0x822d1eae25e4738b137bedbe7d4ebc2c5f95d70fa717e201017cd39af755bc18
+[owner cancels waiting payment 4] OK tx=0x822d1eae25e4738b137bedbe7d4ebc2c5f95d70fa717e201017cd39af755bc18 block=16777746
+  check PASS: payment 4 cancelled
+  check PASS: reservation released
+  check PASS: committed back to 1.9 MUSD
+[owner sweeps unspent 1.1 MUSD from block 3 to owner] SENT tx=0xa2d91b05cd935b1c865cd8320d20ed03838f6c5faeb9131ee343fe00bcaa4961
+[owner sweeps unspent 1.1 MUSD from block 3 to owner] OK tx=0xa2d91b05cd935b1c865cd8320d20ed03838f6c5faeb9131ee343fe00bcaa4961 block=16777750
+  check PASS: owner received the unspent 1.1 MUSD
+  check PASS: block 3 cash is zero after the sweep
+  check PASS: vault MUSD is zero after the sweep
+-- final state --
+  block 3: cash 0.000000000000000000, reserved 0.000000000000000000, committed 1.900000000000000000, spent 1.900000000000000000, per-tx cap 1.500000000000000000, total cap 3.000000000000000000, mandate active False, vendor allowed True
+  payments counted 4, groups closed 1, trove active False
+  vault MUSD 0.000000000000000000, tracked cash 0.000000000000000000; owner MUSD 5.773855285536359733; vendor MUSD 3.660000000000000000
+== revocation done 2026-11-14T15:17:34Z ==
