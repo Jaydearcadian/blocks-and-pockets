@@ -1,3 +1,10 @@
 # Foundry build output and caches. forge build and forge test regenerate them.
 out/
 cache/
+
+# Dashboard dependencies and build output. npm install and npm run build regenerate them.
+app/node_modules/
+app/dist/
+
+# Python bytecode.
+__pycache__/
