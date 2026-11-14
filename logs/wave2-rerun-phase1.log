@@ -1,0 +1,33 @@
+== phase 1 start 2026-11-14T14:40:20Z chain=31611 ==
+oracle price (18-dec USD per BTC): 65908261040000000000000
+group capacity at 150% policy for 0.048 BTC (18-dec MUSD): 2109064353280000000000
+block 1 rejected draw, 50 MUSD over capacity (18-dec): 137244353280000000000
+[block 1 Procurement, CROSS, local cap 2500] OK tx=0x5a11444366d05f956895f1f0ef55ad726d058f21a911d9f6b4394ed2500004e0 block=16777214
+[block 2 Operations, CROSS, local cap 40] OK tx=0x24ca0a0b300a252fec114e2a091acb64d0ca1287205490bd1a91863c406b54ac block=16777215
+[block 3 Vendor pocket, ISOLATED slice] OK tx=0x54502a164a4e3dc8c134d9bb52e929e92d069cdcbfeba01fb8e3da8d74a0bf71 block=16777216
+[allow vendor on block 3] OK tx=0xabc9d1ddbddf86ccdbf6e875be38e6c91ce760b9d6d06065a220c4a3069e2d3c block=16777217
+[grant agent mandate on block 3] OK tx=0xfc9b15676dd74c64c0a837940c5b9ab974de30b8a3ac126f4c708e9bc7011509 block=16777218
+[approve vault for 2 MUSD] OK tx=0x3ce2d5604b2611aea3a350b780667b14d1ef024155c0366d50d200212d4f5e3c block=16777219
+[prefund block 3 with 2 MUSD] OK tx=0xcc04f68a5ae8486b1096345592a8eab17e078df032aee8c23ddd8dfa5806283b block=16777220
+[agent pays 0.5 MUSD to vendor (under the 1.0 approval threshold)] OK tx=0x99bc9678e90dd641dfb2f3a648c315deca3be9b1be8348f37a84228d68c7996c block=16777221
+[agent requests 1.2 MUSD (above threshold, waits for owner)] OK tx=0xf9c19972d75501f9a19fecb45cef5bc0f7120cc9cb71c454cd464a6a8b4c009a block=16777222
+[owner approves payment 2] OK tx=0x22e8e78d3d246da77b0c429804dd7272da210da15b0888ed332b24df2dcfbfa4 block=16777223
+[REJECT slice: agent asks 1.6 MUSD, over the 1.5 per-transaction cap] REVERTED as expected tx=0x48eae5a6aa6c94cffc7f29c1d0135ef3f4a97bc308d668822bc952528e23e753 block=16777224
+[REJECT slice: agent pays an address not on the allowlist] REVERTED as expected tx=0x4134c6d0e803fc0c048380ad12c53de1b4c22c91e6742cc47837df6c13addfb8 block=16777225
+[open shared Trove with 0.048 BTC, draw 1,800 MUSD into block 1] OK tx=0x9697de9cc23f4be1b4c4f16e4836218edc1f8bd1ad6d5c9fe99d21c0166f8193 block=16777226
+[REJECT block limit: block 2 draws 45 MUSD, over its 40 cap] REVERTED as expected tx=0x65c6c85d3f119f8534978a118c8b635b98e050101816e80ed5d1e6f170625f4c block=16777227
+[block 2 draws 20 MUSD (inside its cap and the group)] OK tx=0x0434e0a14762660a7cabd98eb22142232be2a2b3f5f48bf4a492f73a53d97872 block=16777228
+[REJECT group capacity: block 1 draws over the group capacity] REVERTED as expected tx=0xe0e758ea25b05d86be6a9c2e3c7e61b7e675a3ec37e5a6d06d494c4df48e8539 block=16777229
+[approve vault for 0.5 MUSD overhead] OK tx=0x8f2d6524894fa5fe8d3af49fef186408e7184cf094fbb6876891c3da370237b5 block=16777230
+[fund overhead with 0.5 MUSD] OK tx=0xaa7c6a280795e97ebaf4f6673a0e64c13163284b1d7b393a47956a5c492d2d39 block=16777231
+-- state at block 16777231 --
+  groupPosition (coll, principal, interest): 48000000000000000 [4.8e16] 2021820000000000000000 [2.021e21] 14050754965181 [1.405e13] 
+  totalPrincipal, totalInterest: 2021820000000000000000 [2.021e21], 4440416172005 [4.44e12]
+  block 1 (cash, reserved, principal, interest): 1800000000000000000000 [1.8e21] 0 1801800000000000000000 [1.801e21] 3996773832909 [3.996e12] 
+  block 2 (cash, reserved, principal, interest): 20000000000000000000 [2e19] 0 20020000000000000000 [2.002e19] 0 
+  block 3 (cash, reserved, principal, interest): 300000000000000000 [3e17] 0 0 0 
+  overhead principal, interest, cash: 200000000000000000000 [2e20], 443642339096 [4.436e11], 500000000000000000 [5e17]
+  vault MUSD balance, totalCash: 1820800000000000000000 [1.82e21], 1820800000000000000000 [1.82e21]
+  groupCapacity: 2111989510720000000000 [2.111e21]
+  vendor MUSD balance: 3460000000000000000 [3.46e18]
+== phase 1 done 2026-11-14T14:41:38Z ==

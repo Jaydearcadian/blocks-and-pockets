@@ -244,6 +244,15 @@ def send(label, expect, to, sig, *args, gas=None):
         if rc != 0:
             log(f"[{label}] SIMULATION FAILED, nothing sent: {err[:400]}")
             sys.exit(1)
+        if not gas:
+            # Pad the estimate by half. The first repay (tx 0x1a12826d...) reverted in block 16777299
+            # with a 2,906,942 gas limit, and a later estimate was 2,918,501. The cause is not
+            # confirmed. Unused gas is refunded.
+            rc, est, err = read_cmd(["cast", "estimate", to, sig, *map(str, args), "--from", OWNER, "--rpc-url", RPC])
+            if rc != 0 or not est.split():
+                log(f"[{label}] ESTIMATE FAILED, nothing sent: {err[:400]}")
+                sys.exit(1)
+            gas = int(est.split()[0]) * 3 // 2
     cmd = [
         "cast", "send", to, sig, *map(str, args),
         "--rpc-url", RPC, "--chain", CHAIN,
