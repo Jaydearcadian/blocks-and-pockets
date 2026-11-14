@@ -1,0 +1,55 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 1.27s
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+   --> src/MoneyblocksVault.sol:437:13:
+    |
+437 |             uint256 avail = c.cash - c.reserved;
+    |             ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> src/MoneyblocksVault.sol:454:9:
+    |
+454 |         uint256 avail = b.cash - b.reserved;
+    |         ^^^^^^^^^^^^^
+
+
+Ran 14 tests for test/MoneyblocksSlice.t.sol:MoneyblocksSliceTest
+[PASS] testAboveThresholdWaitsForOwnerApproval() (gas: 413683)
+[PASS] testCancelReleasesReservation() (gas: 326109)
+[PASS] testExpiredMandateRejects() (gas: 46765)
+[PASS] testLifetimeCapRejects() (gas: 522871)
+[PASS] testOwnerCannotSpendPocketDirectly() (gas: 42152)
+[PASS] testPerTransactionCapRejects() (gas: 50736)
+[PASS] testPocketInsufficientRejects() (gas: 290673)
+[PASS] testRecipientOutsideAllowlistRejects() (gas: 48429)
+[PASS] testReservationReducesAvailableCash() (gas: 290825)
+[PASS] testRevocationStopsPendingPaymentAtApproval() (gas: 318562)
+[PASS] testRevokedMandateRejectsNewRequests() (gas: 77756)
+[PASS] testStrangerCannotChangeMandate() (gas: 39278)
+[PASS] testStrangerCannotRequestPayment() (gas: 43918)
+[PASS] testUnderThresholdPaymentExecutesNow() (gas: 352985)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 3.05ms (1.66ms CPU time)
+
+Ran 19 tests for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+[PASS] testAddCollateralMakesRoomForDraw() (gas: 6456949)
+[PASS] testBlockLimitRejectsDraw() (gas: 3491036)
+[PASS] testBlockShortfallBlocksGroupRepay() (gas: 7722527)
+[PASS] testCloseReturnsCollateralAndClearsDebt() (gas: 11217747)
+[PASS] testGroupCanReopenAfterClose() (gas: 10781112)
+[PASS] testGroupCanReopenAfterSweep() (gas: 10874711)
+[PASS] testGroupCapacityRejectsDraw() (gas: 3572739)
+[PASS] testInterestSplitsAndRepayPaysInterestFirst() (gas: 14100292)
+[PASS] testIsolatedBlockCannotDraw() (gas: 3505541)
+[PASS] testOpenTiesToMezo() (gas: 3677039)
+[PASS] testOpenTwiceRejected() (gas: 3428163)
+[PASS] testRepeatedOperationsKeepLedgerTied() (gas: 61293203)
+[PASS] testResidualSweepAfterClose() (gas: 11400775)
+[PASS] testResidualSweepRefusedBeforeAnyClose() (gas: 3413002)
+[PASS] testResidualSweepRefusedWhileOpen() (gas: 3421247)
+[PASS] testResidualSweepWaitsForReservations() (gas: 7891730)
+[PASS] testSecondMemberDrawTiesOut() (gas: 7203316)
+[PASS] testSliceSpendLeavesGroupLedgerAlone() (gas: 7596864)
+[PASS] testStrayMUSDBlocksSweepUntilRecovered() (gas: 7579638)
+Suite result: ok. 19 passed; 0 failed; 0 skipped; finished in 38.50s (150.49s CPU time)
+
+Ran 2 test suites in 38.50s (38.50s CPU time): 33 tests passed, 0 failed, 0 skipped (33 total tests)

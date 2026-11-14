@@ -1,0 +1,22 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 39.19ms
+Compiler run successful!
+
+Ran 3 tests for test/TroveVaultFork.t.sol:TroveVaultForkTest
+[FAIL: EvmError: Revert] testFullCycle() (block: 16775327) (gas: 288010)
+[FAIL: call reverted as expected, but without data] testOpenBelowMinimumReverts() (block: 16775327) (gas: 289850)
+[FAIL: EvmError: Revert] testRepayBelowMinimumReverts() (block: 16775327) (gas: 287988)
+Suite result: FAILED. 0 passed; 3 failed; 0 skipped; finished in 2.72s (5.50s CPU time)
+
+Ran 1 test suite in 2.72s (2.72s CPU time): 0 tests passed, 3 failed, 0 skipped (3 total tests)
+
+Failing tests:
+Encountered 3 failing tests in test/TroveVaultFork.t.sol:TroveVaultForkTest
+[FAIL: EvmError: Revert] testFullCycle() (block: 16775327) (gas: 288010)
+[FAIL: call reverted as expected, but without data] testOpenBelowMinimumReverts() (block: 16775327) (gas: 289850)
+[FAIL: EvmError: Revert] testRepayBelowMinimumReverts() (block: 16775327) (gas: 287988)
+
+Encountered a total of 3 failing tests, 0 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 3 failed tests
+Tip: Run `forge test --debug --match-test <TEST_NAME>` to inspect one failing test in the debugger

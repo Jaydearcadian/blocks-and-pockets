@@ -1,0 +1,40 @@
+Mutation check, residual sweep guards (copies under /tmp/mutants)
+no-open-guard: CAUGHT
+  target: testResidualSweepRefusedWhileOpen|testResidualSweepRefusedAfterReopen
+  [FAIL: Error != expected error: LedgerDirty() != GroupStillOpen()] testResidualSweepRefusedAfterReopen() (block: 16777015) (gas: 10672417)
+  [FAIL: Error != expected error: NoGroupClosed() != GroupStillOpen()] testResidualSweepRefusedWhileOpen() (block: 16777015) (gas: 3411528)
+  [FAIL: Error != expected error: LedgerDirty() != GroupStillOpen()] testResidualSweepRefusedAfterReopen() (block: 16777015) (gas: 10672417)
+  [FAIL: Error != expected error: NoGroupClosed() != GroupStillOpen()] testResidualSweepRefusedWhileOpen() (block: 16777015) (gas: 3411528)
+  Ran 2 tests for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 32.78s (32.78s CPU time): 0 tests passed, 2 failed, 0 skipped (2 total tests)
+no-closed-guard: CAUGHT
+  target: testResidualSweepRefusedBeforeAnyClose
+  [FAIL: next call did not revert as expected] testResidualSweepRefusedBeforeAnyClose() (block: 16777024) (gas: 3480328)
+  [FAIL: next call did not revert as expected] testResidualSweepRefusedBeforeAnyClose() (block: 16777024) (gas: 3480328)
+  Ran 1 test for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 31.62s (31.62s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+no-reservation-guard: CAUGHT
+  target: testResidualSweepWaitsForReservations
+  [FAIL: next call did not revert as expected] testResidualSweepWaitsForReservations() (block: 16777031) (gas: 7642245)
+  [FAIL: next call did not revert as expected] testResidualSweepWaitsForReservations() (block: 16777031) (gas: 7642245)
+  Ran 1 test for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 38.64s (38.64s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+no-owner-check: CAUGHT
+  target: testResidualSweepAfterClose
+  [FAIL: next call did not revert as expected] testResidualSweepAfterClose() (block: 16777040) (gas: 11229431)
+  [FAIL: next call did not revert as expected] testResidualSweepAfterClose() (block: 16777040) (gas: 11229431)
+  Ran 1 test for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 38.87s (38.86s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+no-zero-amount-guard: CAUGHT
+  target: testSecondSweepHasNothingToMove
+  [FAIL: next call did not revert as expected] testSecondSweepHasNothingToMove() (block: 16777050) (gas: 7559388)
+  [FAIL: next call did not revert as expected] testSecondSweepHasNothingToMove() (block: 16777050) (gas: 7559388)
+  Ran 1 test for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 33.63s (33.63s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+no-zero-address-guard: CAUGHT
+  target: testResidualSweepRejectsZeroAddress
+  [FAIL: Error != expected error: ERC20: transfer to the zero address != ZeroAddress()] testResidualSweepRejectsZeroAddress() (block: 16777059) (gas: 7439622)
+  [FAIL: Error != expected error: ERC20: transfer to the zero address != ZeroAddress()] testResidualSweepRejectsZeroAddress() (block: 16777059) (gas: 7439622)
+  Ran 1 test for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+  Ran 1 test suite in 33.76s (33.76s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+done

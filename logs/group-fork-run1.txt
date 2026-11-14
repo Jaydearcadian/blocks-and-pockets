@@ -1,0 +1,29 @@
+No files changed, compilation skipped
+
+Ran 11 tests for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+[PASS] testAddCollateralMakesRoomForDraw() (gas: 6436607)
+[PASS] testBlockLimitRejectsDraw() (gas: 3470892)
+[FAIL: GroupCapacityExceeded(2101900000000000000000 [2.101e21], 2058664321813333333333 [2.058e21])] testBlockShortfallBlocksGroupRepay() (block: 16775978) (gas: 3473894)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testCloseReturnsCollateralAndClearsDebt() (block: 16775978) (gas: 4849)
+[PASS] testGroupCapacityRejectsDraw() (gas: 3552661)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testInterestSplitsAndRepayPaysInterestFirst() (block: 16775978) (gas: 4893)
+[PASS] testIsolatedBlockCannotDraw() (gas: 3485419)
+[PASS] testOpenTiesToMezo() (gas: 3656543)
+[PASS] testOpenTwiceRejected() (gas: 3407997)
+[PASS] testSecondMemberDrawTiesOut() (gas: 7163182)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testSliceSpendLeavesGroupLedgerAlone() (block: 16775978) (gas: 4871)
+Suite result: FAILED. 7 passed; 4 failed; 0 skipped; finished in 37.10s (128.36s CPU time)
+
+Ran 1 test suite in 37.10s (37.10s CPU time): 7 tests passed, 4 failed, 0 skipped (11 total tests)
+
+Failing tests:
+Encountered 4 failing tests in test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+[FAIL: GroupCapacityExceeded(2101900000000000000000 [2.101e21], 2058664321813333333333 [2.058e21])] testBlockShortfallBlocksGroupRepay() (block: 16775978) (gas: 3473894)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testCloseReturnsCollateralAndClearsDebt() (block: 16775978) (gas: 4849)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testInterestSplitsAndRepayPaysInterestFirst() (block: 16775978) (gas: 4893)
+[FAIL: unknown cheatcode with selector 0x6bce989b; you may have a mismatch between the `Vm` interface (likely in `forge-std`) and the `forge` version] testSliceSpendLeavesGroupLedgerAlone() (block: 16775978) (gas: 4871)
+
+Encountered a total of 4 failing tests, 7 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 4 failed tests
+Tip: Run `forge test --debug --match-test <TEST_NAME>` to inspect one failing test in the debugger

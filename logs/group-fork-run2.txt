@@ -1,0 +1,30 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 903.76ms
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+   --> src/MoneyblocksVault.sol:431:13:
+    |
+431 |             uint256 avail = c.cash - c.reserved;
+    |             ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> src/MoneyblocksVault.sol:448:9:
+    |
+448 |         uint256 avail = b.cash - b.reserved;
+    |         ^^^^^^^^^^^^^
+
+
+Ran 11 tests for test/MoneyblocksGroupFork.t.sol:MoneyblocksGroupForkTest
+[PASS] testAddCollateralMakesRoomForDraw() (gas: 6416661)
+[PASS] testBlockLimitRejectsDraw() (gas: 3450946)
+[PASS] testBlockShortfallBlocksGroupRepay() (gas: 7642522)
+[PASS] testCloseReturnsCollateralAndClearsDebt() (gas: 11079475)
+[PASS] testGroupCapacityRejectsDraw() (gas: 3532715)
+[PASS] testInterestSplitsAndRepayPaysInterestFirst() (gas: 13940063)
+[PASS] testIsolatedBlockCannotDraw() (gas: 3465473)
+[PASS] testOpenTiesToMezo() (gas: 3636597)
+[PASS] testOpenTwiceRejected() (gas: 3388051)
+[PASS] testSecondMemberDrawTiesOut() (gas: 7123289)
+[PASS] testSliceSpendLeavesGroupLedgerAlone() (gas: 7516684)
+Suite result: ok. 11 passed; 0 failed; 0 skipped; finished in 39.48s (153.72s CPU time)
+
+Ran 1 test suite in 39.48s (39.48s CPU time): 11 tests passed, 0 failed, 0 skipped (11 total tests)

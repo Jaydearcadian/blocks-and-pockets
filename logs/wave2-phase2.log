@@ -1,0 +1,192 @@
+== phase 2 run start 2026-11-14T13:43:58Z chain=31611 ==
+-- state at start (block 16776399) --
+  group: coll 0.048000000000000000 BTC, principal 2021.820000000000000000 MUSD, Mezo interest 440718076954960 wei, settled interest 7612142009152 wei
+  trove active: True, totalPrincipal 2021.820000000000000000 MUSD
+  block 1: cash 1800.000000000000000000, reserved 0.000000000000000000, principal 1801.800000000000000000, interest 6851612284988 wei
+  block 2: cash 20.000000000000000000, reserved 0.000000000000000000, principal 20.020000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 760529724164 wei, cash 0.500000000000000000
+  vault MUSD 1820.800000000000000000, tracked cash 1820.800000000000000000, vault BTC 0.000000000000000000
+  owner MUSD 3.517445080430335287, owner BTC 0.001399994854403145
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[accrue interest to now] NO RECEIPT: {"schema_version":1,"success":false,"data":null,"errors":[{"level":"error","code":"cast.error","message":"server returned a null response when a non-null response was expected"}],"warnings":[]} 
+note: the accrue from the aborted run was mined in block 16776401, tx 0xc0601df2b315828a8c0ceb92d419d1910b9d2e099648563985967b454cabe2d0 (status 1, InterestAccrued amount 437590759715957 wei, group interest 445202901725109 wei). The NO RECEIPT line above was the RPC response, not a failed accrue. The run below starts from that state.
+== phase 2 run start 2026-11-14T13:52:10Z chain=31611 ==
+-- state at start (block 16776517) --
+  group: coll 0.048000000000000000 BTC, principal 2021.820000000000000000 MUSD, Mezo interest 755937189371140 wei, settled interest 445202901725109 wei
+  trove active: True, totalPrincipal 2021.820000000000000000 MUSD
+  block 1: cash 1800.000000000000000000, reserved 0.000000000000000000, principal 1801.800000000000000000, interest 396822544838930 wei
+  block 2: cash 20.000000000000000000, reserved 0.000000000000000000, principal 20.020000000000000000, interest 4333010361710 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 44047346524469 wei, cash 0.500000000000000000
+  vault MUSD 1820.800000000000000000, tracked cash 1820.800000000000000000, vault BTC 0.000000000000000000
+  owner MUSD 3.517445080430335287, owner BTC 0.001399994837402321
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[accrue interest to now] OK tx=0xe67b96942ad0ed3fa7caf6cfa725b2ae1d026e60006c2283a19a70289fd29565 block=16776520
+  split by principal, accrued 317141180174815 wei: block 1 282629006755785, block 2 3140322297286, overhead 31371851121744 (expected 282629006755785, 3140322297286, 31371851121744): PASS
+-- after first accrue (block 16776520) --
+  group: coll 0.048000000000000000 BTC, principal 2021.820000000000000000 MUSD, Mezo interest 762344081899924 wei, settled interest 762344081899924 wei
+  trove active: True, totalPrincipal 2021.820000000000000000 MUSD
+  block 1: cash 1800.000000000000000000, reserved 0.000000000000000000, principal 1801.800000000000000000, interest 679451551594715 wei
+  block 2: cash 20.000000000000000000, reserved 0.000000000000000000, principal 20.020000000000000000, interest 7473332658996 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 75419197646213 wei, cash 0.500000000000000000
+  vault MUSD 1820.800000000000000000, tracked cash 1820.800000000000000000, vault BTC 0.000000000000000000
+  owner MUSD 3.517445080430335287, owner BTC 0.001399994808393873
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+waiting 180 seconds so interest accrues
+[accrue interest again after 3 minutes] OK tx=0x1dc5cb3e2642aa5a2a5f29ba13e773f2efa38f344450c8927ec899bfbce4487a block=16776567
+  split by principal, accrued 126215782817048 wei: block 1 112480635011898, block 2 1249784833465, overhead 12485362971685 (expected 112480635011898, 1249784833465, 12485362971685): PASS
+-- after second accrue (block 16776567) --
+  group: coll 0.048000000000000000 BTC, principal 2021.820000000000000000 MUSD, Mezo interest 888559864716972 wei, settled interest 888559864716972 wei
+  trove active: True, totalPrincipal 2021.820000000000000000 MUSD
+  block 1: cash 1800.000000000000000000, reserved 0.000000000000000000, principal 1801.800000000000000000, interest 791932186606613 wei
+  block 2: cash 20.000000000000000000, reserved 0.000000000000000000, principal 20.020000000000000000, interest 8723117492461 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 87904560617898 wei, cash 0.500000000000000000
+  vault MUSD 1820.800000000000000000, tracked cash 1820.800000000000000000, vault BTC 0.000000000000000000
+  owner MUSD 3.517445080430335287, owner BTC 0.001399994779385425
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[block 1 repays 10 MUSD] OK tx=0x5657c61ceca9f0f5f1ddea2aed5fe13fdfe6ccf966b0295412e3bd7046c2b998 block=16776570
+  repay check: principal 2021.820000000000000000 -> 2011.820000000000000000 MUSD, settled interest cleared: PASS
+-- after block 1 repay (block 16776570) --
+  group: coll 0.048000000000000000 BTC, principal 2011.820000000000000000 MUSD, Mezo interest 0 wei, settled interest 0 wei
+  trove active: True, totalPrincipal 2011.820000000000000000 MUSD
+  block 1: cash 1789.999201787168798814, reserved 0.000000000000000000, principal 1791.800000000000000000, interest 0 wei
+  block 2: cash 19.999991207097567600, reserved 0.000000000000000000, principal 20.020000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 0 wei, cash 0.499911398287134951
+  vault MUSD 1810.799104392553501365, tracked cash 1810.799104392553501365, vault BTC 0.000000000000000000
+  owner MUSD 3.517445080430335287, owner BTC 0.001399993969843749
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[approve router to spend 0.0001 BTC] OK tx=0xf0751134d3e9412496ea10a4c0f100af513cc0d57d877bdedaedcab05ddb1e53 block=16776574
+[swap 0.0001 BTC for MUSD on the testnet pool] OK tx=0xfa2b8a6b056ca79ac2054527fc94d902d598f5c035c084364d2c5776f3740729 block=16776575
+-- after swap (block 16776575) --
+  group: coll 0.048000000000000000 BTC, principal 2011.820000000000000000 MUSD, Mezo interest 14025448338610 wei, settled interest 0 wei
+  trove active: True, totalPrincipal 2011.820000000000000000 MUSD
+  block 1: cash 1789.999201787168798814, reserved 0.000000000000000000, principal 1791.800000000000000000, interest 0 wei
+  block 2: cash 19.999991207097567600, reserved 0.000000000000000000, principal 20.020000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 0 wei, cash 0.499911398287134951
+  vault MUSD 1810.799104392553501365, tracked cash 1810.799104392553501365, vault BTC 0.000000000000000000
+  owner MUSD 11.335121337010532516, owner BTC 0.001299993914756197
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+  owner MUSD 3.517445080430335287 -> 11.335121337010532516 (received 7.817676256580197229)
+[REJECT close: block 1 cannot yet cover its own debt] REVERTED as expected tx=0xedfc4035e58df70bf14cd798cb946f55acb2d913af6b6e0b4e91c75f2972e7a2 block=16776577: Error: execution reverted: DebtNotCovered(1, 1791800014194970414125 [1.791e21], 1789999201787168798814 [1.789e21])
+  block 1 owes 1791.800012491573964430 MUSD now and holds 1789.999201787168798814 MUSD
+  block 2 owes 20.020000139569879879 MUSD now and holds 19.999991207097567600 MUSD
+[approve vault for 1.840819636877477895 MUSD of close top-ups] OK tx=0x5f0c652cb591d5dbb7c84de04978d1c729718da1c7c203defcaa44371949e7e7 block=16776578
+[fund block 1 pocket with 1.810810704405165616 MUSD for the close] OK tx=0xbdbf496838791520b230c3f2a8895c9079136b3b5d4bd876aa86bf9c47c2990d block=16776579
+[fund block 2 pocket with 0.030008932472312279 MUSD for the close] NO RECEIPT, the transaction may have landed, rerun re-reads state: {"schema_version":1,"success":false,"data":null,"errors":[{"level":"error","code":"cast.error","message":"server returned a null response when a non-null response was expected"}],"warnings":[]} 
+note: the block 2 top-up from the stopped run was mined in block 16776580, tx 0x0d6f21af2a10031bc124248e925672429258878e2280c5cc08aaa90dd05017d3 (PocketFunded block 2, 0.030008932472312279 MUSD). The NO RECEIPT line above was the RPC response, not a failed transfer. Block 2 cash and the owner's allowance confirm it landed. The run below re-reads state and skips finished steps.
+== phase 2 run start 2026-11-14T13:57:36Z chain=31611 ==
+-- state at start (block 16776595) --
+  group: coll 0.048000000000000000 BTC, principal 2011.820000000000000000 MUSD, Mezo interest 66939639797912 wei, settled interest 0 wei
+  trove active: True, totalPrincipal 2011.820000000000000000 MUSD
+  block 1: cash 1791.810012491573964430, reserved 0.000000000000000000, principal 1791.800000000000000000, interest 0 wei
+  block 2: cash 20.030000139569879879, reserved 0.000000000000000000, principal 20.020000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 0 wei, cash 0.499911398287134951
+  vault MUSD 1812.639924029430979260, tracked cash 1812.639924029430979260, vault BTC 0.000000000000000000
+  owner MUSD 9.494301700133054621, owner BTC 0.001299993578432933
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[accrue interest to now] NO RECEIPT, the transaction may have landed, rerun re-reads state: {"schema_version":1,"success":false,"data":null,"errors":[{"level":"error","code":"cast.error","message":"server returned a null response when a non-null response was expected"}],"warnings":[]} 
+note: the accrue sent by the rerun that stopped at its first step was mined in block 16776598, tx 0x0f4bf8e296c6475f0e16fb1e122f26b59130dbac85cc05c18060727847507e2c. The NO RECEIPT line above was the RPC response. The next run skips the accrue steps, because block 1 has already repaid.
+== phase 2 run start 2026-11-14T13:59:45Z chain=31611 ==
+-- state at start (block 16776626) --
+  group: coll 0.048000000000000000 BTC, principal 2011.820000000000000000 MUSD, Mezo interest 147904727934434 wei, settled interest 73952363967217 wei
+  trove active: True, totalPrincipal 2011.820000000000000000 MUSD
+  block 1: cash 1791.810012491573964430, reserved 0.000000000000000000, principal 1791.800000000000000000, interest 65864662721545 wei
+  block 2: cash 20.030000139569879879, reserved 0.000000000000000000, principal 20.020000000000000000, interest 735913912091 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 7351787333581 wei, cash 0.499911398287134951
+  vault MUSD 1812.639924029430979260, tracked cash 1812.639924029430979260, vault BTC 0.000000000000000000
+  owner MUSD 9.494301700133054621, owner BTC 0.001299993553942309
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+block 1 already repaid, skipping the accrue steps
+block 1 principal already reduced, skipping repay
+owner already holds 9.494301700133054621 MUSD, skipping swap
+  block 1 owes 1791.800131729325443090 MUSD now and holds 1791.810012491573964430 MUSD
+  block 2 owes 20.020001471827824182 MUSD now and holds 20.030000139569879879 MUSD
+blocks already cover their debt, skipping top-ups
+-- before close (block 16776626) --
+  group: coll 0.048000000000000000 BTC, principal 2011.820000000000000000 MUSD, Mezo interest 147904727934434 wei, settled interest 73952363967217 wei
+  trove active: True, totalPrincipal 2011.820000000000000000 MUSD
+  block 1: cash 1791.810012491573964430, reserved 0.000000000000000000, principal 1791.800000000000000000, interest 65864662721545 wei
+  block 2: cash 20.030000139569879879, reserved 0.000000000000000000, principal 20.020000000000000000, interest 735913912091 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 200.000000000000000000, interest 7351787333581 wei, cash 0.499911398287134951
+  vault MUSD 1812.639924029430979260, tracked cash 1812.639924029430979260, vault BTC 0.000000000000000000
+  owner MUSD 9.494301700133054621, owner BTC 0.001299993553942309
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[close the group Trove] SENT tx=0x507084921f886aa284ccb7fc5ca559954a9a6b123fe60afff1e1b919ae5f39e2
+[close the group Trove] OK tx=0x507084921f886aa284ccb7fc5ca559954a9a6b123fe60afff1e1b919ae5f39e2 block=16776629
+-- after close (block 16776629) --
+  group: coll 0.000000000000000000 BTC, principal 0.000000000000000000 MUSD, Mezo interest 0 wei, settled interest 0 wei
+  trove active: False, totalPrincipal 0.000000000000000000 MUSD
+  block 1: cash 0.009872245266272864, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  block 2: cash 0.009998572580773961, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 0.000000000000000000, interest 0 wei, cash 0.499895744050312585
+  vault MUSD 0.819766561897359410, tracked cash 0.819766561897359410, vault BTC 0.048000000000000000
+  owner MUSD 9.494301700133054621, owner BTC 0.001299993434867921
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+[sweep BTC collateral to the owner] SENT tx=0xc15bb717b7809f9c4f7811c39ad98f284592bc2f7085b07f3de96b7f5ffe115c
+[sweep BTC collateral to the owner] OK tx=0xc15bb717b7809f9c4f7811c39ad98f284592bc2f7085b07f3de96b7f5ffe115c block=16776631
+-- final (block 16776631) --
+  group: coll 0.000000000000000000 BTC, principal 0.000000000000000000 MUSD, Mezo interest 0 wei, settled interest 0 wei
+  trove active: False, totalPrincipal 0.000000000000000000 MUSD
+  block 1: cash 0.009872245266272864, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  block 2: cash 0.009998572580773961, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  block 3: cash 0.300000000000000000, reserved 0.000000000000000000, principal 0.000000000000000000, interest 0 wei
+  overhead: principal 0.000000000000000000, interest 0 wei, cash 0.499895744050312585
+  vault MUSD 0.819766561897359410, tracked cash 0.819766561897359410, vault BTC 0.000000000000000000
+  owner MUSD 9.494301700133054621, owner BTC 0.049299993430924952
+  tie-out PASS: Mezo principal equals totalPrincipal
+  tie-out PASS: Mezo interest is at least the settled totalInterest
+  tie-out PASS: buckets plus overhead principal equal totalPrincipal
+  tie-out PASS: buckets plus overhead interest equal totalInterest
+  tie-out PASS: vault MUSD equals tracked cash
+owner BTC 0.001299993553942309 at this run's start, 0.049299993430924952 at end
+left in the vault after close: 0.819766561897359410 MUSD (no owner withdrawal path in this spike)
+== phase 2 done 2026-11-14T14:00:06Z tie-out PASS ==

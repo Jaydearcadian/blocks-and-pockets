@@ -1,0 +1,16 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 39.80ms
+Compiler run successful!
+
+Ran 4 tests for test/TroveVaultFork.t.sol:TroveVaultForkTest
+[PASS] testFullCycle() (gas: 5624812)
+Logs:
+  debt after open: 2001800000000000000000
+  debt after repay: 2000800000000000000000
+
+[PASS] testOpenBelowMinimumReverts() (gas: 207695)
+[PASS] testOpenJustAboveMinimumPasses() (gas: 1702118)
+[PASS] testRepayBelowMinimumReverts() (gas: 1898807)
+Suite result: ok. 4 passed; 0 failed; 0 skipped; finished in 16.91s (48.17s CPU time)
+
+Ran 1 test suite in 16.91s (16.91s CPU time): 4 tests passed, 0 failed, 0 skipped (4 total tests)

@@ -1,0 +1,33 @@
+Compiling 3 files with Solc 0.8.24
+Solc 0.8.24 finished in 944.67ms
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+   --> src/MoneyblocksVault.sol:431:13:
+    |
+431 |             uint256 avail = c.cash - c.reserved;
+    |             ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> src/MoneyblocksVault.sol:448:9:
+    |
+448 |         uint256 avail = b.cash - b.reserved;
+    |         ^^^^^^^^^^^^^
+
+
+Ran 14 tests for test/MoneyblocksSlice.t.sol:MoneyblocksSliceTest
+[PASS] testAboveThresholdWaitsForOwnerApproval() (gas: 413639)
+[PASS] testCancelReleasesReservation() (gas: 326047)
+[PASS] testExpiredMandateRejects() (gas: 46765)
+[PASS] testLifetimeCapRejects() (gas: 522871)
+[PASS] testOwnerCannotSpendPocketDirectly() (gas: 42152)
+[PASS] testPerTransactionCapRejects() (gas: 50736)
+[PASS] testPocketInsufficientRejects() (gas: 290673)
+[PASS] testRecipientOutsideAllowlistRejects() (gas: 48429)
+[PASS] testReservationReducesAvailableCash() (gas: 290825)
+[PASS] testRevocationStopsPendingPaymentAtApproval() (gas: 318518)
+[PASS] testRevokedMandateRejectsNewRequests() (gas: 77756)
+[PASS] testStrangerCannotChangeMandate() (gas: 39278)
+[PASS] testStrangerCannotRequestPayment() (gas: 43918)
+[PASS] testUnderThresholdPaymentExecutesNow() (gas: 352919)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 1.85ms (2.08ms CPU time)
+
+Ran 1 test suite in 5.36ms (1.85ms CPU time): 14 tests passed, 0 failed, 0 skipped (14 total tests)
