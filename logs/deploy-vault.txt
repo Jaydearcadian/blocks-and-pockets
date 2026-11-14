@@ -1,0 +1,17 @@
+Compiling 1 files with Solc 0.8.24
+Solc 0.8.24 finished in 503.13ms
+Compiler run successful with warnings:
+Warning (2519): This declaration shadows an existing declaration.
+   --> src/MoneyblocksVault.sol:431:13:
+    |
+431 |             uint256 avail = c.cash - c.reserved;
+    |             ^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+   --> src/MoneyblocksVault.sol:448:9:
+    |
+448 |         uint256 avail = b.cash - b.reserved;
+    |         ^^^^^^^^^^^^^
+
+Deployer: 0xA445987238e1E2C56739C68743a150CdAcF60db7
+Deployed to: 0xf59962C8806E6D2a82808EB4c0b7886dF6fB31cf
+Transaction hash: 0xc1bdb65ba99b65d73bfcc86e389aae5fb1be9669e29613e013fc1d844ca293a4

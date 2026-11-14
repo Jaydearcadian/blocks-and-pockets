@@ -1,0 +1,3 @@
+# Foundry build output and caches. forge build and forge test regenerate them.
+out/
+cache/
