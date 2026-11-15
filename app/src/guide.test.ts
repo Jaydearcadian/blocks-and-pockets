@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FAUCET_URL, GLOSSARY, START_STEPS, TRY_NEEDS, TROVE_MIN_BTC } from './guide';
+import { FAUCET_URL, GLOSSARY, OWN_VAULT_NOTES, START_STEPS, TRY_NEEDS, TROVE_MIN_BTC } from './guide';
 import { NAV } from './nav';
 
 describe('start-here guide', () => {
@@ -34,5 +34,13 @@ describe('start-here guide', () => {
     expect(text).toMatch(/owner and operator wallets/);
     expect(text).toMatch(/cannot act on|can't act on|cannot send/);
     expect(text).not.toMatch(/anyone can (send|act|spend)/);
+  });
+
+  it('points a visitor to deploying their own vault, for testnet gas only, with them as owner', () => {
+    expect(TRY_NEEDS.join(' ').toLowerCase()).toContain('deploy your own vault');
+    const text = OWN_VAULT_NOTES.join(' ').toLowerCase();
+    expect(text).toContain('you become its owner');
+    expect(text).toContain('testnet gas only');
+    expect(OWN_VAULT_NOTES.join(' ')).toContain('0.048 BTC');
   });
 });

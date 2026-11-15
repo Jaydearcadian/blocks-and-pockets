@@ -109,7 +109,7 @@ export default function App() {
             </Section>
             <Glossary />
             <Section id="contracts" title="Contracts" subtitle={`Mezo testnet, chain ${CHAIN_ID}. Explorer links open in a new tab.`}>
-              <ContractList />
+              <ContractList owner={snap.owner} isDemo={IS_DEMO_VAULT} />
             </Section>
           </>
         ) : (

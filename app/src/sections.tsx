@@ -2,7 +2,6 @@ import {
   AGENT,
   BORROWER_OPERATIONS,
   MUSD,
-  OWNER,
   PRICE_FEED,
   TROVE_MANAGER,
   VAULT,
@@ -336,15 +335,15 @@ export function TieOutList({ items }: { items: TieOut[] }) {
   );
 }
 
-export function ContractList() {
+export function ContractList({ owner, isDemo }: { owner: string; isDemo: boolean }) {
   const items: { label: string; addr: string }[] = [
     { label: 'Vault (MoneyblocksVault)', addr: VAULT },
     { label: 'MUSD', addr: MUSD },
     { label: 'BorrowerOperations', addr: BORROWER_OPERATIONS },
     { label: 'TroveManager', addr: TROVE_MANAGER },
     { label: 'PriceFeed', addr: PRICE_FEED },
-    { label: 'Owner (treasury)', addr: OWNER },
-    { label: 'Agent (operator)', addr: AGENT },
+    { label: isDemo ? 'Owner (treasury)' : 'Owner of this vault', addr: owner },
+    ...(isDemo ? [{ label: 'Agent (operator)', addr: AGENT }] : []),
   ];
   return (
     <ul className="contracts">
