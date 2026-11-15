@@ -22,6 +22,7 @@ import {
   type Review,
   type Values,
 } from './actions';
+import { OwnVault } from './OwnVault';
 import { Callout, Chip, Section } from './ui';
 import { fmtAmount, knownName, mandateState, shortAddr, type BlockView, type Snapshot } from './model';
 import { runCall, type Outcome } from './txflow';
@@ -142,6 +143,7 @@ export function ActionsSection({
       subtitle="Owner and operator actions on this vault. Testnet only. Each action is checked with Mezo first, so a refused action sends nothing."
     >
       <WalletBar wallet={wallet} ctx={ctx} />
+      {!owner && ops.length === 0 && <OwnVault wallet={wallet} />}
       {!live && (
         <Callout tone="info" title="Viewing a past checkpoint">
           Switch to Live to act on the vault. Checkpoints are read-only.

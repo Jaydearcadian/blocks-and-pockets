@@ -20,7 +20,7 @@ export const START_STEPS: StartStep[] = [
   },
   {
     title: 'Try it with a testnet wallet',
-    body: 'Connect a testnet wallet to review and send owner or operator actions. See what you need before you try.',
+    body: 'Deploy your own vault from a testnet wallet, then review and send owner and operator actions on it. See what you need first.',
     target: 'actions',
   },
 ];
@@ -63,8 +63,14 @@ export const GLOSSARY: GlossaryEntry[] = [
 ];
 
 export const TRY_NEEDS: string[] = [
-  'Actions on a vault are limited to that vault\u2019s owner and operator wallets, so a visitor with another wallet cannot act on the demo vault.',
+  'Actions on a vault are limited to that vault\u2019s owner and operator wallets, so a visitor with another wallet cannot act on the demo vault. Deploy your own vault in the Actions section to act as an owner.',
   `Opening a shared Trove group needs about ${TROVE_MIN_BTC} BTC of testnet collateral and at least 1,800 MUSD of debt.`,
   'A prefunded slice needs MUSD only, plus a little testnet BTC for gas.',
   'The testnet faucet is protected by a CAPTCHA, so amounts are not guaranteed.',
+];
+
+export const OWN_VAULT_NOTES: string[] = [
+  'This deploys a new copy of the vault contract from your wallet. You become its owner. It costs testnet gas only.',
+  'Then you can create blocks, set payees, grant mandates (you can name your own address as the operator), and change the approval threshold.',
+  'Moving MUSD needs MUSD in your wallet, and opening a Trove group needs about 0.048 BTC of testnet collateral.',
 ];

@@ -1068,6 +1068,29 @@ code {
   }
 }
 
+.own-vault {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.own-vault h3 {
+  font-size: 18px;
+}
+
+.own-vault-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.own-vault a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
 /* Small screens */
 
 @media (max-width: 900px) {

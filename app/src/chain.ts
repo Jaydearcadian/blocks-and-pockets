@@ -1,5 +1,5 @@
 import { createPublicClient, decodeErrorResult, defineChain, http, parseAbiItem, type Hex } from 'viem';
-import { CHAIN_ID, EXPLORER_URL, MUSD, OWNER, PRICE_FEED, RPC_URL, VAULT, VENDOR } from './config';
+import { CHAIN_ID, EXPLORER_URL, MUSD, PRICE_FEED, RPC_URL, VAULT, VENDOR } from './config';
 import { erc20Abi, priceFeedAbi, vaultAbi } from './abi';
 import {
   decodeEvidence,
@@ -50,8 +50,10 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
   const head = await client.getBlock(o);
   const V = { address: VAULT, abi: vaultAbi } as const;
 
+  // The balances below follow the vault's real owner, so another vault shows its own owner's wallet.
+  const owner = await client.readContract({ ...V, functionName: 'owner', ...o });
+
   const [
-    owner,
     ratioBps,
     threshold,
     blockCount,
@@ -73,7 +75,6 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
     vaultBtc,
     ownerBtc,
   ] = await Promise.all([
-    client.readContract({ ...V, functionName: 'owner', ...o }),
     client.readContract({ ...V, functionName: 'targetRatioBps', ...o }),
     client.readContract({ ...V, functionName: 'approvalThreshold', ...o }),
     client.readContract({ ...V, functionName: 'blockCount', ...o }),
@@ -90,10 +91,10 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
     client.readContract({ ...V, functionName: 'groupCapacity', ...o }),
     client.readContract({ address: PRICE_FEED, abi: priceFeedAbi, functionName: 'fetchPrice', ...o }),
     client.readContract({ address: MUSD, abi: erc20Abi, functionName: 'balanceOf', args: [VAULT], ...o }),
-    client.readContract({ address: MUSD, abi: erc20Abi, functionName: 'balanceOf', args: [OWNER], ...o }),
+    client.readContract({ address: MUSD, abi: erc20Abi, functionName: 'balanceOf', args: [owner], ...o }),
     client.readContract({ address: MUSD, abi: erc20Abi, functionName: 'balanceOf', args: [VENDOR], ...o }),
     client.getBalance({ address: VAULT, ...o }),
-    client.getBalance({ address: OWNER, ...o }),
+    client.getBalance({ address: owner, ...o }),
   ]);
 
   const blockReads = await Promise.all(

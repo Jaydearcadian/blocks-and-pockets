@@ -15,6 +15,7 @@ From the repo root:
 ```sh
 forge build
 forge test                      # 40 tests, about 45 s. The fork tests read https://rpc.test.mezo.org.
+scripts/check-vault-artifact.sh      # run after any contract change; fails if app/src/vaultArtifact.json is stale
 python3 scripts/live_run_check.py   # read-only, expects "15 of 15" PASS; rewrites logs/live-run/transactions.md
 ```
 
@@ -23,7 +24,7 @@ From `app/`:
 ```sh
 npm ci
 npm run typecheck
-npm test                        # vitest, node environment, logic tests only (100)
+npm test                        # vitest, node environment, logic tests only (117)
 npm run build                   # typecheck, then vite build
 npm run dev                     # http://127.0.0.1:5173
 ```

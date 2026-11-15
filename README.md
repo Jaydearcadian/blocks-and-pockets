@@ -47,6 +47,12 @@ python3 scripts/live_run_check.py
 
 This reads the public testnet RPC, decodes the chain and compares it with the run ledger in `logs/live-run/`. It sends nothing and needs no keys. It expects **15 of 15 checks to pass**. It uses only the Python standard library plus `cast` and `forge` from Foundry.
 
+## Try it yourself
+
+Actions on a vault are limited to its owner and operator wallets, so a visitor cannot act on the demo vault. The dashboard's Actions section has a **Deploy my vault** card instead. Connect a Mezo testnet wallet, deploy a fresh copy of the contract (testnet gas only), open the link it gives you, and you are the owner. You can then create blocks, set payees, grant mandates (you can name your own address as the operator) and change the approval threshold. Moving MUSD needs MUSD in your wallet, and opening a Trove group needs about 0.048 BTC.
+
+How well this is tested: the deploy and owner flow ran end to end through the dashboard on a local fork of Mezo testnet, with the price feed mocked (its oracle does not run on a fork) and an injected test wallet. It has **not** been run with a consumer wallet or as a live testnet deployment from the hosted page. The code paths are covered by 11 unit tests.
+
 ## Build and test
 
 Needs Node 26 with npm, and [Foundry](https://getfoundry.sh) 1.9 or newer (forge downloads solc 0.8.24).
@@ -57,12 +63,12 @@ forge test          # 40 tests, about 45 s; the fork tests read the public Mezo 
 cd app
 npm ci
 npm run typecheck
-npm test            # 100 tests
+npm test            # 117 tests
 npm run build
 npm run dev         # http://127.0.0.1:5173
 ```
 
-To point the dashboard at another testnet vault, copy `app/.env.example` to `app/.env.local` and set `VITE_VAULT_ADDRESS` and `VITE_DEPLOY_BLOCK`.
+To open another testnet vault, add `?vault=0x…&from=<deploy block>` to the page URL, or copy `app/.env.example` to `app/.env.local` and set `VITE_VAULT_ADDRESS` and `VITE_DEPLOY_BLOCK`. After a change to `src/MoneyblocksVault.sol`, run `scripts/check-vault-artifact.sh` (it checks that `app/src/vaultArtifact.json` still matches the compiled contract).
 
 ## Repo map
 
@@ -81,7 +87,7 @@ To point the dashboard at another testnet vault, copy `app/.env.example` to `app
 
 - Liquidation and redistribution are not modelled. If Mezo reports pending rewards, or its totals stop matching the vault ledger, ledger actions revert.
 - Not audited. Policy choices such as the shortfall policy, overhead costs and borrow fees are open.
-- The dashboard's wallet actions were tested through a test-wallet bridge, not a consumer wallet such as MetaMask.
+- The dashboard's wallet actions were tested through a test-wallet bridge (live testnet) and an injected test wallet (local fork), not a consumer wallet such as MetaMask.
 - Actions are role-gated to a vault's owner and operator wallets. A visitor can read and verify the demo vault but cannot act on it.
 - Opening a Trove group needs about 0.048 BTC of testnet collateral and at least 1,800 MUSD of debt.
 - An older testnet spike vault (`0xf59962C8806E6D2a82808EB4c0b7886dF6fB31cf`) still holds 0.819767 MUSD and has no recovery path.

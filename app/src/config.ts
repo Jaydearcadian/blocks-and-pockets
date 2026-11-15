@@ -1,19 +1,44 @@
 import { isAddress } from 'viem';
 
 export const CHAIN_ID = 31611;
-export const RPC_URL = 'https://rpc.test.mezo.org';
+// VITE_RPC_URL points a build at a local fork of Mezo testnet for tests. Hosted builds use the public RPC.
+export const RPC_URL = (import.meta.env as Record<string, string | undefined>).VITE_RPC_URL?.trim() || 'https://rpc.test.mezo.org';
 export const EXPLORER_URL = 'https://explorer.test.mezo.org';
 export const POLL_MS = 20_000;
 
-// The dashboard shows the demo vault unless VITE_VAULT_ADDRESS names another testnet vault.
-// VITE_DEPLOY_BLOCK is that vault's deploy block. Payee events are read from there.
+// The dashboard shows the demo vault. A visitor can open another testnet vault with ?vault=0x...&from=<deploy block>,
+// and a build can set VITE_VAULT_ADDRESS and VITE_DEPLOY_BLOCK. The query wins over the env variables.
+// Payee events are read from the deploy block.
 export const DEMO_VAULT = '0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641' as const;
-const env = import.meta.env as Record<string, string | undefined>;
-const vaultOverride = env.VITE_VAULT_ADDRESS?.trim();
-if (vaultOverride && !isAddress(vaultOverride)) throw new Error('VITE_VAULT_ADDRESS is not an address');
-export const VAULT = (vaultOverride || DEMO_VAULT) as `0x${string}`;
-export const IS_DEMO_VAULT = VAULT.toLowerCase() === DEMO_VAULT.toLowerCase();
-export const DEPLOY_BLOCK = BigInt(env.VITE_DEPLOY_BLOCK?.trim() || '16777200');
+const DEFAULT_DEPLOY_BLOCK = 16777200n;
+
+type Env = Record<string, string | undefined>;
+
+export function resolveVault(
+  search: string,
+  env: Env,
+): { vault: `0x${string}`; deployBlock: bigint; isDemo: boolean } {
+  const params = new URLSearchParams(search);
+  const fromQuery = params.get('vault')?.trim();
+  const fromEnv = env.VITE_VAULT_ADDRESS?.trim();
+  if (fromEnv && !isAddress(fromEnv)) throw new Error('VITE_VAULT_ADDRESS is not an address');
+
+  let vault: `0x${string}` = (fromEnv || DEMO_VAULT) as `0x${string}`;
+  let blockText = env.VITE_DEPLOY_BLOCK?.trim();
+  if (fromQuery && isAddress(fromQuery)) {
+    vault = fromQuery;
+    const from = params.get('from')?.trim();
+    blockText = from !== undefined && /^\d+$/.test(from) ? from : undefined;
+  }
+  const deployBlock = blockText && /^\d+$/.test(blockText) ? BigInt(blockText) : DEFAULT_DEPLOY_BLOCK;
+  return { vault, deployBlock, isDemo: vault.toLowerCase() === DEMO_VAULT.toLowerCase() };
+}
+
+const env = import.meta.env as Env;
+const resolved = resolveVault(typeof location === 'undefined' ? '' : location.search, env);
+export const VAULT = resolved.vault;
+export const IS_DEMO_VAULT = resolved.isDemo;
+export const DEPLOY_BLOCK = resolved.deployBlock;
 
 export const MUSD = '0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503' as const;
 export const PRICE_FEED = '0x86bCF0841622a5dAC14A313a15f96A95421b9366' as const;
