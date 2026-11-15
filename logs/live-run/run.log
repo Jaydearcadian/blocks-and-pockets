@@ -1,0 +1,608 @@
+2026-11-15T11:08:15Z -- fresh vault before close: trove active True, group 0.048000000000000000 BTC, principal 2001.800000000000000000, Mezo interest 41633342028723179 wei, settled 0 wei
+2026-11-15T11:08:15Z    blocks: 1 1803.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 1.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:08:15Z    vault MUSD 1804.000000000000000000, tracked 1804.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 0.073855285536359733, owner BTC 0.001299988823225605
+2026-11-15T11:08:15Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:08:15Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:08:15Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:08:15Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:08:15Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:08:15Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:08:15Z   check PASS: fresh vault trove is active
+2026-11-15T11:08:15Z   check PASS: fresh vault has not closed before
+2026-11-15T11:08:16Z [FC1 approve 0.01 MUSD overhead (fresh vault)] SENT 0xe134c6cd8fa443ffd912d2c623966c05274c8de44dced337c44c8351cc4d4f6f
+2026-11-15T11:08:18Z [FC1 approve 0.01 MUSD overhead (fresh vault)] OK block 16794938 gas 46382
+2026-11-15T11:08:19Z [FC2 fundOverhead 0.01 MUSD (fresh vault)] SENT 0xc115049c883099f8e4257b5add3e971d0f2755cdf5d36fdf1cb4154686a9e1e6
+2026-11-15T11:08:22Z [FC2 fundOverhead 0.01 MUSD (fresh vault)] OK block 16794939 gas 64183
+2026-11-15T11:08:23Z [FC3 closeGroup (fresh vault)] SENT 0x40b3f81b16d550f0505aab0dcfcc2e0ca8ae541cf16db9fb0a1d885bd38c05f1
+2026-11-15T11:08:25Z [FC3 closeGroup (fresh vault)] OK block 16794940 gas 450781
+2026-11-15T11:08:30Z -- fresh vault after close: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:08:30Z    blocks: 1 1.162515971124207434 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 1.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.005839268634055659, overhead interest 0 wei
+2026-11-15T11:08:30Z    vault MUSD 2.168355239758263093, tracked 2.168355239758263093, vault BTC 0.048000000000000000; owner MUSD 0.063855285536359733, owner BTC 0.001299988741269089
+2026-11-15T11:08:30Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:08:30Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:08:30Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:08:30Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:08:30Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:08:30Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:08:30Z   check PASS: fresh vault trove is closed
+2026-11-15T11:08:30Z   check PASS: collateral returned to the fresh vault
+2026-11-15T11:08:32Z [FC4 sweepBTC to owner (fresh vault)] SENT 0x92d67433b9e4d258540d2e003b480584191bd9e9cd8ebcee0dc303011a58fba4
+2026-11-15T11:08:36Z [FC4 sweepBTC to owner (fresh vault)] OK block 16794943 gas 30143
+2026-11-15T11:08:37Z [FC5 sweepResidualMUSD to owner (fresh vault)] SENT 0xcf430a9cd1a9f3171aed08ed2472588fb77ab376f7be19f32ab9471ffc4c5a3f
+2026-11-15T11:08:39Z [FC5 sweepResidualMUSD to owner (fresh vault)] OK block 16794944 gas 90435
+2026-11-15T11:08:44Z -- fresh vault after sweeps: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:08:44Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:08:44Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 2.232210525294622826, owner BTC 0.049299988723664701
+2026-11-15T11:08:44Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:08:44Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:08:44Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:08:44Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:08:44Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:08:44Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:08:44Z   check PASS: fresh vault holds no MUSD and no BTC
+2026-11-15T11:08:44Z   check PASS: owner BTC rose by the returned collateral, less gas
+2026-11-15T11:08:44Z   check PASS: owner MUSD rose by the residue
+2026-11-15T11:08:44Z fresh vault closed: owner BTC 0.049299988723664701, owner MUSD 2.232210525294622826
+2026-11-15T11:08:53Z [SW1 approve router to spend 0.0001 BTC] SENT 0x6a968b087417bb9a13864caafd2731b7e6143d67ad63e2b5450d2bf13e16d067
+2026-11-15T11:08:58Z [SW1 approve router to spend 0.0001 BTC] OK block 16794948 gas 25540
+2026-11-15T11:08:59Z [SW2 swap 0.0001 BTC for MUSD (testnet pool)] SENT 0xac8796ba4e7f800bb974f3c9cc22cbbb8384cd7f54a12febe5b2d17b2edf4ef7
+2026-11-15T11:09:01Z [SW2 swap 0.0001 BTC for MUSD (testnet pool)] OK block 16794949 gas 232795
+2026-11-15T11:09:07Z -- after swap: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:09:07Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:09:07Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.049199988685947791
+2026-11-15T11:09:07Z   tie-out PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:09:07Z   tie-out PASS: Mezo interest is at least totalInterest
+2026-11-15T11:09:07Z   tie-out PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:09:07Z   tie-out PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:09:07Z   tie-out PASS: vault MUSD equals tracked cash
+2026-11-15T11:09:07Z   tie-out PASS: reserved cash never exceeds block cash
+2026-11-15T11:09:07Z owner MUSD after swap 10.013509145078201233
+2026-11-15T11:09:16Z deploy sent: vault 0x4c716Be7F97EaC8B3dc1c5593649a387751C9835, tx 0xb28cf7c3ba1f3283ae66c69dad3ad11f80163e230baf68d4fa90d579e5e22996
+2026-11-15T11:09:17Z [D1 deploy MoneyblocksVault] OK block 16794952 gas 5285365
+2026-11-15T11:09:17Z   check PASS: contract code present at the deployed address
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back owner
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back targetRatioBps 15000
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back approvalThreshold 1 MUSD
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back borrowerOperations
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back troveManager
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back priceFeed
+2026-11-15T11:09:19Z   check PASS: deployed vault reads back musd
+2026-11-15T11:09:19Z vault deployed at 0x4c716Be7F97EaC8B3dc1c5593649a387751C9835 in block 16794952
+2026-11-15T11:10:03Z [T2.1 refuse sweepResidualMUSD before any group opens] SENT 0xc64d02a61075706ef622fad4dcd870b5ae657296cf6a260a9f3db13f6053484c
+2026-11-15T11:10:11Z [T2.1 refuse sweepResidualMUSD before any group opens] REVERTED block 16794965 gas 3000000: NoGroupClosed | replay: NoGroupClosed
+2026-11-15T11:10:11Z   check PASS: T2 vault owner is the owner wallet
+2026-11-15T11:10:12Z [T3.1 createMoneyblock 1 Procurement (cross, cap 2500)] SENT 0x874944652f57510bd0ebd88360963bfc7bac159332fda804a9d6a37be7922321
+2026-11-15T11:10:14Z [T3.1 createMoneyblock 1 Procurement (cross, cap 2500)] OK block 16794966 gas 161965
+2026-11-15T11:10:15Z [T3.2 createMoneyblock 2 Operations (cross, cap 40)] SENT 0x413e069f20a1cec751de828bef3a97cfd7d66931fb094ad8b6bda503f991f299
+2026-11-15T11:10:17Z [T3.2 createMoneyblock 2 Operations (cross, cap 40)] OK block 16794967 gas 127753
+2026-11-15T11:10:19Z [T3.3 createMoneyblock 3 Vendor pocket (isolated)] SENT 0xa694c9a3a5cf78d6eef1d0bcd4ee7cace46500b72bc6ad07559ceeaa38db1ddb
+2026-11-15T11:10:24Z [T3.3 createMoneyblock 3 Vendor pocket (isolated)] OK block 16794968 gas 79973
+2026-11-15T11:10:25Z [T3.4 createMoneyblock 4 Short mandate (isolated)] SENT 0xcc74844b349f2bebf212a946e2a06264ebf3f059074debae61bdb8a545de0876
+2026-11-15T11:10:29Z [T3.4 createMoneyblock 4 Short mandate (isolated)] OK block 16794970 gas 79973
+2026-11-15T11:10:29Z   check PASS: T3 four blocks exist
+2026-11-15T11:10:30Z [T3.5 refuse createMoneyblock from operator] SENT 0xac6a35244fb87320964d069614b612cacd67eba23cd6d12894ed8e349aec51ae
+2026-11-15T11:10:32Z [T3.5 refuse createMoneyblock from operator] REVERTED block 16794971 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:10:34Z [T3.6 setRecipient block 3: vendor allowed] SENT 0x247dee2491f9178165e383ad44cf513999545850fefe9b7c245fe45c8e6e0d97
+2026-11-15T11:10:36Z [T3.6 setRecipient block 3: vendor allowed] OK block 16794972 gas 51072
+2026-11-15T11:10:37Z [T3.7 refuse setRecipient from operator] SENT 0x5916e459fce5e203cf0b0fa725c740c5326699c0fb512cf25f6e58516fabca05
+2026-11-15T11:10:45Z [T3.7 refuse setRecipient from operator] REVERTED block 16794973 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:10:45Z [T3.8 refuse setRecipient on block 99] SENT 0x39c4259ef2554d6300a55f5775fa9b46060c2b3f043299098ad9c1818cf943f3
+2026-11-15T11:10:51Z [T3.8 refuse setRecipient on block 99] REVERTED block 16794974 gas 3000000: BlockNotFound(99) | replay: BlockNotFound(99)
+2026-11-15T11:10:53Z [T3.9 grantMandate block 3: operator, 1.5 per payment, 5 total, 30 days] SENT 0x724d9b8bed8f1c219229495cd785626dc18e54c03009630839d06d5e16ef6318
+2026-11-15T11:10:54Z [T3.9 grantMandate block 3: operator, 1.5 per payment, 5 total, 30 days] OK block 16794976 gas 97783
+2026-11-15T11:10:55Z [T3.10 refuse grantMandate with expiry in the past] SENT 0xccf2c7434474b165bc37abb910cb93bc0f972e0bf1e6e2459845be3e91d3b4f1
+2026-11-15T11:11:01Z [T3.10 refuse grantMandate with expiry in the past] REVERTED block 16794977 gas 3000000: InvalidMandate | replay: InvalidMandate
+2026-11-15T11:11:01Z [T3.11 refuse grantMandate from operator] SENT 0x901251b8d2e269fc6674687c7c8477781fef4e10e4a830242eb6bb0fbdb5e838
+2026-11-15T11:11:05Z [T3.11 refuse grantMandate from operator] REVERTED block 16794979 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:11:10Z -- after Task 3: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:11:10Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:11:10Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.049199986512900727
+2026-11-15T11:11:10Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:11:10Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:11:10Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:11:10Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:11:10Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:11:10Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:11:10Z [T4.1 refuse openGroup on isolated block 3] SENT 0x9f4c30c2b29e556e8a465f00a9f8299e75e7fcac5afbcabb4d743ec594e1df66
+2026-11-15T11:11:16Z [T4.1 refuse openGroup on isolated block 3] REVERTED block 16794980 gas 3000000: BlockNotCross(3) | replay: BlockNotCross(3)
+2026-11-15T11:11:17Z [T4.2 refuse openGroup with no BTC] SENT 0x0e7a31f4067f27628386d05667f333a7f6a939073b7e93329b195dc27ac33f61
+2026-11-15T11:11:21Z [T4.2 refuse openGroup with no BTC] REVERTED block 16794982 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:12:04Z STOP [T4.3 refuse openGroup from operator] expected NotOwner, simulation says Error: server returned an error response: error code -32000: rpc error: code = Internal desc = insufficient balance for transfer. Nothing sent.
+2026-11-15T11:12:04Z run stopped: [T4.3 refuse openGroup from operator] expected NotOwner, simulation says Error: server returned an error response: error code -32000: rpc error: code = Internal desc = insufficient balance for transfer. Nothing sent.
+2026-11-15T11:15:44Z [T2.1 refuse sweepResidualMUSD before any group opens] already on chain: tx 0xc64d02a61075706ef622fad4dcd870b5ae657296cf6a260a9f3db13f6053484c, status 0, not sent again
+2026-11-15T11:15:45Z   check PASS: T2 vault owner is the owner wallet
+2026-11-15T11:15:45Z [T3.1 createMoneyblock 1 Procurement (cross, cap 2500)] already on chain: tx 0x874944652f57510bd0ebd88360963bfc7bac159332fda804a9d6a37be7922321, status 1, not sent again
+2026-11-15T11:15:45Z [T3.2 createMoneyblock 2 Operations (cross, cap 40)] already on chain: tx 0x413e069f20a1cec751de828bef3a97cfd7d66931fb094ad8b6bda503f991f299, status 1, not sent again
+2026-11-15T11:15:45Z [T3.3 createMoneyblock 3 Vendor pocket (isolated)] already on chain: tx 0xa694c9a3a5cf78d6eef1d0bcd4ee7cace46500b72bc6ad07559ceeaa38db1ddb, status 1, not sent again
+2026-11-15T11:15:45Z [T3.4 createMoneyblock 4 Short mandate (isolated)] already on chain: tx 0xcc74844b349f2bebf212a946e2a06264ebf3f059074debae61bdb8a545de0876, status 1, not sent again
+2026-11-15T11:15:45Z   check PASS: T3 four blocks exist
+2026-11-15T11:15:45Z [T3.5 refuse createMoneyblock from operator] already on chain: tx 0xac6a35244fb87320964d069614b612cacd67eba23cd6d12894ed8e349aec51ae, status 0, not sent again
+2026-11-15T11:15:45Z [T3.6 setRecipient block 3: vendor allowed] already on chain: tx 0x247dee2491f9178165e383ad44cf513999545850fefe9b7c245fe45c8e6e0d97, status 1, not sent again
+2026-11-15T11:15:45Z [T3.7 refuse setRecipient from operator] already on chain: tx 0x5916e459fce5e203cf0b0fa725c740c5326699c0fb512cf25f6e58516fabca05, status 0, not sent again
+2026-11-15T11:15:45Z [T3.8 refuse setRecipient on block 99] already on chain: tx 0x39c4259ef2554d6300a55f5775fa9b46060c2b3f043299098ad9c1818cf943f3, status 0, not sent again
+2026-11-15T11:15:45Z [T3.9 grantMandate block 3: operator, 1.5 per payment, 5 total, 30 days] already on chain: tx 0x724d9b8bed8f1c219229495cd785626dc18e54c03009630839d06d5e16ef6318, status 1, not sent again
+2026-11-15T11:15:45Z [T3.10 refuse grantMandate with expiry in the past] already on chain: tx 0xccf2c7434474b165bc37abb910cb93bc0f972e0bf1e6e2459845be3e91d3b4f1, status 0, not sent again
+2026-11-15T11:15:45Z [T3.11 refuse grantMandate from operator] already on chain: tx 0x901251b8d2e269fc6674687c7c8477781fef4e10e4a830242eb6bb0fbdb5e838, status 0, not sent again
+2026-11-15T11:15:50Z -- after Task 3: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:15:50Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:15:50Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.049199985636900727
+2026-11-15T11:15:50Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:15:50Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:15:50Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:15:50Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:15:50Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:15:50Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:15:50Z [T4.1 refuse openGroup on isolated block 3] already on chain: tx 0x9f4c30c2b29e556e8a465f00a9f8299e75e7fcac5afbcabb4d743ec594e1df66, status 0, not sent again
+2026-11-15T11:15:50Z [T4.2 refuse openGroup with no BTC] already on chain: tx 0x0e7a31f4067f27628386d05667f333a7f6a939073b7e93329b195dc27ac33f61, status 0, not sent again
+2026-11-15T11:15:52Z [T4.3 refuse openGroup from operator] SENT 0xabef9e946a2305d724bc2e7d51a54f4815223fe2609970debf8483e9dd3c581c
+2026-11-15T11:15:56Z [T4.3 refuse openGroup from operator] REVERTED block 16795049 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:15:57Z [T4.4 refuse openGroup on block 2 above its 40 cap] SENT 0x15ec74509866110cac734902a358d3dbfd9967b7d8863498b0faf960c50ea9c4
+2026-11-15T11:16:05Z [T4.4 refuse openGroup on block 2 above its 40 cap] REVERTED block 16795050 gas 3055108: BlockDebtCapExceeded(2, 1801800000000000000000, 40000000000000000000) | replay: BlockDebtCapExceeded(2, 1801800000000000000000, 40000000000000000000)
+2026-11-15T11:16:06Z [T4.5 openGroup on block 1: 1800 MUSD against 0.048 BTC] SENT 0x8aea399be213db7527bb31d4dc75895c974ef7817211aded560b7fccf39638bb
+2026-11-15T11:16:10Z [T4.5 openGroup on block 1: 1800 MUSD against 0.048 BTC] OK block 16795052 gas 3173055
+2026-11-15T11:16:15Z -- after openGroup: trove active True, group 0.048000000000000000 BTC, principal 2001.800000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:16:15Z    blocks: 1 1800.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:16:15Z    vault MUSD 1800.000000000000000000, tracked 1800.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.001199984727588929
+2026-11-15T11:16:15Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:16:15Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:16:15Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:16:15Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:16:15Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:16:15Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:16:15Z   check PASS: T4.5 trove active with 0.048 BTC and 2001.8 MUSD principal
+2026-11-15T11:16:15Z   check PASS: T4.5 block 1 holds 1800 cash and 1801.8 principal
+2026-11-15T11:16:16Z [T4.6 refuse second openGroup] SENT 0x9b49db995af1ad4ffff24ae11b0ac242a7b9c1d303bbedf116f9627efc6bf090
+2026-11-15T11:16:18Z [T4.6 refuse second openGroup] REVERTED block 16795054 gas 3000000: GroupAlreadyOpen | replay: GroupAlreadyOpen
+2026-11-15T11:16:20Z [T5.1 borrow 20 MUSD into block 2] SENT 0x903597105224ce4be193f059aae17a186883dac52868c616f7cd615b40073eef
+2026-11-15T11:16:24Z [T5.1 borrow 20 MUSD into block 2] OK block 16795056 gas 3132464
+2026-11-15T11:16:29Z -- after borrow: trove active True, group 0.048000000000000000 BTC, principal 2021.820000000000000000, Mezo interest 8880832344010 wei, settled 8880832344010 wei
+2026-11-15T11:16:29Z    blocks: 1 1800.000000000000000000 (reserved 0.000000000000000000), 2 20.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 887284678191 wei
+2026-11-15T11:16:29Z    vault MUSD 1820.000000000000000000, tracked 1820.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.001199983832249185
+2026-11-15T11:16:29Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:16:29Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:16:29Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:16:29Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:16:29Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:16:29Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:16:30Z [T5.2 refuse borrow 45 into block 2 (cap 40)] SENT 0xe1725cfe78b3a05636f15d2f27814133500e5f2b0ef2af33cc00aece982aae5d
+2026-11-15T11:16:36Z [T5.2 refuse borrow 45 into block 2 (cap 40)] REVERTED block 16795057 gas 3000000: BlockDebtCapExceeded(2, 65065000000000000000, 40000000000000000000) | replay: BlockDebtCapExceeded(2, 65065000000000000000, 40000000000000000000)
+2026-11-15T11:16:37Z [T5.3 refuse borrow 300 into block 1 (group capacity)] SENT 0xb810a017f89d4970fefff1725bba9209c1fe80195a715209808a34d954350a7f
+2026-11-15T11:16:40Z [T5.3 refuse borrow 300 into block 1 (group capacity)] REVERTED block 16795059 gas 3000000: GroupCapacityExceeded(2322120015928414125672, 2091803230720000000000) | replay: GroupCapacityExceeded(2322120015928414125672, 2091803230720000000000)
+2026-11-15T11:16:40Z [T5.4 refuse borrow into isolated block 3] SENT 0x004605d97bd238da595477c429960e1b20bbaee63d261c7c2376dbb8c3f6f758
+2026-11-15T11:16:43Z [T5.4 refuse borrow into isolated block 3] REVERTED block 16795060 gas 3000000: BlockNotCross(3) | replay: BlockNotCross(3)
+2026-11-15T11:16:44Z [T5.5 refuse borrow of zero] SENT 0xce042cc0cfa69a0aafe0ee6438553b0f2e89bfb870ebcd46b3ec9d904d99355d
+2026-11-15T11:16:48Z [T5.5 refuse borrow of zero] REVERTED block 16795061 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:16:49Z [T5.6 refuse borrow from operator] SENT 0x4ff6667744cc8b448f47911651b1fb7ddbdc54c5a979ee1aeab0d1694a79bc3f
+2026-11-15T11:16:51Z [T5.6 refuse borrow from operator] REVERTED block 16795062 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:16:53Z [T5.7 addCollateral 0.0005 BTC] SENT 0x67e29bc42471944fdb7ac86c707b1ba214109b9b1a5268e1f99f9ae86f6a5678
+2026-11-15T11:17:01Z [T5.7 addCollateral 0.0005 BTC] OK block 16795064 gas 2824451
+2026-11-15T11:17:06Z -- after addCollateral: trove active True, group 0.048500000000000000 BTC, principal 2021.820000000000000000, Mezo interest 30023577688997 wei, settled 30023577688997 wei
+2026-11-15T11:17:06Z    blocks: 1 1800.000000000000000000 (reserved 0.000000000000000000), 2 20.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 2978741419641 wei
+2026-11-15T11:17:06Z    vault MUSD 1820.000000000000000000, tracked 1820.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.000699981667879339
+2026-11-15T11:17:06Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:17:06Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:17:06Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:17:06Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:17:06Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:17:06Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:17:06Z   check PASS: T5.7 collateral is 0.0485 BTC
+2026-11-15T11:17:07Z [T5.8 refuse addCollateral with no BTC] SENT 0xfe41ea6bee11cecb82be8863744b40a30efee1e56f7cdd8b92dd7d1e985af5c1
+2026-11-15T11:17:09Z [T5.8 refuse addCollateral with no BTC] REVERTED block 16795066 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:17:10Z [T5.9 refuse addCollateral from operator] SENT 0xd1b169b40d342ee876d35a6cbe2bc0652e507f4a4eb9dc245312ff99455aa394
+2026-11-15T11:17:13Z [T5.9 refuse addCollateral from operator] REVERTED block 16795067 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:17:13Z waiting 13 s so interest accrues before the operator calls accrue
+2026-11-15T11:17:26Z waiting 3 s so interest accrues before the operator calls accrue
+2026-11-15T11:17:29Z waiting 3 s so interest accrues before the operator calls accrue
+2026-11-15T11:17:33Z [T5.10 accrue from the operator wallet] SENT 0x2a391ce7297fa930d9a1ed656ee53e12a78aa05fd6881f61979bbb445eb0052b
+2026-11-15T11:17:39Z [T5.10 accrue from the operator wallet] OK block 16795073 gas 99388
+2026-11-15T11:17:44Z -- after accrue: trove active True, group 0.048500000000000000 BTC, principal 2021.820000000000000000, Mezo interest 55651147804133 wei, settled 55651147804133 wei
+2026-11-15T11:17:44Z    blocks: 1 1800.000000000000000000 (reserved 0.000000000000000000), 2 20.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 5513840500187 wei
+2026-11-15T11:17:44Z    vault MUSD 1820.000000000000000000, tracked 1820.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 10.013509145078201233, owner BTC 0.000699981229879339
+2026-11-15T11:17:44Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:17:44Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:17:44Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:17:44Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:17:44Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:17:44Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:17:44Z   check PASS: T5.10 interest is settled
+2026-11-15T11:17:45Z [T6.1 approve 1 MUSD for the block 3 pocket] SENT 0xf212e1795c09504ff8fa57785aa22755bcd60e01275448328d4567e300f3f6f9
+2026-11-15T11:17:48Z [T6.1 approve 1 MUSD for the block 3 pocket] OK block 16795076 gas 46394
+2026-11-15T11:17:49Z [T6.2 refuse fundPocket of zero] SENT 0xfe7a819550ff5b75f2817febfeb3eec7b5d2970119e9072d5afc9d25e32fd2d4
+2026-11-15T11:17:54Z [T6.2 refuse fundPocket of zero] REVERTED block 16795077 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:17:54Z [T6.3 refuse fundPocket on block 99] SENT 0x3f696bce32413d6c7c3a022428001720aad6411ce2fed11251a4a4e43227a8ae
+2026-11-15T11:18:00Z [T6.3 refuse fundPocket on block 99] REVERTED block 16795078 gas 3000000: BlockNotFound(99) | replay: BlockNotFound(99)
+2026-11-15T11:18:01Z [T6.4 refuse fundPocket from operator] SENT 0x16e18167e9911f083fdf7fedbaf7a9c22ffd7d33d10be8606e5326d231bcbfe2
+2026-11-15T11:18:03Z [T6.4 refuse fundPocket from operator] REVERTED block 16795079 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:18:05Z [T6.5 fundPocket block 3 with 1 MUSD] SENT 0x19a9a46f97abbc329e7040740b2c77e59781b9e65a58343d39149b4ccde38abb
+2026-11-15T11:18:07Z [T6.5 fundPocket block 3 with 1 MUSD] OK block 16795080 gas 67369
+2026-11-15T11:18:08Z [T6.6 refuse setApprovalThreshold from operator] SENT 0x514c4d623a73c47815bb13c72cc1fe838c7f3fc6bfa983c89a632add03d82da1
+2026-11-15T11:18:12Z [T6.6 refuse setApprovalThreshold from operator] REVERTED block 16795081 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:18:13Z [T6.7 setApprovalThreshold 0.1 MUSD] SENT 0x3affd597468838370164dc500e266eb132ba4bf03c7439fa30b4de7b63883508
+2026-11-15T11:18:19Z [T6.7 setApprovalThreshold 0.1 MUSD] OK block 16795083 gas 29040
+2026-11-15T11:18:19Z [T6.8 refuse repay 0.5 while overhead interest is unfunded] SENT 0x38bd286f8d427e64eec4ec893b6b4ffd14676c9de3af5d243f7149c0388c6ae0
+2026-11-15T11:18:22Z [T6.8 refuse repay 0.5 while overhead interest is unfunded] REVERTED block 16795084 gas 3000000: InterestUnsettled(0, 8048939580733, 0) | replay: InterestUnsettled(0, 8048939580733, 0)
+2026-11-15T11:18:23Z [T6.9 refuse fundOverhead of zero] SENT 0xcd335367809774c4878e4a633fb7bc602d0003034ff003584cee066b8a024523
+2026-11-15T11:18:32Z [T6.9 refuse fundOverhead of zero] REVERTED block 16795085 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:18:34Z [T6.10 accrue, so the overhead interest is settled] SENT 0x314dece9032f141cf5ba4622156cc41ec750ee761a2fb786b603adb27c83aab3
+2026-11-15T11:18:36Z [T6.10 accrue, so the overhead interest is settled] OK block 16795087 gas 99388
+2026-11-15T11:18:40Z -- before overhead funding: trove active True, group 0.048500000000000000 BTC, principal 2021.820000000000000000, Mezo interest 93451813723960 wei, settled 93451813723960 wei
+2026-11-15T11:18:40Z    blocks: 1 1800.000000000000000000 (reserved 0.000000000000000000), 2 20.000000000000000000 (reserved 0.000000000000000000), 3 1.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 9253111643992 wei
+2026-11-15T11:18:40Z    vault MUSD 1821.000000000000000000, tracked 1821.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 9.013509145078201233, owner BTC 0.000699979442519453
+2026-11-15T11:18:40Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:18:40Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:18:40Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:18:40Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:18:40Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:18:40Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:18:42Z [T6.11 approve overhead funding] SENT 0x7a436d4d867a6fa8a84ccab07086a5ccaf89bcc513eb70fc19b959aa18523e74
+2026-11-15T11:18:44Z [T6.11 approve overhead funding] OK block 16795089 gas 46394
+2026-11-15T11:18:45Z [T6.12 fundOverhead just above the overhead interest] SENT 0x6a0ae907231e25f12e3d1d7437563b398b4819502c7d48ab614312c6b09a2249
+2026-11-15T11:18:47Z [T6.12 fundOverhead just above the overhead interest] OK block 16795090 gas 64195
+2026-11-15T11:18:49Z [T6.13 repay 0.5 from block 1] SENT 0xe31ccf0c9b866c4f985def19ad455d7b9ed4d421b1c421190a950697a45760b0
+2026-11-15T11:18:58Z [T6.13 repay 0.5 from block 1] OK block 16795092 gas 2815305
+2026-11-15T11:19:02Z -- after repay: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:19:02Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 1.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:19:02Z    vault MUSD 1820.499934909580621099, tracked 1820.499934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699979015338929
+2026-11-15T11:19:02Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:19:02Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:19:02Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:19:02Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:19:02Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:19:02Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:19:02Z   check PASS: T6.13 settled interest cleared
+2026-11-15T11:19:03Z [T6.14 refuse repay of 2000 (above block 1 principal)] SENT 0x057851eb5b99c900b61491264c128fef0dd0e3fa21b91b026b3ed6c59e466e7f
+2026-11-15T11:19:05Z [T6.14 refuse repay of 2000 (above block 1 principal)] REVERTED block 16795094 gas 3000000: RepayExceedsPrincipal(1, 2000000000000000000000, 1801300000000000000000) | replay: RepayExceedsPrincipal(1, 2000000000000000000000, 1801300000000000000000)
+2026-11-15T11:19:06Z [T6.15 refuse repay of 25 (Mezo minimum net debt)] SENT 0x8266ba35de29a9178db14618dfdf96ef2a167a529a3e6245523d45fd5b631d0c
+2026-11-15T11:19:10Z [T6.15 refuse repay of 25 (Mezo minimum net debt)] REVERTED block 16795095 gas 3000000: BorrowerOps: Trove's net debt must be greater than minimum | replay: BorrowerOps: Trove's net debt must be greater than minimum
+2026-11-15T11:19:11Z [T7.1 instant payment 0.05 MUSD to vendor (under threshold)] SENT 0x2e33ad8ec93f4f4949ae88987848e101f86c34bfdad913d951e9689788e733c8
+2026-11-15T11:19:13Z [T7.1 instant payment 0.05 MUSD to vendor (under threshold)] OK block 16795096 gas 251861
+2026-11-15T11:19:13Z [T7.2 refuse 1.6 MUSD to vendor (above 1.5 per-payment cap)] SENT 0x6eef97002f335a4ad16886785ec3fb0c5c408f172dc7531b6ac124b838f1d2bc
+2026-11-15T11:19:17Z [T7.2 refuse 1.6 MUSD to vendor (above 1.5 per-payment cap)] REVERTED block 16795097 gas 3000000: PerTransactionCapExceeded(1600000000000000000, 1500000000000000000) | replay: PerTransactionCapExceeded(1600000000000000000, 1500000000000000000)
+2026-11-15T11:19:18Z [T7.3 refuse payment to an unlisted address] SENT 0xe8d6b8f81ed84fa842f4aff551e9fde8948e624b68682348ed05e778c22ba42b
+2026-11-15T11:19:28Z [T7.3 refuse payment to an unlisted address] REVERTED block 16795099 gas 3000000: RecipientNotAllowed(3, 0x000000000000000000000000000000000000dead) | replay: RecipientNotAllowed(3, 0x000000000000000000000000000000000000dead)
+2026-11-15T11:19:28Z [T7.4 refuse payment of zero] SENT 0x2b21934ff4252e8d9615aec8a03ca414e153ffa540be3315f6c6bf65f2d31f9b
+2026-11-15T11:19:31Z [T7.4 refuse payment of zero] REVERTED block 16795100 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:19:32Z [T7.5 refuse request from owner] SENT 0x51d330d3ea6209bb3b4c185c04998ab807048797a3e520393d68d12c03e526eb
+2026-11-15T11:19:36Z [T7.5 refuse request from owner] REVERTED block 16795101 gas 3000000: NotOperator(3) | replay: NotOperator(3)
+2026-11-15T11:19:36Z [T7.6 waiting payment X 0.5 MUSD to vendor] SENT 0xdb81754c79b513bf606df993b952abf6f1a07267a48c2ad4577ae20602092ec1
+2026-11-15T11:19:42Z [T7.6 waiting payment X 0.5 MUSD to vendor] OK block 16795102 gas 192406
+2026-11-15T11:19:43Z [T7.7 cancel payment X] SENT 0xbdf0ea91fa05fcaf025b4687157c5b0d55298651712aae2467a4d025e70a582a
+2026-11-15T11:19:45Z [T7.7 cancel payment X] OK block 16795104 gas 40954
+2026-11-15T11:19:45Z [T7.8 refuse cancel of X again] SENT 0x6070a9b550a217154d61d03c5163a3ab88e53eb57ace7ace1d75c8e5d5495251
+2026-11-15T11:19:49Z [T7.8 refuse cancel of X again] REVERTED block 16795105 gas 3000000: PaymentNotPending(2) | replay: PaymentNotPending(2)
+2026-11-15T11:19:50Z [T7.9 refuse cancel from operator] SENT 0xd3d8fb730d10caab4ac9c2fa1ce6122c6af08e33cbc01ac483a918178ba43682
+2026-11-15T11:20:00Z [T7.9 refuse cancel from operator] REVERTED block 16795106 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:20:01Z [T7.10 waiting payment Y 0.5 MUSD to vendor] SENT 0x7d7ed27dfa37b7257bcf104c17a4113c7f18b98b1972da5f5a7b7349aa05608f
+2026-11-15T11:20:04Z [T7.10 waiting payment Y 0.5 MUSD to vendor] OK block 16795108 gas 192406
+2026-11-15T11:20:05Z [T7.11 refuse 0.46 MUSD (only 0.45 unreserved)] SENT 0xf0d25dea14e7722ab6c1289daee0f548e7e3026a4906b5e7bd5b159ca1c7b9aa
+2026-11-15T11:20:07Z [T7.11 refuse 0.46 MUSD (only 0.45 unreserved)] REVERTED block 16795109 gas 3000000: PocketInsufficient(3, 450000000000000000, 460000000000000000) | replay: PocketInsufficient(3, 450000000000000000, 460000000000000000)
+2026-11-15T11:20:08Z [T7.12 owner approves payment Y] SENT 0x9ae15333c00b28f1eb2f88247384aadcc146bf7264a4080c630a624b9e2c5a63
+2026-11-15T11:20:10Z [T7.12 owner approves payment Y] OK block 16795110 gas 77866
+2026-11-15T11:20:10Z STOP [T7.13 refuse approve of Y again] expected PaymentNotPending, but the simulation succeeded. Nothing sent.
+2026-11-15T11:20:10Z run stopped: [T7.13 refuse approve of Y again] expected PaymentNotPending, but the simulation succeeded. Nothing sent.
+2026-11-15T11:23:06Z [T2.1 refuse sweepResidualMUSD before any group opens] already on chain: tx 0xc64d02a61075706ef622fad4dcd870b5ae657296cf6a260a9f3db13f6053484c, status 0, not sent again
+2026-11-15T11:23:06Z   check PASS: T2 vault owner is the owner wallet
+2026-11-15T11:23:06Z [T3.1 createMoneyblock 1 Procurement (cross, cap 2500)] already on chain: tx 0x874944652f57510bd0ebd88360963bfc7bac159332fda804a9d6a37be7922321, status 1, not sent again
+2026-11-15T11:23:06Z [T3.2 createMoneyblock 2 Operations (cross, cap 40)] already on chain: tx 0x413e069f20a1cec751de828bef3a97cfd7d66931fb094ad8b6bda503f991f299, status 1, not sent again
+2026-11-15T11:23:06Z [T3.3 createMoneyblock 3 Vendor pocket (isolated)] already on chain: tx 0xa694c9a3a5cf78d6eef1d0bcd4ee7cace46500b72bc6ad07559ceeaa38db1ddb, status 1, not sent again
+2026-11-15T11:23:06Z [T3.4 createMoneyblock 4 Short mandate (isolated)] already on chain: tx 0xcc74844b349f2bebf212a946e2a06264ebf3f059074debae61bdb8a545de0876, status 1, not sent again
+2026-11-15T11:23:07Z   check PASS: T3 four blocks exist
+2026-11-15T11:23:07Z [T3.5 refuse createMoneyblock from operator] already on chain: tx 0xac6a35244fb87320964d069614b612cacd67eba23cd6d12894ed8e349aec51ae, status 0, not sent again
+2026-11-15T11:23:07Z [T3.6 setRecipient block 3: vendor allowed] already on chain: tx 0x247dee2491f9178165e383ad44cf513999545850fefe9b7c245fe45c8e6e0d97, status 1, not sent again
+2026-11-15T11:23:07Z [T3.7 refuse setRecipient from operator] already on chain: tx 0x5916e459fce5e203cf0b0fa725c740c5326699c0fb512cf25f6e58516fabca05, status 0, not sent again
+2026-11-15T11:23:07Z [T3.8 refuse setRecipient on block 99] already on chain: tx 0x39c4259ef2554d6300a55f5775fa9b46060c2b3f043299098ad9c1818cf943f3, status 0, not sent again
+2026-11-15T11:23:07Z [T3.9 grantMandate block 3: operator, 1.5 per payment, 5 total, 30 days] already on chain: tx 0x724d9b8bed8f1c219229495cd785626dc18e54c03009630839d06d5e16ef6318, status 1, not sent again
+2026-11-15T11:23:07Z [T3.10 refuse grantMandate with expiry in the past] already on chain: tx 0xccf2c7434474b165bc37abb910cb93bc0f972e0bf1e6e2459845be3e91d3b4f1, status 0, not sent again
+2026-11-15T11:23:07Z [T3.11 refuse grantMandate from operator] already on chain: tx 0x901251b8d2e269fc6674687c7c8477781fef4e10e4a830242eb6bb0fbdb5e838, status 0, not sent again
+2026-11-15T11:23:11Z -- after Task 3: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 161413763914841 wei, settled 0 wei
+2026-11-15T11:23:11Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:23:11Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:23:11Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:23:11Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:23:11Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:23:11Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:23:11Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:23:11Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:23:11Z [T4.1 refuse openGroup on isolated block 3] already on chain: tx 0x9f4c30c2b29e556e8a465f00a9f8299e75e7fcac5afbcabb4d743ec594e1df66, status 0, not sent again
+2026-11-15T11:23:11Z [T4.2 refuse openGroup with no BTC] already on chain: tx 0x0e7a31f4067f27628386d05667f333a7f6a939073b7e93329b195dc27ac33f61, status 0, not sent again
+2026-11-15T11:23:11Z [T4.3 refuse openGroup from operator] already on chain: tx 0xabef9e946a2305d724bc2e7d51a54f4815223fe2609970debf8483e9dd3c581c, status 0, not sent again
+2026-11-15T11:23:11Z [T4.4 refuse openGroup on block 2 above its 40 cap] already on chain: tx 0x15ec74509866110cac734902a358d3dbfd9967b7d8863498b0faf960c50ea9c4, status 0, not sent again
+2026-11-15T11:23:11Z [T4.5 openGroup on block 1: 1800 MUSD against 0.048 BTC] already on chain: tx 0x8aea399be213db7527bb31d4dc75895c974ef7817211aded560b7fccf39638bb, status 1, not sent again
+2026-11-15T11:23:16Z -- after openGroup: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 163335356342399 wei, settled 0 wei
+2026-11-15T11:23:16Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:23:16Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:23:16Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:23:16Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:23:16Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:23:16Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:23:16Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:23:16Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:23:16Z   check FAIL: T4.5 trove active with 0.048 BTC and 2001.8 MUSD principal
+2026-11-15T11:23:16Z STOP check failed: T4.5 trove active with 0.048 BTC and 2001.8 MUSD principal
+2026-11-15T11:23:16Z run stopped: check failed: T4.5 trove active with 0.048 BTC and 2001.8 MUSD principal
+2026-11-15T11:24:20Z [T2.1 refuse sweepResidualMUSD before any group opens] already on chain: tx 0xc64d02a61075706ef622fad4dcd870b5ae657296cf6a260a9f3db13f6053484c, status 0, not sent again
+2026-11-15T11:24:20Z   check skipped, its step was confirmed in an earlier run: T2 vault owner is the owner wallet
+2026-11-15T11:24:20Z [T3.1 createMoneyblock 1 Procurement (cross, cap 2500)] already on chain: tx 0x874944652f57510bd0ebd88360963bfc7bac159332fda804a9d6a37be7922321, status 1, not sent again
+2026-11-15T11:24:20Z [T3.2 createMoneyblock 2 Operations (cross, cap 40)] already on chain: tx 0x413e069f20a1cec751de828bef3a97cfd7d66931fb094ad8b6bda503f991f299, status 1, not sent again
+2026-11-15T11:24:20Z [T3.3 createMoneyblock 3 Vendor pocket (isolated)] already on chain: tx 0xa694c9a3a5cf78d6eef1d0bcd4ee7cace46500b72bc6ad07559ceeaa38db1ddb, status 1, not sent again
+2026-11-15T11:24:20Z [T3.4 createMoneyblock 4 Short mandate (isolated)] already on chain: tx 0xcc74844b349f2bebf212a946e2a06264ebf3f059074debae61bdb8a545de0876, status 1, not sent again
+2026-11-15T11:24:21Z   check skipped, its step was confirmed in an earlier run: T3 four blocks exist
+2026-11-15T11:24:21Z [T3.5 refuse createMoneyblock from operator] already on chain: tx 0xac6a35244fb87320964d069614b612cacd67eba23cd6d12894ed8e349aec51ae, status 0, not sent again
+2026-11-15T11:24:21Z [T3.6 setRecipient block 3: vendor allowed] already on chain: tx 0x247dee2491f9178165e383ad44cf513999545850fefe9b7c245fe45c8e6e0d97, status 1, not sent again
+2026-11-15T11:24:21Z [T3.7 refuse setRecipient from operator] already on chain: tx 0x5916e459fce5e203cf0b0fa725c740c5326699c0fb512cf25f6e58516fabca05, status 0, not sent again
+2026-11-15T11:24:21Z [T3.8 refuse setRecipient on block 99] already on chain: tx 0x39c4259ef2554d6300a55f5775fa9b46060c2b3f043299098ad9c1818cf943f3, status 0, not sent again
+2026-11-15T11:24:21Z [T3.9 grantMandate block 3: operator, 1.5 per payment, 5 total, 30 days] already on chain: tx 0x724d9b8bed8f1c219229495cd785626dc18e54c03009630839d06d5e16ef6318, status 1, not sent again
+2026-11-15T11:24:21Z [T3.10 refuse grantMandate with expiry in the past] already on chain: tx 0xccf2c7434474b165bc37abb910cb93bc0f972e0bf1e6e2459845be3e91d3b4f1, status 0, not sent again
+2026-11-15T11:24:21Z [T3.11 refuse grantMandate from operator] already on chain: tx 0x901251b8d2e269fc6674687c7c8477781fef4e10e4a830242eb6bb0fbdb5e838, status 0, not sent again
+2026-11-15T11:24:26Z -- after Task 3: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 205610389748667 wei, settled 0 wei
+2026-11-15T11:24:26Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:26Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:26Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:26Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:26Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:26Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:26Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:26Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:26Z [T4.1 refuse openGroup on isolated block 3] already on chain: tx 0x9f4c30c2b29e556e8a465f00a9f8299e75e7fcac5afbcabb4d743ec594e1df66, status 0, not sent again
+2026-11-15T11:24:26Z [T4.2 refuse openGroup with no BTC] already on chain: tx 0x0e7a31f4067f27628386d05667f333a7f6a939073b7e93329b195dc27ac33f61, status 0, not sent again
+2026-11-15T11:24:26Z [T4.3 refuse openGroup from operator] already on chain: tx 0xabef9e946a2305d724bc2e7d51a54f4815223fe2609970debf8483e9dd3c581c, status 0, not sent again
+2026-11-15T11:24:26Z [T4.4 refuse openGroup on block 2 above its 40 cap] already on chain: tx 0x15ec74509866110cac734902a358d3dbfd9967b7d8863498b0faf960c50ea9c4, status 0, not sent again
+2026-11-15T11:24:26Z [T4.5 openGroup on block 1: 1800 MUSD against 0.048 BTC] already on chain: tx 0x8aea399be213db7527bb31d4dc75895c974ef7817211aded560b7fccf39638bb, status 1, not sent again
+2026-11-15T11:24:30Z -- after openGroup: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 212656228649712 wei, settled 0 wei
+2026-11-15T11:24:30Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:30Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:30Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:30Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:30Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:30Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:30Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:30Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:30Z   check skipped, its step was confirmed in an earlier run: T4.5 trove active with 0.048 BTC and 2001.8 MUSD principal
+2026-11-15T11:24:30Z   check skipped, its step was confirmed in an earlier run: T4.5 block 1 holds 1800 cash and 1801.8 principal
+2026-11-15T11:24:30Z [T4.6 refuse second openGroup] already on chain: tx 0x9b49db995af1ad4ffff24ae11b0ac242a7b9c1d303bbedf116f9627efc6bf090, status 0, not sent again
+2026-11-15T11:24:30Z [T5.1 borrow 20 MUSD into block 2] already on chain: tx 0x903597105224ce4be193f059aae17a186883dac52868c616f7cd615b40073eef, status 1, not sent again
+2026-11-15T11:24:35Z -- after borrow: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 215218351886455 wei, settled 0 wei
+2026-11-15T11:24:35Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:35Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:35Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:35Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:35Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:35Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:35Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:35Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:35Z [T5.2 refuse borrow 45 into block 2 (cap 40)] already on chain: tx 0xe1725cfe78b3a05636f15d2f27814133500e5f2b0ef2af33cc00aece982aae5d, status 0, not sent again
+2026-11-15T11:24:35Z [T5.3 refuse borrow 300 into block 1 (group capacity)] already on chain: tx 0xb810a017f89d4970fefff1725bba9209c1fe80195a715209808a34d954350a7f, status 0, not sent again
+2026-11-15T11:24:35Z [T5.4 refuse borrow into isolated block 3] already on chain: tx 0x004605d97bd238da595477c429960e1b20bbaee63d261c7c2376dbb8c3f6f758, status 0, not sent again
+2026-11-15T11:24:35Z [T5.5 refuse borrow of zero] already on chain: tx 0xce042cc0cfa69a0aafe0ee6438553b0f2e89bfb870ebcd46b3ec9d904d99355d, status 0, not sent again
+2026-11-15T11:24:35Z [T5.6 refuse borrow from operator] already on chain: tx 0x4ff6667744cc8b448f47911651b1fb7ddbdc54c5a979ee1aeab0d1694a79bc3f, status 0, not sent again
+2026-11-15T11:24:35Z [T5.7 addCollateral 0.0005 BTC] already on chain: tx 0x67e29bc42471944fdb7ac86c707b1ba214109b9b1a5268e1f99f9ae86f6a5678, status 1, not sent again
+2026-11-15T11:24:39Z -- after addCollateral: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 217139944314013 wei, settled 0 wei
+2026-11-15T11:24:39Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:39Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:39Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:39Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:39Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:39Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:39Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:39Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:39Z   check skipped, its step was confirmed in an earlier run: T5.7 collateral is 0.0485 BTC
+2026-11-15T11:24:39Z [T5.8 refuse addCollateral with no BTC] already on chain: tx 0xfe41ea6bee11cecb82be8863744b40a30efee1e56f7cdd8b92dd7d1e985af5c1, status 0, not sent again
+2026-11-15T11:24:39Z [T5.9 refuse addCollateral from operator] already on chain: tx 0xd1b169b40d342ee876d35a6cbe2bc0652e507f4a4eb9dc245312ff99455aa394, status 0, not sent again
+2026-11-15T11:24:39Z [T5.10 accrue from the operator wallet] already on chain: tx 0x2a391ce7297fa930d9a1ed656ee53e12a78aa05fd6881f61979bbb445eb0052b, status 1, not sent again
+2026-11-15T11:24:44Z -- after accrue: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 221623659978314 wei, settled 0 wei
+2026-11-15T11:24:44Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:44Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:44Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:44Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:44Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:44Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:44Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:44Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:44Z   check skipped, its step was confirmed in an earlier run: T5.10 interest is settled
+2026-11-15T11:24:44Z [T6.1 approve 1 MUSD for the block 3 pocket] already on chain: tx 0xf212e1795c09504ff8fa57785aa22755bcd60e01275448328d4567e300f3f6f9, status 1, not sent again
+2026-11-15T11:24:44Z [T6.2 refuse fundPocket of zero] already on chain: tx 0xfe7a819550ff5b75f2817febfeb3eec7b5d2970119e9072d5afc9d25e32fd2d4, status 0, not sent again
+2026-11-15T11:24:44Z [T6.3 refuse fundPocket on block 99] already on chain: tx 0x3f696bce32413d6c7c3a022428001720aad6411ce2fed11251a4a4e43227a8ae, status 0, not sent again
+2026-11-15T11:24:44Z [T6.4 refuse fundPocket from operator] already on chain: tx 0x16e18167e9911f083fdf7fedbaf7a9c22ffd7d33d10be8606e5326d231bcbfe2, status 0, not sent again
+2026-11-15T11:24:44Z [T6.5 fundPocket block 3 with 1 MUSD] already on chain: tx 0x19a9a46f97abbc329e7040740b2c77e59781b9e65a58343d39149b4ccde38abb, status 1, not sent again
+2026-11-15T11:24:44Z [T6.6 refuse setApprovalThreshold from operator] already on chain: tx 0x514c4d623a73c47815bb13c72cc1fe838c7f3fc6bfa983c89a632add03d82da1, status 0, not sent again
+2026-11-15T11:24:44Z [T6.7 setApprovalThreshold 0.1 MUSD] already on chain: tx 0x3affd597468838370164dc500e266eb132ba4bf03c7439fa30b4de7b63883508, status 1, not sent again
+2026-11-15T11:24:44Z [T6.8 refuse repay 0.5 while overhead interest is unfunded] already on chain: tx 0x38bd286f8d427e64eec4ec893b6b4ffd14676c9de3af5d243f7149c0388c6ae0, status 0, not sent again
+2026-11-15T11:24:44Z [T6.9 refuse fundOverhead of zero] already on chain: tx 0xcd335367809774c4878e4a633fb7bc602d0003034ff003584cee066b8a024523, status 0, not sent again
+2026-11-15T11:24:44Z [T6.10 accrue, so the overhead interest is settled] already on chain: tx 0x314dece9032f141cf5ba4622156cc41ec750ee761a2fb786b603adb27c83aab3, status 1, not sent again
+2026-11-15T11:24:48Z -- before overhead funding: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 221623659978314 wei, settled 0 wei
+2026-11-15T11:24:48Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:48Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:48Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:48Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:48Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:48Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:48Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:48Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:48Z [T6.11 approve overhead funding] already on chain: tx 0x7a436d4d867a6fa8a84ccab07086a5ccaf89bcc513eb70fc19b959aa18523e74, status 1, not sent again
+2026-11-15T11:24:48Z [T6.12 fundOverhead just above the overhead interest] already on chain: tx 0x6a0ae907231e25f12e3d1d7437563b398b4819502c7d48ab614312c6b09a2249, status 1, not sent again
+2026-11-15T11:24:48Z [T6.13 repay 0.5 from block 1] already on chain: tx 0xe31ccf0c9b866c4f985def19ad455d7b9ed4d421b1c421190a950697a45760b0, status 1, not sent again
+2026-11-15T11:24:52Z -- after repay: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 224185783215058 wei, settled 0 wei
+2026-11-15T11:24:52Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:24:52Z    vault MUSD 1819.949934909580621099, tracked 1819.949934909580621099, vault BTC 0.000000000000000000; owner MUSD 9.013469891966557241, owner BTC 0.000699977245991209
+2026-11-15T11:24:52Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:24:52Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:24:52Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:24:52Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:24:52Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:24:52Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:24:52Z   check skipped, its step was confirmed in an earlier run: T6.13 settled interest cleared
+2026-11-15T11:24:52Z [T6.14 refuse repay of 2000 (above block 1 principal)] already on chain: tx 0x057851eb5b99c900b61491264c128fef0dd0e3fa21b91b026b3ed6c59e466e7f, status 0, not sent again
+2026-11-15T11:24:52Z [T6.15 refuse repay of 25 (Mezo minimum net debt)] already on chain: tx 0x8266ba35de29a9178db14618dfdf96ef2a167a529a3e6245523d45fd5b631d0c, status 0, not sent again
+2026-11-15T11:24:52Z [T7.1 instant payment 0.05 MUSD to vendor (under threshold)] already on chain: tx 0x2e33ad8ec93f4f4949ae88987848e101f86c34bfdad913d951e9689788e733c8, status 1, not sent again
+2026-11-15T11:24:52Z [T7.2 refuse 1.6 MUSD to vendor (above 1.5 per-payment cap)] already on chain: tx 0x6eef97002f335a4ad16886785ec3fb0c5c408f172dc7531b6ac124b838f1d2bc, status 0, not sent again
+2026-11-15T11:24:52Z [T7.3 refuse payment to an unlisted address] already on chain: tx 0xe8d6b8f81ed84fa842f4aff551e9fde8948e624b68682348ed05e778c22ba42b, status 0, not sent again
+2026-11-15T11:24:52Z [T7.4 refuse payment of zero] already on chain: tx 0x2b21934ff4252e8d9615aec8a03ca414e153ffa540be3315f6c6bf65f2d31f9b, status 0, not sent again
+2026-11-15T11:24:52Z [T7.5 refuse request from owner] already on chain: tx 0x51d330d3ea6209bb3b4c185c04998ab807048797a3e520393d68d12c03e526eb, status 0, not sent again
+2026-11-15T11:24:52Z [T7.6 waiting payment X 0.5 MUSD to vendor] already on chain: tx 0xdb81754c79b513bf606df993b952abf6f1a07267a48c2ad4577ae20602092ec1, status 1, not sent again
+2026-11-15T11:24:52Z [T7.7 cancel payment X] already on chain: tx 0xbdf0ea91fa05fcaf025b4687157c5b0d55298651712aae2467a4d025e70a582a, status 1, not sent again
+2026-11-15T11:24:52Z [T7.8 refuse cancel of X again] already on chain: tx 0x6070a9b550a217154d61d03c5163a3ab88e53eb57ace7ace1d75c8e5d5495251, status 0, not sent again
+2026-11-15T11:24:52Z [T7.9 refuse cancel from operator] already on chain: tx 0xd3d8fb730d10caab4ac9c2fa1ce6122c6af08e33cbc01ac483a918178ba43682, status 0, not sent again
+2026-11-15T11:24:52Z [T7.10 waiting payment Y 0.5 MUSD to vendor] already on chain: tx 0x7d7ed27dfa37b7257bcf104c17a4113c7f18b98b1972da5f5a7b7349aa05608f, status 1, not sent again
+2026-11-15T11:24:52Z [T7.11 refuse 0.46 MUSD (only 0.45 unreserved)] already on chain: tx 0xf0d25dea14e7722ab6c1289daee0f548e7e3026a4906b5e7bd5b159ca1c7b9aa, status 0, not sent again
+2026-11-15T11:24:52Z [T7.12 owner approves payment Y] already on chain: tx 0x9ae15333c00b28f1eb2f88247384aadcc146bf7264a4080c630a624b9e2c5a63, status 1, not sent again
+2026-11-15T11:24:57Z [T7.13 refuse approve of Y again] SENT 0xfec53c75f6cc599044bc7ebf4eac046b9f39eecf3ee816b86e860c0dd6fc85d7
+2026-11-15T11:24:59Z [T7.13 refuse approve of Y again] REVERTED block 16795179 gas 3000000: PaymentNotPending(3) | replay: PaymentNotPending(3)
+2026-11-15T11:25:03Z [T7.14 refuse approve from operator] SENT 0x1cb83209b87d218ed6c1d74c89b1d63dfb4e1aa0175091740816727bdbbbfe62
+2026-11-15T11:25:06Z [T7.14 refuse approve from operator] REVERTED block 16795181 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:25:07Z [T7.15 lower block 3 total cap to committed plus 0.05] SENT 0x83a29fe635f45235a0bc954801d73506ee11fc03643772e442fa0d52e3fe47e5
+2026-11-15T11:25:09Z [T7.15 lower block 3 total cap to committed plus 0.05] OK block 16795182 gas 40883
+2026-11-15T11:25:13Z [T7.16 refuse 0.1 MUSD under the lowered total cap] SENT 0xbead072301410c11854faef47cccbf1bfd49761411a164e5806838676d9a0e50
+2026-11-15T11:25:17Z [T7.16 refuse 0.1 MUSD under the lowered total cap] REVERTED block 16795183 gas 3000000: MandateTotalCapExceeded(100000000000000000, 50000000000000000) | replay: MandateTotalCapExceeded(100000000000000000, 50000000000000000)
+2026-11-15T11:25:18Z [T7.17 restore block 3 total cap to 5] SENT 0xd61192a23aa7fed0cb7b87e9e05a7bd1e45ebe2defc48f5817476bc221886a27
+2026-11-15T11:25:20Z [T7.17 restore block 3 total cap to 5] OK block 16795184 gas 40883
+2026-11-15T11:25:21Z [T7.18 waiting payment W 0.2 MUSD to vendor] SENT 0xacc3ab04cec47c5c2e0928925cfa42038ccc7c6f0eae3daa8a22e1c2a451363c
+2026-11-15T11:25:23Z [T7.18 waiting payment W 0.2 MUSD to vendor] OK block 16795185 gas 192406
+2026-11-15T11:25:25Z [T7.19 revoke block 3 mandate] SENT 0xc137afd01bee2647ef9b9e7969bbeb13c71e06cb680f6e4bae597e097180a4ee
+2026-11-15T11:25:28Z [T7.19 revoke block 3 mandate] OK block 16795186 gas 31621
+2026-11-15T11:25:32Z [T7.20 refuse approve of W after revoke] SENT 0x86212b36369c012a4a0fcea223feef754e15d97f4626457d8321098bb69f7d80
+2026-11-15T11:25:35Z [T7.20 refuse approve of W after revoke] REVERTED block 16795188 gas 3000000: MandateRevoked(3) | replay: MandateRevoked(3)
+2026-11-15T11:25:36Z [T7.21 cancel W] SENT 0x77666b263e7f2fc9a74b6b9f05cf6c45d77c7857a43d8ade3c23156522da0cf8
+2026-11-15T11:25:38Z [T7.21 cancel W] OK block 16795189 gas 40954
+2026-11-15T11:25:42Z [T7.22 refuse new request after revoke] SENT 0x12b2d923736ba1297b6a4f40397e038ad7bad5b17f32b06019ef2304cc5412de
+2026-11-15T11:25:47Z [T7.22 refuse new request after revoke] REVERTED block 16795190 gas 3000000: MandateRevoked(3) | replay: MandateRevoked(3)
+2026-11-15T11:25:48Z [T7.23 restore block 3 mandate] SENT 0xf719bd652fcc1bc3f0b0ed897ae45f6d626fa473f7c3f25400bf806f2b96529e
+2026-11-15T11:25:50Z [T7.23 restore block 3 mandate] OK block 16795191 gas 40883
+2026-11-15T11:25:51Z [T7.24 waiting payment V 0.2 MUSD to vendor] SENT 0xb4f4bf1839faf9b365972f76aa7232a2fb132c1532cbb707b8abb4fe814354aa
+2026-11-15T11:25:53Z [T7.24 waiting payment V 0.2 MUSD to vendor] OK block 16795192 gas 192406
+2026-11-15T11:25:54Z [T7.25 remove vendor from block 3] SENT 0x55ef75cd8d1a3a173f8aaa2ad1e311fef9021d55a631ad47771263a5b040c528
+2026-11-15T11:25:56Z [T7.25 remove vendor from block 3] OK block 16795193 gas 29160
+2026-11-15T11:26:00Z [T7.26 refuse approve of V after recipient removed] SENT 0x816eabc21daae57c7b2bb20ea36cd91215c5014dcd57bcbd34ddcea176551ab4
+2026-11-15T11:26:04Z [T7.26 refuse approve of V after recipient removed] REVERTED block 16795195 gas 3000000: RecipientNotAllowed(3, 0x000000000000000000000000000000000000beef) | replay: RecipientNotAllowed(3, 0x000000000000000000000000000000000000beef)
+2026-11-15T11:26:05Z [T7.27 cancel V] SENT 0x99f68b8e6ef091ce8fb76bd60cdd1955088eef163a0bd803f47c4fb80fe4d24a
+2026-11-15T11:26:10Z [T7.27 cancel V] OK block 16795196 gas 40954
+2026-11-15T11:26:11Z [T7.28 restore vendor on block 3] SENT 0xe1f7333f1823b339646e13de663a3fb6722deb57c90674ec747e6b2479a01441
+2026-11-15T11:26:16Z [T7.28 restore vendor on block 3] OK block 16795197 gas 51072
+2026-11-15T11:26:17Z [T7.29 grantMandate block 4: operator, 0.5 per payment, 2 total, 300 s] SENT 0x66966afa48e518b98c600c77319e976e69d31bade59dfdb8fef8aa32b50bdee1
+2026-11-15T11:26:19Z [T7.29 grantMandate block 4: operator, 0.5 per payment, 2 total, 300 s] OK block 16795198 gas 97783
+2026-11-15T11:26:20Z [T7.30 allow vendor on block 4] SENT 0x8451ec7d7b0d561e0b692522c90ff8e3458110b64aa93b878f721c0ec0286472
+2026-11-15T11:26:22Z [T7.30 allow vendor on block 4] OK block 16795199 gas 51072
+2026-11-15T11:26:22Z [T7.31 approve 0.5 MUSD for the block 4 pocket] SENT 0x6dc42c219452bf160d6ed86cfec43c996dad69ca05cc3c3fa9e0a07d91dc1047
+2026-11-15T11:26:26Z [T7.31 approve 0.5 MUSD for the block 4 pocket] OK block 16795200 gas 46394
+2026-11-15T11:26:27Z [T7.32 fundPocket block 4 with 0.5 MUSD] SENT 0xefa2708dbcabc053d4bb5ae5ce48ebc20ec891923c94a7f46ecbc3235bc445bc
+2026-11-15T11:26:29Z [T7.32 fundPocket block 4 with 0.5 MUSD] OK block 16795201 gas 67369
+2026-11-15T11:26:30Z [T7.33 pending payment P4 0.3 MUSD on block 4] SENT 0x7cf687dd2fdf85846126763b63bf0e5651ffbc7180912fe5b0afec785fe0af7a
+2026-11-15T11:26:34Z [T7.33 pending payment P4 0.3 MUSD on block 4] OK block 16795202 gas 209506
+2026-11-15T11:26:34Z waiting 284 s until the block 4 mandate expires
+2026-11-15T11:27:04Z waiting 255 s until the block 4 mandate expires
+2026-11-15T11:27:35Z waiting 222 s until the block 4 mandate expires
+2026-11-15T11:28:05Z waiting 193 s until the block 4 mandate expires
+2026-11-15T11:28:35Z waiting 164 s until the block 4 mandate expires
+2026-11-15T11:29:05Z waiting 135 s until the block 4 mandate expires
+2026-11-15T11:29:35Z waiting 106 s until the block 4 mandate expires
+2026-11-15T11:30:05Z waiting 76 s until the block 4 mandate expires
+2026-11-15T11:30:35Z waiting 47 s until the block 4 mandate expires
+2026-11-15T11:31:05Z waiting 15 s until the block 4 mandate expires
+2026-11-15T11:31:25Z [T7.34 refuse approve of P4 after expiry] SENT 0xa354ebdff6978e0590a0f84d968ba44b92174f38b5014b6012d2c5e05acbcde8
+2026-11-15T11:31:27Z [T7.34 refuse approve of P4 after expiry] REVERTED block 16795273 gas 3000000: MandateExpired(4) | replay: MandateExpired(4)
+2026-11-15T11:31:31Z [T7.35 refuse new request after expiry] SENT 0x981cbd996e0a40c9c6ffba1e3f6de0a7d350866774bb22aea36d804c50b3d156
+2026-11-15T11:31:35Z [T7.35 refuse new request after expiry] REVERTED block 16795274 gas 3000000: MandateExpired(4) | replay: MandateExpired(4)
+2026-11-15T11:31:41Z -- after Task 7: trove active True, group 0.048500000000000000 BTC, principal 2021.320000000000000000, Mezo interest 484881822553711 wei, settled 0 wei
+2026-11-15T11:31:41Z    blocks: 1 1799.499906932266462240 (reserved 0.000000000000000000), 2 19.999999054731268091 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.500000000000000000 (reserved 0.300000000000000000); overhead cash 0.000028922582890768, overhead interest 0 wei
+2026-11-15T11:31:41Z    vault MUSD 1820.449934909580621099, tracked 1820.449934909580621099, vault BTC 0.000000000000000000; owner MUSD 8.513469891966557241, owner BTC 0.000699975409453121
+2026-11-15T11:31:41Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:31:41Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:31:41Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:31:41Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:31:41Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:31:41Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:31:45Z [T8.1 refuse sweepResidualMUSD while the group is open] SENT 0xf7275de5ef6618b5c9390beb6a38b3d9624257d961664ba43562e99ca7e4ed2b
+2026-11-15T11:31:50Z [T8.1 refuse sweepResidualMUSD while the group is open] REVERTED block 16795278 gas 3000000: GroupStillOpen | replay: GroupStillOpen
+2026-11-15T11:31:54Z [T8.2 refuse closeGroup from operator] SENT 0x2363ae96416994b98b71b0a0bb64fb4e3c409d57cd6e9018f280d90d8da5ba2b
+2026-11-15T11:31:56Z [T8.2 refuse closeGroup from operator] REVERTED block 16795280 gas 3000000: NotOwner | replay: NotOwner
+2026-11-15T11:32:00Z [T8.3 refuse closeGroup while block 1 cannot cover its debt] SENT 0x6ae7e16f225cc8f0e8a75c99b1039e54b81a266c3f4587faf32b3321a5fe199b
+2026-11-15T11:32:04Z [T8.3 refuse closeGroup while block 1 cannot cover its debt] REVERTED block 16795281 gas 3000000: DebtNotCovered(1, 1801300446943640184260, 1799499906932266462240) | replay: DebtNotCovered(1, 1801300446943640184260, 1799499906932266462240)
+2026-11-15T11:32:04Z   check PASS: T8.3 refusal names block 1
+2026-11-15T11:32:05Z [T8.4 approve block 1 top-up] SENT 0xed647aca60710b31b983745c7938e77c90a7851142cc2c213f5f90aa44d1c421
+2026-11-15T11:32:07Z [T8.4 approve block 1 top-up] OK block 16795282 gas 46406
+2026-11-15T11:32:08Z [T8.5 fundPocket block 1 for the close] SENT 0x484bd7f474aa311533600903dae481099406b7bc2d27a0478861ae4c14b40700
+2026-11-15T11:32:12Z [T8.5 fundPocket block 1 for the close] OK block 16795283 gas 50281
+2026-11-15T11:32:29Z [T8.6 refuse closeGroup while block 2 cannot cover its debt] SENT 0x1ab3d9d54e0a6325fa09729e030555aa0fa376a0e982e9f817febdf69efe322e
+2026-11-15T11:32:33Z [T8.6 refuse closeGroup while block 2 cannot cover its debt] REVERTED block 16795288 gas 3000000: DebtNotCovered(2, 20020005151397384639, 19999999054731268091) | replay: DebtNotCovered(2, 20020005151397384639, 19999999054731268091)
+2026-11-15T11:32:33Z   check PASS: T8.6 refusal names block 2
+2026-11-15T11:32:34Z [T8.7 approve block 2 top-up] SENT 0xfa194ffee29b8eebacc24c0752564e4349e7c54ef199be7c2dfc8012741c85f9
+2026-11-15T11:32:37Z [T8.7 approve block 2 top-up] OK block 16795289 gas 46406
+2026-11-15T11:32:39Z [T8.8 fundPocket block 2 for the close] SENT 0x77c5a9ee1d3f68dae38bafbf1989ea080b806959b0178a22056d4c47677f9d32
+2026-11-15T11:32:45Z [T8.8 fundPocket block 2 for the close] OK block 16795291 gas 50281
+2026-11-15T11:32:59Z [T8.9 refuse closeGroup while overhead cannot cover its interest] SENT 0xc0e2a0af796b993e9c8d6c48528cd8c3dde5aaa4c2b2cf96590b07c0fb7adaa9
+2026-11-15T11:33:03Z [T8.9 refuse closeGroup while overhead cannot cover its interest] REVERTED block 16795295 gas 3000000: DebtNotCovered(0, 53300458168458, 28922582890768) | replay: DebtNotCovered(0, 53300458168458, 28922582890768)
+2026-11-15T11:33:03Z   check PASS: T8.9 refusal names overhead
+2026-11-15T11:33:04Z [T8.10 approve overhead top-up] SENT 0x60d01c4c4e908900facafae67e9937f6f42919c6e9983dda3759a5015a72632a
+2026-11-15T11:33:05Z [T8.10 approve overhead top-up] OK block 16795296 gas 46394
+2026-11-15T11:33:07Z [T8.11 fundOverhead for the interest accrued since the repay] SENT 0x03d843a014649a2ea00dfbdcc885cd25f577dfd3389c145d2429a36f133addb1
+2026-11-15T11:33:09Z [T8.11 fundOverhead for the interest accrued since the repay] OK block 16795297 gas 47095
+2026-11-15T11:33:11Z [T8.12 closeGroup (blocks and overhead covered)] SENT 0xca4b6cce440440fa881f70135cf39d52375c7eb6ba4552f476be885ac22edcd8
+2026-11-15T11:33:12Z [T8.12 closeGroup (blocks and overhead covered)] OK block 16795298 gas 463501
+2026-11-15T11:33:17Z -- after close: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:33:17Z    blocks: 1 0.000956618497249037 (reserved 0.000000000000000000), 2 0.000999701827983894 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.500000000000000000 (reserved 0.300000000000000000); overhead cash 0.000098859205413755, overhead interest 0 wei
+2026-11-15T11:33:17Z    vault MUSD 0.952055179530646686, tracked 0.952055179530646686, vault BTC 0.048500000000000000; owner MUSD 6.690799406051440983, owner BTC 0.000699973547899977
+2026-11-15T11:33:17Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:33:17Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:33:17Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:33:17Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:33:17Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:33:17Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:33:17Z   check PASS: T8.12 trove closed and group ledger at zero
+2026-11-15T11:33:22Z [T8.13 refuse closeGroup after close] SENT 0xceb8f535099f182d56136559fbd0340b19e4b680be50c2bbf09ddce806982a23
+2026-11-15T11:33:24Z [T8.13 refuse closeGroup after close] REVERTED block 16795301 gas 3000000: GroupNotOpen | replay: GroupNotOpen
+2026-11-15T11:33:27Z [T8.14 refuse addCollateral after close] SENT 0x79c04196a8dd319f4946e5866f5f52c1e2817b48cd2b0c4ab5b8b2676af1149c
+2026-11-15T11:33:32Z [T8.14 refuse addCollateral after close] REVERTED block 16795302 gas 3000000: GroupNotOpen | replay: GroupNotOpen
+2026-11-15T11:33:36Z [T8.15 refuse borrow after close] SENT 0xe7295411db0eb6b75c3ae1f9ceba13e79454ef96477363b5e61ebd8056add3a6
+2026-11-15T11:33:40Z [T8.15 refuse borrow after close] REVERTED block 16795304 gas 3000000: GroupNotOpen | replay: GroupNotOpen
+2026-11-15T11:33:44Z [T8.16 refuse repay after close] SENT 0x06ec81806141a372625cc4b88d03a7aa2fdccf4ec0b343744db386b8af63d297
+2026-11-15T11:33:47Z [T8.16 refuse repay after close] REVERTED block 16795306 gas 3000000: GroupNotOpen | replay: GroupNotOpen
+2026-11-15T11:33:51Z [T8.17 refuse sweepBTC to the MUSD token] SENT 0xb01aad4d225741bfffd1a84761d930743aee8a77d19dd7a322e3fff4ee829623
+2026-11-15T11:33:53Z [T8.17 refuse sweepBTC to the MUSD token] REVERTED block 16795308 gas 3000000: SendFailed | replay: SendFailed
+2026-11-15T11:33:54Z [T8.18 sweepBTC collateral to owner] SENT 0x76bb20c1e26b58f48f87b8e110b8fb36d7920d382552ee814e55a4b7b5745465
+2026-11-15T11:34:00Z [T8.18 sweepBTC collateral to owner] OK block 16795309 gas 30143
+2026-11-15T11:34:05Z [T8.19 refuse sweepResidualMUSD while P4 is reserved] SENT 0x12ecafb7217409f1b52fdf71be8b965e51523895d8a7837aff5b9cf1f6abd615
+2026-11-15T11:34:09Z [T8.19 refuse sweepResidualMUSD while P4 is reserved] REVERTED block 16795311 gas 3000000: CashReserved(4, 300000000000000000) | replay: CashReserved(4, 300000000000000000)
+2026-11-15T11:34:10Z [T8.20 cancel P4 (block 4 reserve)] SENT 0xc7ff2c2aceb419b8bd111143e88f9c0efbb48747c169303977e798816bed2f03
+2026-11-15T11:34:14Z [T8.20 cancel P4 (block 4 reserve)] OK block 16795313 gas 36604
+2026-11-15T11:34:15Z [T8.21 owner sends 0.01 MUSD straight to the vault (outside the ledger)] SENT 0x27df58c9553688365fba18be6add0c21f1e8f4164619402398768db7ee141d6b
+2026-11-15T11:34:19Z [T8.21 owner sends 0.01 MUSD straight to the vault (outside the ledger)] OK block 16795314 gas 34573
+2026-11-15T11:34:23Z [T8.22 refuse sweepResidualMUSD with stray MUSD] SENT 0x484c74d3b05302b18abd66d60ff2c9bed0ca433c0b7d87cd65bd591fac822c8c
+2026-11-15T11:34:30Z [T8.22 refuse sweepResidualMUSD with stray MUSD] REVERTED block 16795316 gas 3000000: CashMismatch | replay: CashMismatch
+2026-11-15T11:34:31Z [T8.23 recoverUnallocatedMUSD moves the 0.01 MUSD to owner] SENT 0xb6baabfad876f85abd895f3ad6f8ce71d4c65e81613a8bc271b769a63733a573
+2026-11-15T11:34:37Z [T8.23 recoverUnallocatedMUSD moves the 0.01 MUSD to owner] OK block 16795317 gas 58371
+2026-11-15T11:34:37Z [T8.24 recoverUnallocatedMUSD again (moves nothing)] SENT 0xfe1ceb8d6dbc1b5f237b42bdf9b02603efe1b85647964c57c493c78b049fb320
+2026-11-15T11:34:41Z [T8.24 recoverUnallocatedMUSD again (moves nothing)] OK block 16795319 gas 46148
+2026-11-15T11:34:45Z [T8.25 refuse sweepResidualMUSD to the zero address] SENT 0x600b7736765aef8cec3c1e8b82e308a64d58df5d87d42a6f0c29ee8ac0b352ed
+2026-11-15T11:34:48Z [T8.25 refuse sweepResidualMUSD to the zero address] REVERTED block 16795321 gas 3000000: ZeroAddress | replay: ZeroAddress
+2026-11-15T11:34:53Z -- before residual sweep: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:34:53Z    blocks: 1 0.000956618497249037 (reserved 0.000000000000000000), 2 0.000999701827983894 (reserved 0.000000000000000000), 3 0.450000000000000000 (reserved 0.000000000000000000), 4 0.500000000000000000 (reserved 0.000000000000000000); overhead cash 0.000098859205413755, overhead interest 0 wei
+2026-11-15T11:34:53Z    vault MUSD 0.952055179530646686, tracked 0.952055179530646686, vault BTC 0.000000000000000000; owner MUSD 6.690799406051440983, owner BTC 0.049199970013847483
+2026-11-15T11:34:53Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:34:53Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:34:53Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:34:53Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:34:53Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:34:53Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:34:53Z [T8.26 sweepResidualMUSD to owner] SENT 0x2a57a711a7c1fb878c99efe21456988f392f2baab5d222998a2090ff4b512b55
+2026-11-15T11:34:59Z [T8.26 sweepResidualMUSD to owner] OK block 16795323 gas 92188
+2026-11-15T11:35:04Z -- after residual sweep: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:35:04Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:35:04Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 7.642854585582087669, owner BTC 0.049199970000388035
+2026-11-15T11:35:04Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:35:04Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:35:04Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:35:04Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:35:04Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:35:04Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:35:04Z   check PASS: T8.26 vault MUSD and BTC are zero
+2026-11-15T11:35:07Z [T8.27 refuse second sweepResidualMUSD] SENT 0x84efa2e358a848b5572378f93cdc6b4ff37efde09ac8d12899c55891ffa93a0f
+2026-11-15T11:35:10Z [T8.27 refuse second sweepResidualMUSD] REVERTED block 16795326 gas 3000000: ZeroAmount | replay: ZeroAmount
+2026-11-15T11:35:14Z -- final: trove active False, group 0.000000000000000000 BTC, principal 0.000000000000000000, Mezo interest 0 wei, settled 0 wei
+2026-11-15T11:35:14Z    blocks: 1 0.000000000000000000 (reserved 0.000000000000000000), 2 0.000000000000000000 (reserved 0.000000000000000000), 3 0.000000000000000000 (reserved 0.000000000000000000), 4 0.000000000000000000 (reserved 0.000000000000000000); overhead cash 0.000000000000000000, overhead interest 0 wei
+2026-11-15T11:35:14Z    vault MUSD 0.000000000000000000, tracked 0.000000000000000000, vault BTC 0.000000000000000000; owner MUSD 7.642854585582087669, owner BTC 0.049199969562388035
+2026-11-15T11:35:14Z   check PASS: Mezo principal equals totalPrincipal
+2026-11-15T11:35:14Z   check PASS: Mezo interest is at least totalInterest
+2026-11-15T11:35:14Z   check PASS: block principal plus overhead principal equal totalPrincipal
+2026-11-15T11:35:14Z   check PASS: block interest plus overhead interest equal totalInterest
+2026-11-15T11:35:14Z   check PASS: vault MUSD equals tracked cash
+2026-11-15T11:35:14Z   check PASS: reserved cash never exceeds block cash
+2026-11-15T11:35:14Z final owner MUSD 7.642854585582087669, owner BTC 0.049199970000388035; before sweep owner MUSD 6.690799406051440983

@@ -1,0 +1,16 @@
+{
+  "swap_deadline": 1794742133,
+  "vault": "0x4c716Be7F97EaC8B3dc1c5593649a387751C9835",
+  "deploy_tx": "0xb28cf7c3ba1f3283ae66c69dad3ad11f80163e230baf68d4fa90d579e5e22996",
+  "deploy_block": 16794952,
+  "pay": {
+    "T7.6 waiting payment X 0.5 MUSD to vendor": 2,
+    "T7.10 waiting payment Y 0.5 MUSD to vendor": 3,
+    "T7.18 waiting payment W 0.2 MUSD to vendor": 4,
+    "T7.24 waiting payment V 0.2 MUSD to vendor": 5,
+    "T7.33 pending payment P4 0.3 MUSD on block 4": 6
+  },
+  "exp3": 1797333046,
+  "t5": 1794741380,
+  "exp4": 1794742266
+}

@@ -1,0 +1,563 @@
+Blocks & PocketsTestnet dashboard
+
+TroveBalancesBlocksPaymentsActionsChecksTie-outsContracts
+
+LiveBlock 16,795,350Checked 1s ago
+
+Mezo testnet · testnet only
+
+# Blocks & Pockets
+
+One Bitcoin-backed loan, split into blocks of spending money. An agent spends from its block only inside the owner's limits, and the owner can revoke that agent at any time.
+
+Every number on this page is read from Mezo testnet at the block shown. The Actions section sends owner and operator transactions from a connected testnet wallet, and each one is checked with Mezo first.
+
+Group debt
+
+0.00MUSD
+
+Collateral ratio
+
+n/a
+
+Cash in blocks
+
+0.00MUSD
+
+Tracked by the vault
+
+## One shared Trove
+
+The group borrows once against Bitcoin. The vault tracks each block's share of the debt.
+
+Trove closedOracle price 65,473 USD per BTC
+
+Collateral
+
+0.0000BTC
+
+Collateral ratio
+
+n/a
+
+Target 150.0%
+
+Group debt
+
+0.00MUSD
+
+Principal plus Mezo interest
+
+Room to borrow
+
+0.00MUSD
+
+Capacity 0.00 MUSD at target
+
+Principal by block0.00 MUSD
+
+- Gas deposit and overhead0.00 MUSD
+
+## Balances
+
+The vault and the two test wallets, at the block shown.
+
+Vault MUSD
+
+0.00MUSD
+
+Tracked cash 0.00 MUSD
+
+Owner MUSD
+
+7.64MUSD
+
+Treasury wallet
+
+Vendor MUSD
+
+5.91MUSD
+
+Test payee
+
+Vault BTC
+
+0.0000BTC
+
+Collateral returned at close
+
+Owner BTC
+
+0.0492BTC
+
+Treasury wallet, test BTC
+
+## Blocks
+
+Shared Trove blocks draw on the group debt. A prefunded slice holds its own MUSD, paid out only under its mandate.
+
+Block 1
+
+### Procurement
+
+Shared Trove
+
+Cash0.00MUSD
+
+Reserved0.00MUSD
+
+Free0.00MUSD
+
+Debt0.00 of 2,500 cap
+
+MandateNo mandate
+
+The owner directs this block. No agent can spend from it.
+
+Allowed payees
+
+None
+
+Block 2
+
+### Operations
+
+Shared Trove
+
+Cash0.00MUSD
+
+Reserved0.00MUSD
+
+Free0.00MUSD
+
+Debt0.00 of 40 cap
+
+MandateNo mandate
+
+The owner directs this block. No agent can spend from it.
+
+Allowed payees
+
+None
+
+Block 3
+
+### Vendor pocket
+
+Prefunded slice
+
+Cash0.00MUSD
+
+Reserved0.00MUSD
+
+Free0.00MUSD
+
+MandateActive
+
+OperatorAgent (operator)
+
+Per payment1.50 MUSD
+
+Expires2026-12-15 11:10 UTC
+
+Lifetime used0.55 of 5.00
+
+Allowed payees
+
+- Vendor (test payee)
+
+Block 4
+
+### Short mandate
+
+Prefunded slice
+
+Cash0.00MUSD
+
+Reserved0.00MUSD
+
+Free0.00MUSD
+
+MandateExpired
+
+OperatorAgent (operator)
+
+Per payment0.50 MUSD
+
+Expires2026-11-15 11:31 UTC
+
+Lifetime used0.00 of 2.00
+
+Allowed payees
+
+- Vendor (test payee)
+
+## Payments
+
+Agent payments run through the same checks. Payments above 0.10 MUSD wait for the owner.
+
+#BlockPayeeAmountPathStatusEvidence
+
+1Vendor pocketVendor (test payee)0.05 MUSDAutomaticExecutedINV-001
+
+2Vendor pocketVendor (test payee)0.50 MUSDOwner approvalCancelledINV-006
+
+3Vendor pocketVendor (test payee)0.50 MUSDOwner approvalExecutedINV-007
+
+4Vendor pocketVendor (test payee)0.20 MUSDOwner approvalCancelledINV-010
+
+5Vendor pocketVendor (test payee)0.20 MUSDOwner approvalCancelledINV-012
+
+6Short mandateVendor (test payee)0.30 MUSDOwner approvalCancelledINV-013
+
+## Wallet actions
+
+Owner and operator actions on this vault. Testnet only. Each action is checked with Mezo first, so a refused action sends nothing.
+
+Wallet
+
+Connect a wallet on Mezo testnet. Owner and operator actions show up once the wallet has a role.
+
+Connect wallet
+
+### Owner
+
+Connect the owner wallet to use these.
+
+#### Waiting for approval
+
+No payment is waiting for the owner.
+
+#### Blocks and mandates
+
+Create a blockConnect the owner wallet to run this.
+
+A new pocket. A shared-Trove block draws on the group. A prefunded slice holds its own MUSD.
+
+Block name
+
+FundingShared TrovePrefunded slice
+
+Debt cap (MUSD)
+
+MUSD
+
+Limit on this block's debt. Only shared-Trove blocks borrow.
+
+Create block
+
+Allow or remove a payeeConnect the owner wallet to run this.
+
+Money moves only to addresses on a block's allowlist.
+
+BlockBlock 1 · Procurement · sharedBlock 2 · Operations · sharedBlock 3 · Vendor pocket · prefundedBlock 4 · Short mandate · prefunded
+
+Payee address
+
+StatusAllowRemove
+
+Save payee
+
+Grant an agent mandateConnect the owner wallet to run this.
+
+The agent may request payments from this block, within the caps, until the expiry.
+
+BlockBlock 1 · Procurement · sharedBlock 2 · Operations · sharedBlock 3 · Vendor pocket · prefundedBlock 4 · Short mandate · prefunded
+
+Agent address
+
+The wallet that requests payments.
+
+Per-payment cap (MUSD)
+
+MUSD
+
+Lifetime cap (MUSD)
+
+MUSD
+
+Executed and waiting payments count toward this total.
+
+Expires (UTC)
+
+Grant mandate
+
+Revoke an agent mandateConnect the owner wallet to run this.
+
+The agent is refused from now on. A waiting payment is refused too if you approve it.
+
+BlockBlock 1 · Procurement · sharedBlock 2 · Operations · sharedBlock 3 · Vendor pocket · prefundedBlock 4 · Short mandate · prefunded
+
+Revoke the mandate on block 1.
+
+Revoke mandate
+
+Fund a pocketConnect the owner wallet to run this.
+
+Moves MUSD from the owner wallet into a block. The owner approves the vault for this amount first.
+
+BlockBlock 1 · Procurement · sharedBlock 2 · Operations · sharedBlock 3 · Vendor pocket · prefundedBlock 4 · Short mandate · prefunded
+
+Amount (MUSD)
+
+MUSD
+
+Fund pocket
+
+Fund overheadConnect the owner wallet to run this.
+
+MUSD for Mezo interest on the overhead and for closing the group.
+
+Amount (MUSD)
+
+MUSD
+
+Fund overhead
+
+Set the approval thresholdConnect the owner wallet to run this.
+
+Payments above this amount wait for the owner. Zero makes every payment wait.
+
+Threshold (MUSD)
+
+MUSD
+
+Set threshold
+
+#### Shared Trove
+
+Open the group TroveConnect the owner wallet to run this.
+
+Opens the shared Trove with BTC collateral and borrows into one shared-Trove block.
+
+Shared-Trove blockBlock 1 · Procurement · sharedBlock 2 · Operations · shared
+
+The borrowed MUSD goes to this block.
+
+MUSD to borrow
+
+MUSD
+
+BTC collateral
+
+BTC
+
+Open group
+
+Add collateralConnect the owner wallet to run this.
+
+Adds BTC to the open group Trove. This raises the group capacity.
+
+BTC to add
+
+BTC
+
+Add collateral
+
+Borrow for a shared-Trove blockConnect the owner wallet to run this.
+
+Borrows more MUSD for one block. The block cap and the group capacity both apply.
+
+Shared-Trove blockBlock 1 · Procurement · sharedBlock 2 · Operations · shared
+
+Amount (MUSD)
+
+MUSD
+
+Borrow
+
+Repay a shared-Trove blockConnect the owner wallet to run this.
+
+Repays part of one block's principal. Each block and the overhead pay their own interest first.
+
+Shared-Trove blockBlock 1 · Procurement · sharedBlock 2 · Operations · shared
+
+Amount (MUSD)
+
+MUSD
+
+Repay
+
+Accrue interestConnect the owner wallet to run this.
+
+Settles interest up to now and splits it across the blocks. It moves no MUSD.
+
+Settle interest up to now.
+
+Accrue interest
+
+Close the group TroveConnect the owner wallet to run this.
+
+Each block pays its own debt from its own cash. Then the Trove closes and the BTC returns to the vault.
+
+Close the group Trove.
+
+Close group
+
+#### Sweeps and recovery
+
+Sweep leftover MUSDConnect the owner wallet to run this.
+
+After a close, sends the MUSD the vault still tracks to an address. Refused while a group is open.
+
+Send to
+
+Send all leftover MUSD tracked by the vault to 0xA445987238e1E2C56739C68743a150CdAcF60db7.
+
+Sweep MUSD
+
+Sweep BTCConnect the owner wallet to run this.
+
+Sends all BTC the vault holds, such as collateral returned at close.
+
+Send to
+
+Send all BTC held by the vault to 0xA445987238e1E2C56739C68743a150CdAcF60db7.
+
+Sweep BTC
+
+Recover unallocated MUSDConnect the owner wallet to run this.
+
+Returns MUSD that arrived outside the ledger, such as a direct transfer. Moves no tracked cash.
+
+Send to
+
+Send MUSD that arrived outside the ledger to 0xA445987238e1E2C56739C68743a150CdAcF60db7.
+
+Recover MUSD
+
+### Operator
+
+Connect the operator wallet of a block to request payments.
+
+#### Payments
+
+Request a paymentConnect the operator wallet of a block to run this.
+
+Pays from a block's pocket under its mandate. Above the threshold it waits for the owner.
+
+BlockNo eligible block
+
+Only blocks where this wallet is the operator are listed.
+
+Payee address
+
+Amount (MUSD)
+
+MUSD
+
+Evidence label
+
+Up to 32 bytes, such as INV-2041. Stored on chain.
+
+Request payment
+
+## Eight checks on every payment
+
+In the order the contract runs them. A failed check stops the payment and reverts the transaction.
+
+- 1
+
+#### Block exists
+
+The payment names a block the owner created.
+
+- 2
+
+#### Caller is the operator
+
+Only the block's mandate holder can request a payment.
+
+- 3
+
+#### Mandate active and in date
+
+The owner can revoke the mandate at any time. It also stops at its expiry date.
+
+- 4
+
+#### Payee on the allowlist
+
+Money moves only to addresses the owner approved for that block.
+
+- 5
+
+#### Within the per-payment cap
+
+Each payment has a ceiling set by the owner.
+
+- 6
+
+#### Within the lifetime cap
+
+Executed and waiting payments count toward one total limit.
+
+- 7
+
+#### Free cash in the pocket
+
+A block cannot spend cash that is already reserved.
+
+- 8
+
+#### Owner approval above the threshold
+
+Larger payments wait for the owner. Approval checks the mandate and payee again.
+
+## Ledger tie-outs
+
+Five checks that the vault's books agree with Mezo and with each other. They run on every read.
+
+All 5 checks pass
+
+- ✓
+
+Mezo principal equals the vault ledger
+
+0.000000 vs 0.000000 MUSD
+
+- ✓
+
+Mezo interest is at least the settled interest
+
+0.000000 vs 0.000000 MUSD
+
+- ✓
+
+Block and overhead principal add up to the ledger
+
+0.000000 vs 0.000000 MUSD
+
+- ✓
+
+Block and overhead interest add up to the ledger
+
+0.000000 vs 0.000000 MUSD
+
+- ✓
+
+Vault MUSD equals the cash the vault tracks
+
+0.000000 vs 0.000000 MUSD
+
+## Contracts
+
+Mezo testnet, chain 31611. Explorer links open in a new tab.
+
+- Vault (MoneyblocksVault)0x4c716Be7F97EaC8B3dc1c5593649a387751C9835
+
+- MUSD0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503
+
+- BorrowerOperations0xCdF7028ceAB81fA0C6971208e83fa7872994beE5
+
+- TroveManager0xE47c80e8c23f6B4A1aE41c34837a0599D5D16bb0
+
+- PriceFeed0x86bCF0841622a5dAC14A313a15f96A95421b9366
+
+- Owner (treasury)0xA445987238e1E2C56739C68743a150CdAcF60db7
+
+- Agent (operator)0xDb41Eb73ee78e2B4fb7fb5aaf877CB49626E2E3E
+
+Blocks & Pockets · testnet prototype · no real funds
+
+Reads and wallet actions go through Mezo testnet (chain 31611, https://rpc.test.mezo.org). No mainnet, no real funds.
