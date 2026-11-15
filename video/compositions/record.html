@@ -1,0 +1,120 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, Inter), Inter, sans-serif;
+      color: #1f2330;
+      font-variant-numeric: tabular-nums;
+    }
+    .a {
+      position: absolute;
+    }
+    #r-eyebrow {
+      left: 200px;
+      top: 220px;
+      font-size: 34px;
+      color: #6b7080;
+    }
+    #r-head {
+      left: 200px;
+      top: 280px;
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      white-space: nowrap;
+    }
+    #r-num {
+      font-size: 240px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+    #r-unit {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .seg {
+      top: 600px;
+      height: 64px;
+      border-radius: 16px;
+    }
+    #r-ok {
+      left: 200px;
+      width: 776px;
+      background: linear-gradient(90deg, #8fa8f8, #6c5ce7);
+      transform-origin: 0 50%;
+    }
+    #r-no {
+      left: 984px;
+      width: 736px;
+      background: #e5484d;
+      transform-origin: 100% 50%;
+    }
+    .cap {
+      top: 696px;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+    #r-ok-cap {
+      left: 200px;
+    }
+    #r-no-cap {
+      right: 200px;
+      color: #c9363b;
+      text-align: right;
+    }
+    #r-foot {
+      left: 200px;
+      top: 830px;
+      font-size: 34px;
+      color: #6b7080;
+    }
+  </style>
+
+  <div id="root" data-composition-id="record" data-width="1920" data-height="1080">
+    <div id="r-stage" class="clip" data-start="0" data-duration="5.5" style="position:absolute;inset:0">
+      <div id="r-eyebrow" class="a">Live run on Mezo testnet, 15 Nov 2026</div>
+      <div id="r-head" class="a"><span id="r-num">0</span><span id="r-unit">transactions</span></div>
+      <div id="r-ok" class="a seg"></div>
+      <div id="r-no" class="a seg"></div>
+      <div id="r-ok-cap" class="a cap"><span id="r-ok-n">0</span> succeeded</div>
+      <div id="r-no-cap" class="a cap"><span id="r-no-n">0</span> refused on purpose</div>
+      <div id="r-foot" class="a">26 of 30 custom errors reached on chain</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const FPS = 30;
+      function countUp(sel, to, start, dur) {
+        const frames = Math.round(dur * FPS);
+        for (let i = 0; i <= frames; i += 1) {
+          const p = i / frames;
+          const e = 1 - Math.pow(1 - p, 3);
+          tl.set(sel, { textContent: String(Math.round(to * e)) }, start + dur * p);
+        }
+      }
+
+      tl.fromTo("#r-eyebrow", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.1);
+      tl.fromTo("#r-num", { opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.25);
+      countUp("#r-num", 113, 0.25, 1.4);
+      tl.fromTo("#r-unit", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.4);
+
+      tl.fromTo("#r-ok", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 1.75);
+      tl.fromTo("#r-no", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 1.85);
+      tl.fromTo(["#r-ok-cap", "#r-no-cap"], { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.1, ease: "power4.out" }, 1.8);
+      countUp("#r-ok-n", 58, 1.8, 1.2);
+      countUp("#r-no-n", 55, 1.9, 1.2);
+
+      tl.fromTo("#r-foot", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 2.2);
+      tl.to("#r-stage > *", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power3.in" }, 5.2);
+
+      window.__timelines["record"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Background","default":"#FFFFFF"},
+    {"id":"color-ink","type":"color","label":"Text","default":"#1F2330"},
+    {"id":"color-accent","type":"color","label":"Accent","default":"#6C5CE7"},
+    {"id":"color-btc","type":"color","label":"Bitcoin price","default":"#F7931A"},
+    {"id":"font-display","type":"string","label":"Display font","default":"Inter"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Blocks &amp; Pockets demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --color-ground: #ffffff;
+        --color-ink: #1f2330;
+        --color-muted: #6b7080;
+        --color-line: #e6e8ef;
+        --color-accent: #6c5ce7;
+        --color-btc: #f7931a;
+        --color-ok: #1f9d63;
+        --color-no: #e5484d;
+        --blob-lilac: 185, 166, 245;
+        --blob-peri: 143, 168, 248;
+        --font-display: Inter;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--color-ground);
+        font-family: var(--font-display), Inter, sans-serif;
+        color: var(--color-ink);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #bg {
+        position: absolute;
+        inset: 0;
+        background: var(--color-ground);
+        overflow: hidden;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+      }
+      #blob-a {
+        left: -360px;
+        top: -420px;
+        width: 1200px;
+        height: 1200px;
+        background: radial-gradient(circle, rgba(var(--blob-lilac), 0.55) 0%, rgba(var(--blob-lilac), 0) 68%);
+      }
+      #blob-b {
+        left: 1080px;
+        top: 360px;
+        width: 1100px;
+        height: 1100px;
+        background: radial-gradient(circle, rgba(var(--blob-peri), 0.5) 0%, rgba(var(--blob-peri), 0) 68%);
+      }
+      #blob-c {
+        left: 620px;
+        top: 760px;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(circle, rgba(var(--blob-lilac), 0.45) 0%, rgba(var(--blob-lilac), 0) 68%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="43.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bg" data-layout-ignore>
+        <div class="blob" id="blob-a"></div>
+        <div class="blob" id="blob-b"></div>
+        <div class="blob" id="blob-c"></div>
+      </div>
+
+      <div id="hook" data-composition-id="hook" data-composition-src="compositions/hook.html"
+        data-start="0" data-duration="10" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080"></div>
+      <div id="split" data-composition-id="split" data-composition-src="compositions/split.html"
+        data-start="10" data-duration="5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080"></div>
+      <div id="pocket" data-composition-id="pocket" data-composition-src="compositions/pocket.html"
+        data-start="15" data-duration="18" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080"></div>
+      <div id="record" data-composition-id="record" data-composition-src="compositions/record.html"
+        data-start="33" data-duration="5.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080"></div>
+      <div id="endcard" data-composition-id="endcard" data-composition-src="compositions/endcard.html"
+        data-start="38.5" data-duration="5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080"></div>
+
+      <!-- Sound: bundled Pixabay SFX, each on a visible action (see assets/sfx/CREDITS.md). -->
+      <audio id="sfx-typing" src="assets/sfx/typing.mp3" data-start="0.05" data-duration="1.2" data-volume="0.5" data-fade-out="0.2" data-track-index="10"></audio>
+      <audio id="sfx-coin" src="assets/sfx/pop.mp3" data-start="3.12" data-duration="0.72" data-volume="0.8" data-track-index="11"></audio>
+      <audio id="sfx-morph" src="assets/sfx/whoosh-short.mp3" data-start="3.45" data-duration="0.57" data-volume="0.55" data-track-index="12"></audio>
+      <audio id="sfx-split" src="assets/sfx/whoosh.mp3" data-start="10.2" data-duration="0.57" data-volume="0.5" data-track-index="12"></audio>
+      <audio id="sfx-click-vendor" src="assets/sfx/click.mp3" data-start="13.88" data-duration="0.36" data-volume="0.9" data-track-index="13"></audio>
+      <audio id="sfx-click-grant" src="assets/sfx/click.mp3" data-start="18.08" data-duration="0.36" data-volume="0.9" data-track-index="13"></audio>
+      <audio id="sfx-paid-1" src="assets/sfx/pop.mp3" data-start="19.98" data-duration="0.72" data-volume="0.6" data-track-index="11"></audio>
+      <audio id="sfx-click-approve" src="assets/sfx/click.mp3" data-start="22.38" data-duration="0.36" data-volume="0.9" data-track-index="13"></audio>
+      <audio id="sfx-paid-2" src="assets/sfx/pop.mp3" data-start="22.48" data-duration="0.72" data-volume="0.6" data-track-index="11"></audio>
+      <audio id="sfx-refused" src="assets/sfx/impact-bass-1.mp3" data-start="24.58" data-duration="2.1" data-volume="0.9" data-track-index="14"></audio>
+      <audio id="sfx-click-revoke" src="assets/sfx/click.mp3" data-start="28.28" data-duration="0.36" data-volume="0.9" data-track-index="13"></audio>
+      <audio id="sfx-refused-2" src="assets/sfx/error.mp3" data-start="29.98" data-duration="1.6" data-volume="0.4" data-track-index="14"></audio>
+      <audio id="sfx-exit" src="assets/sfx/whoosh-short.mp3" data-start="32.45" data-duration="0.57" data-volume="0.55" data-track-index="12"></audio>
+      <audio id="sfx-riser" src="assets/sfx/riser.mp3" data-start="37.15" data-media-start="1" data-duration="3" data-volume="0.45" data-fade-in="0.4" data-fade-out="0.6" data-track-index="15"></audio>
+      <audio id="sfx-click-mark" src="assets/sfx/click.mp3" data-start="39.38" data-duration="0.36" data-volume="0.9" data-track-index="13"></audio>
+      <audio id="sfx-mark" src="assets/sfx/impact-bass-2.mp3" data-start="39.45" data-duration="2.5" data-volume="0.8" data-fade-out="0.8" data-track-index="14"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // The background drifts slowly for the whole film (about 4 px a second).
+      tl.fromTo("#blob-a", { x: 0, y: 0 }, { x: 160, y: 90, duration: 43.5, ease: "sine.inOut" }, 0);
+      tl.fromTo("#blob-b", { x: 0, y: 0 }, { x: -180, y: -120, duration: 43.5, ease: "sine.inOut" }, 0);
+      tl.fromTo("#blob-c", { x: 0, y: 0 }, { x: 120, y: -140, duration: 43.5, ease: "sine.inOut" }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

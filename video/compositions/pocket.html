@@ -1,0 +1,431 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, Inter), Inter, sans-serif;
+      color: #1f2330;
+      font-variant-numeric: tabular-nums;
+    }
+    .a {
+      position: absolute;
+    }
+    .lbl {
+      font-size: 28px;
+      color: #6b7080;
+    }
+    #p-cam {
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+    }
+    #p-panel {
+      left: 160px;
+      top: 150px;
+      width: 1600px;
+      height: 800px;
+      background: #ffffff;
+      border: 1px solid #e6e8ef;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(31, 35, 48, 0.1);
+    }
+    #p-h1 {
+      left: 216px;
+      top: 194px;
+    }
+    #p-h2 {
+      left: 216px;
+      top: 232px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+    }
+    .tag {
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0;
+      background: #eef0f5;
+      color: #1f2330;
+    }
+    .pill {
+      right: 216px;
+      top: 244px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 28px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pill i {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    #p-pill-none { background: #eef0f5; color: #6b7080; }
+    #p-pill-on { background: #e9f6ef; color: #1f9d63; }
+    #p-pill-off { background: #fdecec; color: #c9363b; }
+
+    #p-hr {
+      left: 216px;
+      top: 322px;
+      width: 1488px;
+      height: 2px;
+      background: #eef0f5;
+      transform-origin: 0 50%;
+    }
+    #p-vr {
+      left: 800px;
+      top: 346px;
+      width: 2px;
+      height: 548px;
+      background: #eef0f5;
+      transform-origin: 50% 0;
+    }
+    .row {
+      left: 216px;
+      width: 540px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .row b {
+      font-size: 30px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    #p-r1 { top: 352px; }
+    #p-r2 { top: 418px; }
+    #p-r3 { top: 484px; }
+    #p-r4 { top: 550px; }
+    #p-r5 { top: 616px; }
+    #p-meter {
+      left: 216px;
+      top: 676px;
+      width: 540px;
+      height: 14px;
+      border-radius: 7px;
+      background: #eef0f5;
+      overflow: hidden;
+    }
+    #p-meter-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+      background: linear-gradient(90deg, #8fa8f8, #6c5ce7);
+      transform-origin: 0 50%;
+    }
+    #p-btn {
+      left: 216px;
+      top: 760px;
+      width: 540px;
+      height: 84px;
+      border-radius: 18px;
+      background: #6c5ce7;
+    }
+    #p-btn span {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    #p-btn-grant { color: #ffffff; }
+    #p-btn-revoke { color: #c9363b; }
+    #p-btn-done { color: #6b7080; }
+
+    #p-pay-h {
+      left: 840px;
+      top: 344px;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    #p-pay-note {
+      left: 840px;
+      top: 392px;
+    }
+    #p-empty {
+      left: 840px;
+      top: 470px;
+    }
+    .pay {
+      left: 840px;
+      width: 864px;
+      border-radius: 16px;
+      background: #f7f8fb;
+      border: 2px solid transparent;
+    }
+    .pay > .a {
+      top: 22px;
+      font-size: 30px;
+      white-space: nowrap;
+    }
+    .pay .n { left: 24px; color: #6b7080; }
+    .pay .who { left: 84px; }
+    .pay .amt { left: 430px; font-weight: 700; }
+    .pay .st {
+      right: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .st.muted { color: #6b7080; font-weight: 400; }
+    .st.ok { color: #1f9d63; }
+    .st.no { color: #c9363b; }
+    .chip {
+      padding: 8px 18px;
+      border-radius: 12px;
+      background: #6c5ce7;
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .pay .why {
+      left: 84px;
+      top: 70px;
+      font-size: 28px;
+      color: #c9363b;
+    }
+    #p-q1 { top: 440px; height: 84px; }
+    #p-q2 { top: 536px; height: 84px; }
+    #p-q3 { top: 632px; height: 120px; }
+    #p-q4 { top: 764px; height: 120px; }
+
+    .title {
+      left: 160px;
+      top: 48px;
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+    .title span {
+      display: inline-block;
+      color: #b8bcc8;
+    }
+
+    .cursor {
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      z-index: 20;
+    }
+    .cursor svg {
+      position: absolute;
+      left: -15px;
+      top: -9px;
+      width: 72px;
+      height: 72px;
+      overflow: visible;
+      filter: drop-shadow(0 4px 6px rgba(31, 35, 48, 0.3));
+    }
+    .cursor path {
+      fill: #ffffff;
+      stroke: #1f2330;
+      stroke-width: 1.4;
+      stroke-linejoin: round;
+    }
+  </style>
+
+  <div id="root" data-composition-id="pocket" data-width="1920" data-height="1080">
+    <div id="p-stage" class="clip" data-start="0" data-duration="18" style="position:absolute;inset:0" data-layout-allow-overlap>
+      <div id="p-cam" class="a" data-layout-allow-overflow>
+        <div id="p-panel" class="a"></div>
+        <div id="p-h1" class="a lbl">Block 3</div>
+        <div id="p-h2" class="a">Vendor pocket <span class="tag">Prefunded slice</span></div>
+        <div id="p-pill-none" class="a pill"><i></i>No mandate</div>
+        <div id="p-pill-on" class="a pill"><i></i>Mandate active</div>
+        <div id="p-pill-off" class="a pill"><i></i>Mandate revoked</div>
+        <div id="p-hr" class="a"></div>
+        <div id="p-vr" class="a"></div>
+
+        <div id="p-r1" class="a row"><span class="lbl">Operator</span><b>Operator (test key)</b></div>
+        <div id="p-r2" class="a row"><span class="lbl">Per payment</span><b>1.50 MUSD</b></div>
+        <div id="p-r3" class="a row"><span class="lbl">Lifetime cap</span><b id="p-life">3.00 MUSD</b></div>
+        <div id="p-r4" class="a row"><span class="lbl">Allowed payee</span><b>Vendor (test payee)</b></div>
+        <div id="p-r5" class="a row"><span class="lbl">Owner approves above</span><b>1.00 MUSD</b></div>
+        <div id="p-meter" class="a"><div id="p-meter-fill"></div></div>
+        <div id="p-btn" class="a">
+          <span id="p-btn-grant">Grant mandate</span>
+          <span id="p-btn-revoke">Revoke mandate</span>
+          <span id="p-btn-done">Mandate revoked</span>
+        </div>
+
+        <div id="p-pay-h" class="a">Payments</div>
+        <div id="p-pay-note" class="a lbl">Over 1.00 MUSD waits for the owner</div>
+        <div id="p-empty" class="a lbl">No payments yet</div>
+
+        <div id="p-q1" class="a pay">
+          <span class="a n">#1</span><span class="a who">Vendor (test payee)</span><span class="a amt">0.50 MUSD</span>
+          <span class="a st muted" id="p-q1-a">Automatic</span>
+          <span class="a st ok" id="p-q1-b">Executed</span>
+        </div>
+        <div id="p-q2" class="a pay">
+          <span class="a n">#2</span><span class="a who">Vendor (test payee)</span><span class="a amt">1.20 MUSD</span>
+          <span class="a st muted" id="p-q2-a">Waiting for owner <span class="chip" id="p-chip">Approve</span></span>
+          <span class="a st ok" id="p-q2-b">Executed</span>
+        </div>
+        <div id="p-q3" class="a pay">
+          <span class="a n">#3</span><span class="a who">Vendor (test payee)</span><span class="a amt">1.60 MUSD</span>
+          <span class="a st muted" id="p-q3-a">Checking</span>
+          <span class="a st no" id="p-q3-b">Refused</span>
+          <span class="a why" id="p-q3-why">1.60 MUSD is over the 1.50 MUSD per-payment cap</span>
+        </div>
+        <div id="p-q4" class="a pay">
+          <span class="a n">#4</span><span class="a who">Vendor (test payee)</span><span class="a amt">0.10 MUSD</span>
+          <span class="a st muted" id="p-q4-a">Checking</span>
+          <span class="a st no" id="p-q4-b">Refused</span>
+          <span class="a why" id="p-q4-why">The owner revoked this mandate</span>
+        </div>
+      </div>
+
+      <div id="p-t1" class="a title"><span>Give</span> <span>a</span> <span>key</span> <span>a</span> <span class="hl">limit</span></div>
+      <div id="p-t2" class="a title"><span>It</span> <span>pays</span> <span class="hl">inside</span> <span>the</span> <span>limit</span></div>
+      <div id="p-t3" class="a title"><span>Over</span> <span>the</span> <span>limit,</span> <span class="hl no">refused</span> <span>on</span> <span>chain</span></div>
+      <div id="p-t4" class="a title"><span>The</span> <span>owner</span> <span>can</span> <span class="hl">pull</span> <span>the</span> <span>key</span></div>
+
+      <div id="p-cur" class="a cursor">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z" /></svg>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const BLUR_IN = { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" };
+      function blurIn(sel, t, extra) {
+        tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, Object.assign({}, BLUR_IN, extra || {}), t);
+      }
+      function out(sel, t, dur) {
+        tl.to(sel, { opacity: 0, filter: "blur(6px)", duration: dur || 0.12, ease: "power2.in" }, t);
+      }
+      // Titles: words go from light grey to ink, one accent word; landed titles hold still.
+      function title(id, tin, tout) {
+        const words = document.querySelectorAll(id + " span");
+        tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.01 }, tin);
+        words.forEach(function (w, i) {
+          const to = w.classList.contains("hl") ? (w.classList.contains("no") ? "#c9363b" : "#6c5ce7") : "#1f2330";
+          tl.fromTo(w, { color: "#b8bcc8" }, { color: to, duration: 0.12, ease: "none" }, tin + 0.05 + i * 0.08);
+        });
+        tl.to(id, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in" }, tout);
+      }
+      function click(t, target) {
+        tl.fromTo("#p-cur svg", { scale: 1 }, { scale: 0.86, duration: 0.08, ease: "power2.out", transformOrigin: "20.8% 12.5%", immediateRender: false }, t);
+        tl.to("#p-cur svg", { scale: 1, duration: 0.12, ease: "power2.out" }, t + 0.08);
+        if (target) {
+          tl.fromTo(target, { scale: 1 }, { scale: 0.96, duration: 0.08, ease: "power2.out", immediateRender: false }, t);
+          tl.to(target, { scale: 1, duration: 0.14, ease: "power2.out" }, t + 0.08);
+        }
+      }
+
+      // Panel arrives from the previous scene's grow; contents populate.
+      blurIn(["#p-h1", "#p-h2"], 0.08, { stagger: 0.06 });
+      blurIn("#p-pill-none", 0.2);
+      tl.fromTo("#p-pill-on", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#p-pill-off", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#p-hr", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.3);
+      tl.fromTo("#p-vr", { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, 0.4);
+      blurIn(["#p-r1", "#p-r2", "#p-r3", "#p-r4", "#p-r5"], 0.6, { stagger: 0.1 });
+      blurIn(["#p-pay-h", "#p-pay-note", "#p-empty"], 1.2, { stagger: 0.08 });
+      blurIn("#p-btn", 1.6);
+      tl.fromTo(["#p-btn-revoke", "#p-btn-done"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#p-meter", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo("#p-meter-fill", { scaleX: 0 }, { scaleX: 0, duration: 0.01 }, 0);
+      tl.fromTo(["#p-q1", "#p-q2", "#p-q3", "#p-q4"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo(["#p-q1-b", "#p-q2-b", "#p-q3-b", "#p-q3-why", "#p-q4-b", "#p-q4-why"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+
+      title("#p-t1", 0.5, 3.8);
+
+      // Grant the mandate.
+      tl.fromTo("#p-cur", { x: -90, y: 1160 }, { x: 486, y: 802, duration: 0.7, ease: "power3.inOut" }, 2.2);
+      click(3.08, "#p-btn");
+      tl.to("#p-btn", { backgroundColor: "#ffffff", boxShadow: "inset 0 0 0 3px #e5484d", duration: 0.2, ease: "power2.out" }, 3.12);
+      out("#p-btn-grant", 3.1);
+      tl.to("#p-btn-revoke", { opacity: 1, duration: 0.16, ease: "power2.out" }, 3.18);
+      out("#p-pill-none", 3.1);
+      tl.to("#p-pill-on", { opacity: 1, duration: 0.16, ease: "power2.out" }, 3.14);
+      tl.set("#p-life", { textContent: "0.00 of 3.00 used" }, 3.14);
+      tl.to("#p-meter", { opacity: 1, duration: 0.2, ease: "power2.out" }, 3.2);
+      tl.to("#p-cur", { x: 700, y: 990, duration: 0.5, ease: "power2.inOut" }, 3.4);
+
+      title("#p-t2", 4.0, 8.4);
+
+      // Payment 1: under the threshold, it executes on its own.
+      out("#p-empty", 4.2);
+      tl.to("#p-q1", { opacity: 1, duration: 0.01 }, 4.3);
+      tl.fromTo("#p-q1", { filter: "blur(8px)", x: 40 }, { filter: "blur(0px)", x: 0, duration: 0.4, ease: "expo.out" }, 4.3);
+      out("#p-q1-a", 4.96);
+      tl.to("#p-q1-b", { opacity: 1, duration: 0.14, ease: "power2.out" }, 4.98);
+      tl.to("#p-meter-fill", { scaleX: 0.5 / 3, duration: 0.4, ease: "power3.out" }, 5.0);
+      tl.set("#p-life", { textContent: "0.50 of 3.00 used" }, 5.0);
+
+      // Payment 2: over 1.00 MUSD, so it waits; the owner approves it.
+      tl.to("#p-q2", { opacity: 1, duration: 0.01 }, 6.0);
+      tl.fromTo("#p-q2", { filter: "blur(8px)", x: 40 }, { filter: "blur(0px)", x: 0, duration: 0.4, ease: "expo.out" }, 6.0);
+      tl.to("#p-cur", { x: 1606, y: 580, duration: 0.6, ease: "power3.inOut" }, 6.6);
+      click(7.38, "#p-chip");
+      out("#p-q2-a", 7.46);
+      tl.to("#p-q2-b", { opacity: 1, duration: 0.14, ease: "power2.out" }, 7.48);
+      tl.to("#p-meter-fill", { scaleX: 1.7 / 3, duration: 0.4, ease: "power3.out" }, 7.5);
+      tl.set("#p-life", { textContent: "1.70 of 3.00 used" }, 7.5);
+      tl.to("#p-cur", { x: 1560, y: 1000, duration: 0.5, ease: "power2.inOut" }, 7.6);
+
+      title("#p-t3", 8.6, 12.2);
+
+      // Payment 3: over the per-payment cap. Push in; the chain refuses it.
+      tl.to("#p-q3", { opacity: 1, duration: 0.01 }, 8.6);
+      tl.fromTo("#p-q3", { filter: "blur(8px)", x: 40 }, { filter: "blur(0px)", x: 0, duration: 0.4, ease: "expo.out" }, 8.6);
+      tl.fromTo("#p-cam", { scale: 1, x: 0, y: 0, transformOrigin: "1272px 692px" }, { scale: 1.32, x: -230, y: -110, duration: 0.6, ease: "power2.inOut" }, 8.9);
+      out("#p-q3-a", 9.56);
+      tl.to("#p-q3", { backgroundColor: "#fdecec", borderColor: "#e5484d", duration: 0.12, ease: "power2.out" }, 9.58);
+      tl.to("#p-q3-b", { opacity: 1, duration: 0.1, ease: "power2.out" }, 9.58);
+      tl.fromTo("#p-q3-b", { scale: 1.25 }, { scale: 1, duration: 0.25, ease: "power3.out", immediateRender: false }, 9.58);
+      tl.to("#p-q3-why", { opacity: 1, duration: 0.2, ease: "power2.out" }, 9.7);
+      // The header would slide under the title during the push: clear it, bring it back on the pull.
+      tl.to(["#p-h1", "#p-h2", "#p-pill-on", "#p-hr"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 8.9);
+      tl.to("#p-cam", { scale: 1, x: 0, y: 0, duration: 0.6, ease: "power2.inOut" }, 11.6);
+      tl.to(["#p-h1", "#p-h2", "#p-pill-on", "#p-hr"], { opacity: 1, duration: 0.3, ease: "power2.out" }, 11.9);
+
+      title("#p-t4", 12.4, 17.3);
+
+      // Revoke: the owner pulls the key.
+      tl.to("#p-cur", { x: 486, y: 802, duration: 0.7, ease: "power3.inOut" }, 12.4);
+      click(13.28, "#p-btn");
+      out("#p-btn-revoke", 13.3);
+      tl.to("#p-btn-done", { opacity: 1, duration: 0.16, ease: "power2.out" }, 13.34);
+      tl.to("#p-btn", { backgroundColor: "#eef0f5", boxShadow: "inset 0 0 0 0px #e5484d", duration: 0.2, ease: "power2.out" }, 13.32);
+      out("#p-pill-on", 13.3);
+      tl.to("#p-pill-off", { opacity: 1, duration: 0.16, ease: "power2.out" }, 13.34);
+      tl.to("#p-cur", { x: 300, y: 1180, duration: 0.5, ease: "power3.in" }, 13.6);
+
+      // Payment 4 after revocation: refused.
+      tl.to("#p-q4", { opacity: 1, duration: 0.01 }, 14.4);
+      tl.fromTo("#p-q4", { filter: "blur(8px)", x: 40 }, { filter: "blur(0px)", x: 0, duration: 0.4, ease: "expo.out" }, 14.4);
+      out("#p-q4-a", 14.96);
+      tl.to("#p-q4", { backgroundColor: "#fdecec", borderColor: "#e5484d", duration: 0.12, ease: "power2.out" }, 14.98);
+      tl.to("#p-q4-b", { opacity: 1, duration: 0.1, ease: "power2.out" }, 14.98);
+      tl.to("#p-q4-why", { opacity: 1, duration: 0.2, ease: "power2.out" }, 15.1);
+
+      // Exit into the record.
+      tl.to("#p-cam", { scale: 0.92, opacity: 0, filter: "blur(12px)", duration: 0.5, ease: "power3.in" }, 17.3);
+
+      window.__timelines["pocket"] = tl;
+    })();
+  </script>
+</template>

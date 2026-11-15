@@ -1,0 +1,304 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, Inter), Inter, sans-serif;
+      color: #1f2330;
+      font-variant-numeric: tabular-nums;
+    }
+    .h-type {
+      position: absolute;
+      left: 200px;
+      top: 440px;
+      display: flex;
+      align-items: center;
+      font-size: 128px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      white-space: pre;
+    }
+    .h-type .ch {
+      display: none;
+    }
+    .h-caret {
+      width: 7px;
+      height: 118px;
+      margin-left: 8px;
+      border-radius: 4px;
+      background: #6c5ce7;
+    }
+    .h-title2 {
+      position: absolute;
+      left: 200px;
+      top: 80px;
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .h-title2 span {
+      display: inline-block;
+      color: #b8bcc8;
+    }
+    .h-coin {
+      position: absolute;
+      left: 830px;
+      top: 470px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a7fe6 0%, #5546d6 100%);
+      box-shadow: 0 30px 60px rgba(108, 92, 231, 0.28), inset 0 0 0 10px rgba(255, 255, 255, 0.28);
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 150px;
+      font-weight: 700;
+      line-height: 1;
+      z-index: 3;
+    }
+    .h-card {
+      position: absolute;
+      left: 340px;
+      top: 300px;
+      width: 1240px;
+      height: 600px;
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1px solid #e6e8ef;
+      box-shadow: 0 24px 60px rgba(31, 35, 48, 0.1);
+      z-index: 2;
+    }
+    .h-card > div {
+      position: absolute;
+    }
+    .h-name {
+      left: 168px;
+      top: 54px;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .h-sub {
+      left: 168px;
+      top: 114px;
+      font-size: 28px;
+      color: #6b7080;
+    }
+    .h-pill {
+      right: 56px;
+      top: 62px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: #e9f6ef;
+      color: #1f9d63;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .h-pill i {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #1f9d63;
+    }
+    .lbl {
+      font-size: 28px;
+      color: #6b7080;
+    }
+    .h-debt {
+      left: 56px;
+      top: 206px;
+    }
+    .h-debt .big {
+      margin-top: 10px;
+      font-size: 112px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .h-debt .big small {
+      font-size: 40px;
+      font-weight: 700;
+      color: #6b7080;
+      letter-spacing: 0;
+      margin-left: 12px;
+    }
+    .h-side {
+      left: 760px;
+      top: 206px;
+    }
+    .h-side .val {
+      margin-top: 8px;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .h-side .price {
+      margin-top: 8px;
+      font-size: 36px;
+      font-weight: 700;
+      color: #f7931a;
+    }
+    .h-side .lbl + .val + .lbl {
+      margin-top: 20px;
+    }
+    .h-ratio {
+      left: 56px;
+      top: 430px;
+      width: 1128px;
+      height: 140px;
+    }
+    .h-ratio .row {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    .h-ratio .row b {
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .h-track {
+      position: absolute;
+      left: 0;
+      top: 72px;
+      width: 1128px;
+      height: 20px;
+      border-radius: 10px;
+      background: #eef0f5;
+      overflow: hidden;
+    }
+    .h-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #8fa8f8, #6c5ce7);
+      transform-origin: 0 50%;
+    }
+    .h-tick {
+      position: absolute;
+      left: 844px;
+      top: 60px;
+      width: 4px;
+      height: 44px;
+      border-radius: 2px;
+      background: #1f2330;
+    }
+    .h-target {
+      position: absolute;
+      left: 760px;
+      top: 108px;
+      font-size: 28px;
+      color: #6b7080;
+    }
+  </style>
+
+  <div id="root" data-composition-id="hook" data-width="1920" data-height="1080">
+    <div id="h-type" class="h-type clip" data-start="0" data-duration="10" data-layout-allow-overflow>
+      <span class="ch">O</span><span class="ch">n</span><span class="ch">e</span><span class="ch"> </span><span class="ch">B</span><span class="ch">i</span><span class="ch">t</span><span class="ch">c</span><span class="ch">o</span><span class="ch">i</span><span class="ch">n</span><span class="ch"> </span><span class="ch">l</span><span class="ch">o</span><span class="ch">a</span><span class="ch">n</span><i class="h-caret" id="h-caret"></i>
+    </div>
+
+    <div id="h-title2" class="h-title2 clip" data-start="7.3" data-duration="2.7">
+      <span>One</span> <span>loan,</span> <span>many</span> <span id="h-accent">pockets</span>
+    </div>
+
+    <div id="h-card" class="h-card clip" data-start="3.4" data-duration="6.6">
+      <div class="h-name" id="h-name">One shared Trove</div>
+      <div class="h-sub" id="h-sub">The group borrows once against Bitcoin</div>
+      <div class="h-pill" id="h-pill"><i></i>Trove open</div>
+      <div class="h-debt" id="h-debt">
+        <div class="lbl">Group debt</div>
+        <div class="big"><span id="h-debt-num">0.00</span><small>MUSD</small></div>
+      </div>
+      <div class="h-side" id="h-side">
+        <div class="lbl">Collateral</div>
+        <div class="val">0.0480 BTC</div>
+        <div class="lbl">Oracle price</div>
+        <div class="price">66,000 USD per BTC</div>
+      </div>
+      <div class="h-ratio" id="h-ratio">
+        <div class="row"><span class="lbl">Collateral ratio</span><b id="h-ratio-num">0.0%</b></div>
+        <div class="h-track"><div class="h-fill" id="h-fill"></div></div>
+        <div class="h-tick"></div>
+        <div class="h-target">Target 150%</div>
+      </div>
+    </div>
+
+    <div id="h-coin" class="h-coin clip" data-start="2.5" data-duration="7.5">₿</div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const FPS = 30;
+
+      function fmt(v, dec) {
+        const s = v.toFixed(dec);
+        const parts = s.split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+      }
+      // Seek-safe count: one tl.set per frame, eased out.
+      function countUp(sel, to, start, dur, dec, suffix) {
+        const frames = Math.round(dur * FPS);
+        for (let i = 0; i <= frames; i += 1) {
+          const p = i / frames;
+          const e = 1 - Math.pow(1 - p, 3);
+          tl.set(sel, { textContent: fmt(to * e, dec) + (suffix || "") }, start + dur * p);
+        }
+      }
+
+      // 1. Typewriter: "One" is already on screen at frame 0, the rest types to 1.2 s.
+      const chars = document.querySelectorAll("#h-type .ch");
+      chars.forEach(function (ch, i) {
+        const t = i < 3 ? 0 : 0.1 + (i - 3) * 0.085;
+        tl.set(ch, { display: "inline" }, t);
+      });
+      // Caret blinks while the line holds (finite, deterministic).
+      for (let k = 0; k < 2; k += 1) {
+        tl.set("#h-caret", { opacity: 0 }, 1.4 + k * 0.5);
+        tl.set("#h-caret", { opacity: 1 }, 1.65 + k * 0.5);
+      }
+      tl.set("#h-caret", { opacity: 0 }, 2.45);
+
+      // 2. Headline lifts to a small label; the coin drops in.
+      tl.fromTo("#h-type", { y: 0, scale: 1, transformOrigin: "0% 0%" }, { y: -360, scale: 0.5, duration: 0.6, ease: "power2.inOut" }, 2.5);
+      tl.fromTo("#h-coin", { y: -820 }, { y: 0, duration: 0.6, ease: "power3.in" }, 2.52);
+      tl.to("#h-coin", { scaleX: 1.08, scaleY: 0.9, duration: 0.07, ease: "power2.out" }, 3.12);
+      tl.to("#h-coin", { scaleX: 1, scaleY: 1, duration: 0.3, ease: "elastic.out(1, 0.6)" }, 3.19);
+
+      // 3. Coin becomes the Trove card: the card opens out of the coin's circle.
+      tl.fromTo("#h-card", { clipPath: "inset(170px 490px 170px 490px round 130px)" }, { clipPath: "inset(0px 0px 0px 0px round 28px)", duration: 0.65, ease: "power3.inOut" }, 3.45);
+      tl.to("#h-coin", { x: -520, y: -200, scale: 0.338, duration: 0.65, ease: "power3.inOut" }, 3.45);
+
+      tl.fromTo(["#h-name", "#h-sub"], { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.08, ease: "power4.out" }, 4.05);
+      tl.fromTo("#h-pill", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 4.25);
+      tl.fromTo("#h-debt", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 4.35);
+      countUp("#h-debt-num", 2021.82, 4.4, 1.4, 2);
+      tl.fromTo("#h-side .lbl, #h-side .val, #h-side .price", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.12, ease: "power4.out" }, 4.8);
+      tl.fromTo("#h-ratio", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 5.5);
+      tl.fromTo("#h-fill", { scaleX: 0 }, { scaleX: 156.7 / 200, duration: 1.2, ease: "power3.out" }, 5.6);
+      countUp("#h-ratio-num", 156.7, 5.6, 1.2, 1, "%");
+
+      // 4. The label swaps to the promise; "pockets" lands in the accent.
+      tl.to("#h-type", { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in" }, 7.1);
+      const words = document.querySelectorAll("#h-title2 span");
+      words.forEach(function (w, i) {
+        tl.fromTo(w, { color: "#b8bcc8" }, { color: i === words.length - 1 ? "#6c5ce7" : "#1f2330", duration: 0.12, ease: "none" }, 7.35 + i * 0.09);
+      });
+
+      // 5. Clear the side stats so the split starts from header and debt only.
+      tl.to(["#h-side", "#h-ratio"], { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power3.in" }, 9.1);
+      tl.to("#h-title2", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power3.in" }, 9.55);
+
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>
