@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import demoRecord from './demo-record.json';
-import { CHAIN_ID, RPC_URL } from './config';
+import { ActionsSection } from './ActionsPanel';
+import { CHAIN_ID, IS_DEMO_VAULT, RPC_URL } from './config';
 import { useNow, useSnapshot, useVerification } from './hooks';
 import { BlockCard, ContractList, PaymentsTable, PipelineSteps, RecordTable, TieOutList } from './sections';
 import { Callout, Chip, Kpi, Logo, Section, Spinner, Stack, type Tone } from './ui';
+import { useWallet } from './wallet';
 import {
   collateralRatioBps,
   fmtAmount,
@@ -14,21 +16,27 @@ import {
   refusalSteps,
   tieOuts,
   type DemoRecord,
+  type RecordRow,
   type Snapshot,
 } from './model';
 
 const demo = demoRecord as DemoRecord;
+// The demo record describes the demo vault only. Other vaults show no record and no demo counts.
+const DEMO_ROWS: RecordRow[] = IS_DEMO_VAULT ? demo.rows : [];
 
 const NAV = [
   { id: 'trove', label: 'Trove' },
   { id: 'balances', label: 'Balances' },
   { id: 'blocks', label: 'Blocks' },
   { id: 'payments', label: 'Payments' },
+  { id: 'actions', label: 'Actions' },
   { id: 'guardrails', label: 'Checks' },
   { id: 'record', label: 'Record' },
   { id: 'tieouts', label: 'Tie-outs' },
   { id: 'contracts', label: 'Contracts' },
 ];
+
+const NAV_ITEMS = IS_DEMO_VAULT ? NAV : NAV.filter((n) => n.id !== 'record');
 
 const VIEW_NOTES: Record<string, string> = {
   live: 'The vault as of the newest Mezo testnet block, which is after the demo. Refreshes every 20 seconds.',
@@ -40,23 +48,26 @@ const VIEW_NOTES: Record<string, string> = {
 };
 
 // Opens on the first checkpoint. The demo has finished, so the newest block shows an empty vault.
-const DEFAULT_VIEW = 'setup';
+// Another vault has no checkpoints, so it opens on the live view.
+const DEFAULT_VIEW = IS_DEMO_VAULT ? 'setup' : 'live';
 
 export default function App() {
   const [view, setView] = useState(DEFAULT_VIEW);
-  const checkpoint = demo.checkpoints.find((c) => c.id === view);
+  const [refresh, setRefresh] = useState(0);
+  const wallet = useWallet();
+  const checkpoint = IS_DEMO_VAULT ? demo.checkpoints.find((c) => c.id === view) : undefined;
   const live = checkpoint === undefined;
-  const { snap, error, checkedAt } = useSnapshot(checkpoint ? BigInt(checkpoint.block) : undefined);
-  const verified = useVerification(demo.rows);
-  const refusals = demo.rows.filter((r) => r.result === 'refused').length;
-  const steps = refusalSteps(demo.rows, verified);
+  const { snap, error, checkedAt } = useSnapshot(checkpoint ? BigInt(checkpoint.block) : undefined, refresh);
+  const verified = useVerification(DEMO_ROWS);
+  const refusals = DEMO_ROWS.filter((r) => r.result === 'refused').length;
+  const steps = refusalSteps(DEMO_ROWS, verified);
 
   return (
     <>
       <TopBar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
       <main className="app">
-        <Hero snap={snap} refusals={refusals} />
-        <Replay view={view} onPick={setView} />
+        <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
+        {IS_DEMO_VAULT && <Replay view={view} onPick={setView} />}
         {snap ? (
           <>
             {error && <Callout tone="warn" title="Latest read failed">Showing the last good read. Retrying.</Callout>}
@@ -80,21 +91,24 @@ export default function App() {
             >
               <PaymentsTable payments={snap.payments} blocks={snap.blocks} threshold={snap.threshold} />
             </Section>
+            <ActionsSection snap={snap} live={live} wallet={wallet} onDone={() => setRefresh((n) => n + 1)} />
             <Section
               id="guardrails"
               title="Eight checks on every payment"
               subtitle="In the order the contract runs them. A failed check stops the payment and reverts the transaction."
             >
-              <PipelineSteps counts={steps} />
+              <PipelineSteps counts={IS_DEMO_VAULT ? steps : undefined} />
             </Section>
-            <Section
-              id="record"
-              title="On-chain record"
-              subtitle="Every transaction in the demo. Each receipt is checked against Mezo, and each refusal reason is decoded from chain data."
-            >
-              <RecordTable rows={demo.rows} verified={verified} phases={demo.phases} />
-              <p className="muted small source-line">Source logs: {demo.sources.join(', ')}.</p>
-            </Section>
+            {IS_DEMO_VAULT && (
+              <Section
+                id="record"
+                title="On-chain record"
+                subtitle="Every transaction in the demo. Each receipt is checked against Mezo, and each refusal reason is decoded from chain data."
+              >
+                <RecordTable rows={demo.rows} verified={verified} phases={demo.phases} />
+                <p className="muted small source-line">Source logs: {demo.sources.join(', ')}.</p>
+              </Section>
+            )}
             <Section
               id="tieouts"
               title="Ledger tie-outs"
@@ -137,7 +151,7 @@ function TopBar({
           </span>
         </a>
         <nav className="nav" aria-label="Page sections">
-          {NAV.map((n) => (
+          {NAV_ITEMS.map((n) => (
             <a key={n.id} href={`#${n.id}`}>
               {n.label}
             </a>
@@ -175,21 +189,21 @@ function Updated({ live, failing, checkedAt }: { live: boolean; failing: boolean
   return <span className="muted small">Checked {secs < 90 ? `${secs}s` : `${Math.round(secs / 60)}m`} ago</span>;
 }
 
-function Hero({ snap, refusals }: { snap?: Snapshot; refusals: number }) {
+function Hero({ snap, refusals }: { snap?: Snapshot; refusals?: number }) {
   const debt = snap ? groupDebt(snap) : undefined;
   const ratio = snap ? collateralRatioBps(snap.coll, snap.price, groupDebt(snap)) : null;
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="kicker accent">Mezo testnet · read-only</p>
+        <p className="kicker accent">Mezo testnet · testnet only</p>
         <h1 id="hero-title">Blocks &amp; Pockets</h1>
         <p className="lead">
           One Bitcoin-backed loan, split into blocks of spending money. An agent spends from its block only inside
           the owner&apos;s limits, and the owner can revoke that agent at any time.
         </p>
         <p className="muted small">
-          Every number on this page is read from Mezo testnet at the block shown. No wallet is connected, and nothing
-          here sends a transaction.
+          Every number on this page is read from Mezo testnet at the block shown. The Actions section sends owner and
+          operator transactions from a connected testnet wallet, and each one is checked with Mezo first.
         </p>
       </div>
       <div className="hero-stats">
@@ -202,7 +216,9 @@ function Hero({ snap, refusals }: { snap?: Snapshot; refusals: number }) {
           note="Tracked by the vault"
           delay={120}
         />
-        <Kpi label="Refusals on record" value={String(refusals)} note="Each one decoded from chain data" delay={180} />
+        {refusals !== undefined && (
+          <Kpi label="Refusals on record" value={String(refusals)} note="Each one decoded from chain data" delay={180} />
+        )}
       </div>
     </section>
   );
@@ -338,7 +354,7 @@ function Footer() {
     <footer className="footer">
       <p>Blocks &amp; Pockets · testnet prototype · no real funds</p>
       <p className="small">
-        Reads Mezo testnet (chain {CHAIN_ID}) through {RPC_URL}. No wallet connection, no signing, no transactions.
+        Reads and wallet actions go through Mezo testnet (chain {CHAIN_ID}, {RPC_URL}). No mainnet, no real funds.
       </p>
     </footer>
   );

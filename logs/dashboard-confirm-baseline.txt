@@ -1,0 +1,8 @@
+baseline 2026-11-15T06:22:50Z
+owner nonce: 90
+operator nonce: 14
+blockCount: 4
+paymentCount: 3
+troveActive: true
+owner MUSD wei: 73855285536359733 [7.385e16]
+vault MUSD wei: 1804000000000000000000 [1.804e21]
