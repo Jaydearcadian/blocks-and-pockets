@@ -29,7 +29,7 @@ The owner can revoke a mandate at any time, and every payment that breaks a limi
 
 ## What is live
 
-The contract is `src/MoneyblocksVault.sol` (670 lines, Solidity 0.8.24, 30 custom errors, 19 write functions).
+The contract is `src/MoneyblocksVault.sol` (669 lines, Solidity 0.8.24, 30 custom errors, 19 write functions).
 
 | Vault | Address | Role |
 |---|---|---|
@@ -51,7 +51,7 @@ This reads the public testnet RPC, decodes the chain and compares it with the ru
 
 Actions on a vault are limited to its owner and operator wallets, so a visitor cannot act on the demo vault. The dashboard's Actions section has a **Deploy my vault** card instead. Connect a Mezo testnet wallet, deploy a fresh copy of the contract (testnet gas only), open the link it gives you, and you are the owner. You can then create blocks, set payees, grant mandates (you can name your own address as the operator) and change the approval threshold. Moving MUSD needs MUSD in your wallet, and opening a Trove group needs about 0.048 BTC.
 
-How well this is tested: the deploy and owner flow ran end to end through the dashboard on a local fork of Mezo testnet, with the price feed mocked (its oracle does not run on a fork) and an injected test wallet. It has **not** been run with a consumer wallet or as a live testnet deployment from the hosted page. The code paths are covered by 11 unit tests.
+How well this is tested: on a local fork of Mezo testnet, with the price feed mocked (its oracle does not run on a fork) and an injected test wallet, I deployed a vault from the dashboard, opened it by link, was recognised as its owner, and created a block through the review step. A fork cannot run repay or close, so those owner actions were not tried this way. It has **not** been run with a consumer wallet or as a live testnet deployment from the hosted page. Before any non-demo vault is opened, the page compares its on-chain code with the compiled contract and refuses look-alikes; unit tests cover that check, the link parsing and the deploy request.
 
 ## Build and test
 
@@ -63,7 +63,7 @@ forge test          # 40 tests, about 45 s; the fork tests read the public Mezo 
 cd app
 npm ci
 npm run typecheck
-npm test            # 117 tests
+npm test            # 138 tests
 npm run build
 npm run dev         # http://127.0.0.1:5173
 ```

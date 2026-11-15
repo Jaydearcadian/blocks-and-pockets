@@ -24,7 +24,7 @@ From `app/`:
 ```sh
 npm ci
 npm run typecheck
-npm test                        # vitest, node environment, logic tests only (117)
+npm test                        # vitest, node environment, logic tests only (138)
 npm run build                   # typecheck, then vite build
 npm run dev                     # http://127.0.0.1:5173
 ```

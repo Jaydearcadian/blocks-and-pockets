@@ -1,4 +1,5 @@
 import { getAddress, isAddress, parseUnits, stringToHex, type Address, type Hex } from 'viem';
+import { VAULT } from './config';
 import { fmtAmount, fmtBtc, type BlockView, type Snapshot } from './model';
 
 // Owner and operator actions for the vault. Each one is data: its form fields, how inputs become contract
@@ -168,6 +169,7 @@ export type Review = {
   title: string;
   sender: string;
   account?: Address;
+  vault: Address;
   block?: string;
   summary: string;
   notes: string[];
@@ -200,6 +202,7 @@ export function reviewOf(def: ActionDef, v: Values, ctx: Ctx, call: Call): Revie
     title: def.title,
     sender: def.role === 'operator' ? `Operator wallet for block ${block?.id ?? '?'}` : 'Owner wallet',
     account: ctx.account,
+    vault: VAULT,
     block: block && `Block ${block.id} · ${block.name} · ${block.cross ? 'shared' : 'prefunded'}`,
     summary: def.describe(v),
     notes,
@@ -327,12 +330,12 @@ export const ACTIONS: ActionDef[] = [
   {
     id: 'grantMandate',
     role: 'owner',
-    title: 'Grant an agent mandate',
-    summary: 'The agent may request payments from this block, within the caps, until the expiry.',
+    title: 'Grant an operator mandate',
+    summary: 'The operator key may request payments from this block, within the caps, until the expiry.',
     button: 'Grant mandate',
     fields: [
       blockField(),
-      { name: 'operator', label: 'Agent address', kind: 'address', hint: 'The wallet that requests payments.' },
+      { name: 'operator', label: 'Operator address', kind: 'address', hint: 'The wallet that requests payments.' },
       amountField('perTxCap', 'Per-payment cap (MUSD)'),
       amountField('totalCap', 'Lifetime cap (MUSD)', 'Executed and waiting payments count toward this total.'),
       { name: 'expiry', label: 'Expires (UTC)', kind: 'expiry' },
@@ -343,7 +346,7 @@ export const ACTIONS: ActionDef[] = [
         functionName: 'grantMandate',
         args: [
           BigInt(block.id),
-          parseAddressInput(v.operator, 'Agent address'),
+          parseAddressInput(v.operator, 'Operator address'),
           parseAmount(v.perTxCap, 'Per-payment cap'),
           parseAmount(v.totalCap, 'Lifetime cap'),
           parseExpiry(v.expiry, ctx.nowSeconds),
@@ -356,8 +359,8 @@ export const ACTIONS: ActionDef[] = [
   {
     id: 'revokeMandate',
     role: 'owner',
-    title: 'Revoke an agent mandate',
-    summary: 'The agent is refused from now on. A waiting payment is refused too if you approve it.',
+    title: 'Revoke an operator mandate',
+    summary: 'The operator key is refused from now on. A waiting payment is refused too if you approve it.',
     button: 'Revoke mandate',
     fields: [blockField()],
     build: (v, ctx) => ({

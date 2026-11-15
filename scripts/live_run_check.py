@@ -410,7 +410,9 @@ def main():
     print(f"transactions {len(rows)}, succeeded {summary['succeeded']}, refused {summary['refused_on_chain']}, "
           f"ledger rows in range {len(in_range_ledger)}", flush=True)
     print(f"wrote {OUT}/transactions.md and transactions.json", flush=True)
-    return 0 if all(c["pass"] for c in checks) else 1
+    passed = sum(1 for c in checks if c["pass"])
+    print(f"{passed} of {len(checks)} checks passed", flush=True)
+    return 0 if passed == len(checks) else 1
 
 
 def md_cell(s):

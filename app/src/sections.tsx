@@ -100,7 +100,7 @@ export function BlockCard({ block, nowSeconds, delay }: { block: BlockView; nowS
           <MandateChip state={state} />
         </div>
         {state === 'none' ? (
-          <p className="muted small">The owner directs this block. No agent can spend from it.</p>
+          <p className="muted small">The owner directs this block. No operator key can spend from it.</p>
         ) : (
           <>
             <dl className="facts">
@@ -343,7 +343,7 @@ export function ContractList({ owner, isDemo }: { owner: string; isDemo: boolean
     { label: 'TroveManager', addr: TROVE_MANAGER },
     { label: 'PriceFeed', addr: PRICE_FEED },
     { label: isDemo ? 'Owner (treasury)' : 'Owner of this vault', addr: owner },
-    ...(isDemo ? [{ label: 'Agent (operator)', addr: AGENT }] : []),
+    ...(isDemo ? [{ label: 'Operator (test key)', addr: AGENT }] : []),
   ];
   return (
     <ul className="contracts">

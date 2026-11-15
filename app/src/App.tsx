@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import demoRecord from './demo-record.json';
 import { ActionsSection } from './ActionsPanel';
-import { CHAIN_ID, IS_DEMO_VAULT, RPC_URL } from './config';
-import { useNow, useSnapshot, useVerification } from './hooks';
+import { CHAIN_ID, DEMO_VAULT, IS_DEMO_VAULT, RPC_URL, VAULT, VAULT_WARNING } from './config';
+import { balancesSubtitle, vaultNotice } from './guide';
+import { useNow, useSnapshot, useVaultStatus, useVerification } from './hooks';
 import { BlockCard, ContractList, PaymentsTable, PipelineSteps, RecordTable, TieOutList } from './sections';
 import { NAV } from './nav';
 import { Glossary, StartHere } from './StartHere';
@@ -30,11 +31,11 @@ const NAV_ITEMS = IS_DEMO_VAULT ? NAV : NAV.filter((n) => n.id !== 'record');
 
 const VIEW_NOTES: Record<string, string> = {
   live: 'The vault as of the newest Mezo testnet block, which is after the demo. Refreshes every 20 seconds.',
-  setup: 'Trove open, blocks funded, and an agent mandate on block 3. Payments above 1.00 MUSD wait for the owner.',
+  setup: 'Trove open, blocks funded, and an operator mandate on block 3. Payments above 1.00 MUSD wait for the owner.',
   repaid: 'Block 1 repays 10 MUSD of the group debt.',
   closed: 'The group Trove is closed. The vault still holds the returned BTC and the cash that is left.',
   swept: 'The leftover MUSD and the BTC go to the owner. The vault is empty.',
-  revoked: "The owner revokes block 3's mandate. The agent is refused from then on.",
+  revoked: "The owner revokes block 3's mandate. The operator key is refused from then on.",
 };
 
 // Opens on the first checkpoint. The demo has finished, so the newest block shows an empty vault.
@@ -42,6 +43,37 @@ const VIEW_NOTES: Record<string, string> = {
 const DEFAULT_VIEW = IS_DEMO_VAULT ? 'setup' : 'live';
 
 export default function App() {
+  const status = useVaultStatus();
+  if (status.state === 'ok') return <Dashboard />;
+  return (
+    <>
+      <main className="app">
+        <section className="hero" id="top">
+          <div className="hero-copy">
+            <p className="kicker accent">Mezo testnet · testnet only</p>
+            <h1 id="hero-title">Blocks &amp; Pockets</h1>
+          </div>
+        </section>
+        {status.state === 'checking' ? (
+          <div className="card loading">
+            <Spinner />
+            <span>Checking that {shortVault(VAULT)} is a Blocks &amp; Pockets vault</span>
+          </div>
+        ) : (
+          <Callout tone="bad" title="This is not a vault this page can open">
+            {status.reason} Vault {VAULT}. The page reads nothing from it and offers no actions on it.{' '}
+            <a href={`?vault=${DEMO_VAULT}`}>Open the demo vault instead.</a>
+          </Callout>
+        )}
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+const shortVault = (a: string): string => `${a.slice(0, 8)}…${a.slice(-6)}`;
+
+function Dashboard() {
   const [view, setView] = useState(DEFAULT_VIEW);
   const [refresh, setRefresh] = useState(0);
   const wallet = useWallet();
@@ -51,12 +83,31 @@ export default function App() {
   const verified = useVerification(DEMO_ROWS);
   const refusals = DEMO_ROWS.filter((r) => r.result === 'refused').length;
   const steps = refusalSteps(DEMO_ROWS, verified);
+  const notice = vaultNotice(VAULT);
 
   return (
     <>
       <TopBar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
       <main className="app">
         <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
+        {VAULT_WARNING && (
+          <Callout tone="warn" title="Link adjusted">
+            {VAULT_WARNING}
+          </Callout>
+        )}
+        {notice && (
+          <Callout tone="info" title={notice.title}>
+            {notice.body}
+            {notice.recordUrl && (
+              <>
+                {' '}
+                <a href={notice.recordUrl} target="_blank" rel="noreferrer">
+                  Read the full transaction list.
+                </a>
+              </>
+            )}
+          </Callout>
+        )}
         <StartHere />
         {IS_DEMO_VAULT && <Replay view={view} onPick={setView} />}
         {snap ? (
@@ -78,7 +129,7 @@ export default function App() {
             <Section
               id="payments"
               title="Payments"
-              subtitle={`Agent payments run through the same checks. Payments above ${fmtAmount(snap.threshold)} MUSD wait for the owner.`}
+              subtitle={`Operator payments run through the same checks. Payments above ${fmtAmount(snap.threshold)} MUSD wait for the owner.`}
             >
               <PaymentsTable payments={snap.payments} blocks={snap.blocks} threshold={snap.threshold} />
             </Section>
@@ -190,8 +241,8 @@ function Hero({ snap, refusals }: { snap?: Snapshot; refusals?: number }) {
         <p className="kicker accent">Mezo testnet · testnet only</p>
         <h1 id="hero-title">Blocks &amp; Pockets</h1>
         <p className="lead">
-          One Bitcoin-backed loan, split into blocks of spending money. An agent spends from its block only inside
-          the owner&apos;s limits, and the owner can revoke that agent at any time.
+          One Bitcoin-backed loan, split into blocks of spending money. An operator key spends from its block only inside
+          the owner&apos;s limits, and the owner can revoke that key at any time.
         </p>
         <p className="muted small">
           Every number on this page is read from Mezo testnet at the block shown. The Actions section sends owner and
@@ -310,12 +361,14 @@ function BalancesSection({ snap }: { snap: Snapshot }) {
   const cards = [
     { label: 'Vault MUSD', value: fmtAmount(snap.vaultMusd), unit: 'MUSD', note: `Tracked cash ${fmtAmount(snap.totalCash)} MUSD` },
     { label: 'Owner MUSD', value: fmtAmount(snap.ownerMusd), unit: 'MUSD', note: 'Treasury wallet' },
-    { label: 'Vendor MUSD', value: fmtAmount(snap.vendorMusd), unit: 'MUSD', note: 'Test payee' },
+    ...(IS_DEMO_VAULT
+      ? [{ label: 'Vendor MUSD', value: fmtAmount(snap.vendorMusd), unit: 'MUSD', note: 'Test payee' }]
+      : []),
     { label: 'Vault BTC', value: fmtBtc(snap.vaultBtc), unit: 'BTC', note: 'Collateral returned at close' },
     { label: 'Owner BTC', value: fmtBtc(snap.ownerBtc), unit: 'BTC', note: 'Treasury wallet, test BTC' },
   ];
   return (
-    <Section id="balances" title="Balances" subtitle="The vault and the two test wallets, at the block shown.">
+    <Section id="balances" title="Balances" subtitle={balancesSubtitle(IS_DEMO_VAULT)}>
       <div className="kpi-grid">
         {cards.map((c, i) => (
           <Kpi key={c.label} label={c.label} value={c.value} unit={c.unit} note={c.note} delay={i * 60} />

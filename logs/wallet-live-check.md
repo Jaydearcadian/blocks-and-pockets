@@ -2,6 +2,8 @@
 
 Written 14 Nov 2026, about 17:20 UTC. Updated 15 Nov 2026 (checks at 06:30 UTC) after a follow-up check (see "Open after the run") and a browser check of the review step (see "Review step check"). The bridge log, deploy file, and fork traces cited here are local files and are not in the commit. The earlier demo record (`app/src/demo-record.json`, `logs/dashboard-chain-check.txt`) covers the rerun vault and is not affected by this run.
 
+> Later state: after this check the vault below was closed. The 15 Nov live run (`logs/live-run/`) used a different, newer vault. Balances described below were true at the time of the check, not now.
+
 ## Setup
 
 - Vault: `0x26c046472294Cf3F147e82E36217dE68609bc08B` on Mezo testnet (chain 31611). Deployed at block 16779032 (tx `0xe507c962ba72aa0d2fc974d68950a0d0093f88b721fbf9825ddc7a2832d6382c`, see `logs/wallet-e2e-deploy.json`). Approval threshold 1 MUSD. Target ratio 150%.

@@ -438,6 +438,10 @@ function ReviewBox({
             </>
           )}
         </dd>
+        <dt>Vault</dt>
+        <dd>
+          <code>{r.vault}</code>
+        </dd>
         <dt>Block</dt>
         <dd>{r.block ?? 'None. This action is vault-wide.'}</dd>
         <dt>Action</dt>
