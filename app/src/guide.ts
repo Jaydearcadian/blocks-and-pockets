@@ -1,3 +1,5 @@
+import { DEMO_VAULT, LIVE_RUN_VAULT } from './config';
+
 // Copy for the Start-here strip, the glossary, and the "what you need to try it" note.
 // Pure data so tests can pin the claims: what a visitor can do on this page is limited by the contract's roles.
 
@@ -7,23 +9,54 @@ export const TROVE_MIN_BTC = '0.048';
 
 export type StartStep = { title: string; body: string; target: string };
 
-export const START_STEPS: StartStep[] = [
-  {
-    title: 'See what happened',
-    body: 'Each block card shows its own cash, debt and spending limits. Use the replay buttons to step through the demo.',
-    target: 'blocks',
-  },
-  {
-    title: 'Check it against the chain',
-    body: 'Every number is read from Mezo testnet at the block shown. Five tie-out checks compare the vault books with Mezo.',
-    target: 'tieouts',
-  },
-  {
-    title: 'Try it with a testnet wallet',
-    body: 'Deploy your own vault from a testnet wallet, then review and send owner and operator actions on it. See what you need first.',
-    target: 'actions',
-  },
-];
+const REPO_URL = 'https://github.com/Jaydearcadian/blocks-and-pockets';
+
+// The replay buttons exist only for the demo vault, so another vault's copy does not mention them.
+export function startSteps(isDemo: boolean): StartStep[] {
+  return [
+    {
+      title: 'See what happened',
+      body: isDemo
+        ? 'Each block card shows its own cash, debt and spending limits. Use the replay buttons to step through the demo.'
+        : 'Each block card shows its own cash, debt and spending limits. The payments table lists every request and its result.',
+      target: 'blocks',
+    },
+    {
+      title: 'Check it against the chain',
+      body: 'Every number is read from Mezo testnet at the block shown. Five tie-out checks compare the vault books with Mezo.',
+      target: 'tieouts',
+    },
+    {
+      title: 'Try it with a testnet wallet',
+      body: 'Deploy your own vault from a testnet wallet, then review and send owner and operator actions on it. See what you need first.',
+      target: 'actions',
+    },
+  ];
+}
+
+export const START_STEPS: StartStep[] = startSteps(true);
+
+export const balancesSubtitle = (isDemo: boolean): string =>
+  isDemo ? 'The vault and the two test wallets, at the block shown.' : "The vault and its owner's wallet, at the block shown.";
+
+export type VaultNotice = { title: string; body: string; recordUrl?: string };
+
+// A banner for any vault other than the demo, so a visitor always knows which vault the page is showing.
+export function vaultNotice(vault: string): VaultNotice | undefined {
+  const v = vault.toLowerCase();
+  if (v === DEMO_VAULT.toLowerCase()) return undefined;
+  if (v === LIVE_RUN_VAULT.toLowerCase()) {
+    return {
+      title: 'The live-run vault, closed',
+      body: `This is the vault from the 15 Nov live run: 113 transactions on Mezo testnet (58 succeeded, 55 refused on purpose). It was closed and swept to zero at the end, so balances read 0. The payments table and the record below show what happened.`,
+      recordUrl: `${REPO_URL}/blob/main/logs/live-run/transactions.md`,
+    };
+  }
+  return {
+    title: 'Viewing another vault',
+    body: `Vault ${vault}. This is not the demo vault. Only act on a vault you deployed or trust.`,
+  };
+}
 
 export type GlossaryEntry = { term: string; meaning: string };
 

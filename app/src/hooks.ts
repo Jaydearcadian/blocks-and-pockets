@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { readSnapshot, retryRead, verifyRow } from './chain';
-import { DEPLOY_BLOCK, POLL_MS } from './config';
+import { client, readSnapshot, retryRead, verifyRow } from './chain';
+import { DEPLOY_BLOCK, IS_DEMO_VAULT, POLL_MS, VAULT } from './config';
+import { verifyVault, type VaultCheck } from './vaultCheck';
 import type { RecordRow, Snapshot, Verified } from './model';
 
 export type ChainState = { snap?: Snapshot; error?: string; checkedAt?: number };
@@ -113,4 +114,31 @@ export function useNow(intervalMs = 1_000): number {
     return () => window.clearInterval(timer);
   }, [intervalMs]);
   return now;
+}
+
+export type VaultStatus = { state: 'checking' } | { state: 'ok' } | { state: 'rejected'; reason: string };
+
+// The demo vault is known good. Any other address is checked against the vault's code before anything else
+// is read or offered, because a look-alike contract could answer owner() and the wallet actions with anything.
+export function useVaultStatus(): VaultStatus {
+  const [status, setStatus] = useState<VaultStatus>(IS_DEMO_VAULT ? { state: 'ok' } : { state: 'checking' });
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    if (IS_DEMO_VAULT) return;
+    let active = true;
+    let timer: number | undefined;
+    void verifyVault(client, VAULT).then((check: VaultCheck) => {
+      if (!active) return;
+      if (check.ok) setStatus({ state: 'ok' });
+      else if (check.reason.startsWith('Could not check')) {
+        setStatus({ state: 'checking' });
+        timer = window.setTimeout(() => setAttempt((n) => n + 1), 4_000);
+      } else setStatus({ state: 'rejected', reason: check.reason });
+    });
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, [attempt]);
+  return status;
 }

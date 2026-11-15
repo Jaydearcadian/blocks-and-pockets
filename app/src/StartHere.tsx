@@ -1,4 +1,5 @@
-import { FAUCET_URL, GLOSSARY, START_STEPS, TRY_NEEDS } from './guide';
+import { IS_DEMO_VAULT } from './config';
+import { FAUCET_URL, GLOSSARY, startSteps, TRY_NEEDS } from './guide';
 import { Section } from './ui';
 
 export function StartHere() {
@@ -8,7 +9,7 @@ export function StartHere() {
         Start here
       </h2>
       <ol className="start-grid">
-        {START_STEPS.map((s, i) => (
+        {startSteps(IS_DEMO_VAULT).map((s, i) => (
           <li key={s.title} className="card start-card">
             <span className="start-num" aria-hidden="true">
               {i + 1}

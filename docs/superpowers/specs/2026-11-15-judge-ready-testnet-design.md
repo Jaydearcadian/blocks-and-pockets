@@ -54,7 +54,7 @@ Video (owner's choice): I record a captioned screen recording of the hosted dash
 
 ## Design of the parts
 
-**Repo hygiene.** Add `README.md` (what it is, what is live, how to build and test, how to verify the live run, honest limits), `AGENTS.md` (commands, layout, rules, what not to touch), `LICENSE` (MIT, my call), and `.env.example` for the dashboard's optional vault and RPC overrides. Commit the live-run evidence: `scripts/live_run.py`, `scripts/live_run_check.py`, the plan, the spec, and `logs/live-run/`. Do not commit `scripts/wallet-e2e/` (dev-only signing bridge), the anvil and fork logs, or any keystore or password path.
+**Repo hygiene.** Add `README.md` (what it is, what is live, how to build and test, how to verify the live run, honest limits), `AGENTS.md` (commands, layout, rules, what not to touch), `LICENSE` (GPL-3.0, to match the SPDX headers in the contract), and `.env.example` for the dashboard's optional vault and RPC overrides. Commit the live-run evidence: `scripts/live_run.py`, `scripts/live_run_check.py`, the plan, the spec, and `logs/live-run/`. Do not commit `scripts/wallet-e2e/` (dev-only signing bridge), the anvil and fork logs, or any keystore or password path.
 
 **UI explainer.** The hero already says it in one sentence. Add a "Start here" strip near the top with three steps (see what happened, check it against the chain, try it with a testnet wallet), a plain glossary (block, mandate, shared Trove, prefunded slice, operator), and an honest "what you need to try it" note: Mezo testnet wallet, testnet BTC from the faucet, and that opening a Trove group needs 0.048 BTC while a prefunded slice needs only MUSD. Keep the existing sections. Run typecheck, the 96 tests, and the build, then review a screenshot.
 

@@ -1,5 +1,7 @@
 # Blocks & Pockets Judge-Ready Testnet Implementation Plan
 
+> **Historical record.** This is the working plan from 15 Nov 2026. Its checkboxes were not ticked as work went on, and some details changed during the build (license is GPL-3.0, deploy-your-own-vault was added later, test counts grew). The README and the code are the current truth.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Put a public repo and a hosted testnet dashboard in front of AKINDO judges, with current numbers, a deck, a captioned video, and a submission checklist, before the 14:15 UTC cut line.

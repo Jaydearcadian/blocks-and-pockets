@@ -1,5 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { FAUCET_URL, GLOSSARY, OWN_VAULT_NOTES, START_STEPS, TRY_NEEDS, TROVE_MIN_BTC } from './guide';
+import {
+  FAUCET_URL,
+  GLOSSARY,
+  OWN_VAULT_NOTES,
+  START_STEPS,
+  TRY_NEEDS,
+  TROVE_MIN_BTC,
+  balancesSubtitle,
+  startSteps,
+  vaultNotice,
+} from './guide';
+import { DEMO_VAULT, LIVE_RUN_VAULT } from './config';
 import { NAV } from './nav';
 
 describe('start-here guide', () => {
@@ -42,5 +53,52 @@ describe('start-here guide', () => {
     expect(text).toContain('you become its owner');
     expect(text).toContain('testnet gas only');
     expect(OWN_VAULT_NOTES.join(' ')).toContain('0.048 BTC');
+  });
+
+  it('mentions the replay buttons only when the demo vault is shown', () => {
+    expect(startSteps(true)[0].body.toLowerCase()).toContain('replay');
+    expect(startSteps(false)[0].body.toLowerCase()).not.toContain('replay');
+    expect(startSteps(false)).toHaveLength(3);
+    expect(START_STEPS).toEqual(startSteps(true));
+  });
+
+  it('names the test wallets in the balances subtitle only for the demo vault', () => {
+    expect(balancesSubtitle(true).toLowerCase()).toContain('test wallets');
+    expect(balancesSubtitle(false).toLowerCase()).not.toContain('test wallets');
+  });
+
+  it('uses "operator key" and never "agent" in the visitor-facing copy', () => {
+    const all = [
+      ...START_STEPS.map((x) => x.title + x.body),
+      ...GLOSSARY.map((g) => g.term + g.meaning),
+      ...TRY_NEEDS,
+      ...OWN_VAULT_NOTES,
+      balancesSubtitle(true),
+      balancesSubtitle(false),
+    ].join(' ');
+    expect(all).not.toMatch(/\bagents?\b/i);
+  });
+});
+
+describe('vaultNotice', () => {
+  it('gives no notice for the demo vault', () => {
+    expect(vaultNotice(DEMO_VAULT)).toBeUndefined();
+  });
+
+  it('describes the live-run vault as closed, and links the record of its 113 transactions', () => {
+    const n = vaultNotice(LIVE_RUN_VAULT.toLowerCase());
+    expect(n?.body).toMatch(/113 transactions/);
+    expect(n?.body).toMatch(/closed/i);
+    expect(n?.recordUrl).toContain('/logs/live-run/transactions.md');
+  });
+
+  it('warns that another vault is not the demo and to act only on vaults the visitor trusts', () => {
+    const other = '0x26c046472294Cf3F147e82E36217dE68609bc08B';
+    const n = vaultNotice(other);
+    expect(n?.title).toMatch(/another vault/i);
+    expect(n?.body).toContain(other);
+    expect(n?.body).toMatch(/not the demo/i);
+    expect(n?.body).toMatch(/deployed or trust/i);
+    expect(n?.recordUrl).toBeUndefined();
   });
 });

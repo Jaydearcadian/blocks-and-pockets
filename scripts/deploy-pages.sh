@@ -11,6 +11,20 @@ trap 'rm -rf "$tmp"' EXIT
 
 gh auth status >/dev/null
 
+# The build reads the working tree, not HEAD, and bakes in any VITE_* setting. Publish only what is committed.
+if [ -n "$(git -C "$root" status --porcelain)" ]; then
+  echo "refusing to publish: the working tree has uncommitted changes" >&2
+  exit 1
+fi
+if compgen -G "$root/app/.env*" | grep -v '\.env\.example$' >/dev/null; then
+  echo "refusing to publish: app/.env* would be baked into the build" >&2
+  exit 1
+fi
+if env | grep -q '^VITE_'; then
+  echo "refusing to publish: a VITE_* variable is set in the environment" >&2
+  exit 1
+fi
+
 cd "$root/app"
 npm ci
 VITE_BASE="/${repo}/" npm run build

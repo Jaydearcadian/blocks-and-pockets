@@ -1,6 +1,6 @@
 import { getAddress, parseEther } from 'viem';
 import { describe, expect, it } from 'vitest';
-import { AGENT, OWNER, VENDOR } from './config';
+import { AGENT, OWNER, VAULT, VENDOR } from './config';
 import {
   ACTIONS,
   actionById,
@@ -328,6 +328,17 @@ describe('action registry', () => {
 });
 
 describe('review before signing', () => {
+  it('names the vault the transaction goes to, for the owner and for the operator', () => {
+    const ownerDef = actionById('fundPocket');
+    const ownerCtx = ctxFor(setupSnapshot(), OWNER);
+    const ov = { block: '3', amount: '3' };
+    expect(reviewOf(ownerDef, ov, ownerCtx, prepare(ownerDef, ov, ownerCtx)).vault).toBe(VAULT);
+    const opDef = actionById('requestTransfer');
+    const opCtx = ctxFor(withOperator(), AGENT);
+    const pv = { block: '3', payee: VENDOR, amount: '0.5', evidence: 'INV-0001' };
+    expect(reviewOf(opDef, pv, opCtx, prepare(opDef, pv, opCtx)).vault).toBe(VAULT);
+  });
+
   it('names the owner wallet, the block, and the MUSD the owner sends', () => {
     const def = actionById('fundPocket');
     const values = { block: '3', amount: '3' };
