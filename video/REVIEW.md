@@ -1,6 +1,6 @@
 # Review: Blocks & Pockets demo film
 
-Render: `renders/blocks-and-pockets-demo.mp4`, 43.5 s, 1920x1080, 30 fps, H.264 + AAC, 6.8 MB.
+Render: `renders/blocks-and-pockets-demo.mp4`, 43.5 s, 1920x1080, 30 fps, H.264 + AAC, 7.5 MB.
 
 ## Creative calls
 - Built storyline A ("One loan, many pockets"). B ("The no") and C ("Into the block") are in `STORYLINES.md`.
@@ -15,12 +15,12 @@ Render: `renders/blocks-and-pockets-demo.mp4`, 43.5 s, 1920x1080, 30 fps, H.264 
 - `hyperframes check`: passed, 0 errors, 0 warnings (lint, runtime, layout, motion, contrast, craft, audio).
 - Looked at: review beat sheet, all four seam strips, phone sheet, and frames at every QA time in `SPEC.md`; six frames decoded from the final MP4.
 - Sound: bundled Pixabay SFX only (clicks, pops, whooshes, two bass hits, a riser). Onsets measured in the render line up with the on-screen actions. Nobody has listened to it.
-- No music bed: the HeyGen music catalog needs `npx hyperframes auth login`.
+- Music bed: HeyGen catalog track "Minimalist, premium, corporate tech" (75 s), entered at 26 s so its outro lands on the end card, volume 0.5, 1.5 s fade-out. Render measured at -15.2 LUFS integrated, -1.1 dBFS peak.
+- No voiceover yet: HeyGen voices need a paid HyperFrames plan on this account; local Kokoro is the free option.
 
 ## Weakest shot
 - 15.0-15.3 s: the empty panel before its contents arrive reads as a brief blank card.
 - The panel's 28-30 px labels are readable at 1080p but small on a phone.
 
 ## With more time
-- A music bed under the whole film (sign in, then `/media-use` bgm).
 - Bigger type in the Vendor pocket panel (fewer fields, or a second punch-in on the mandate fields).
