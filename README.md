@@ -3,6 +3,7 @@
 One Bitcoin-backed loan, split into blocks of spending money. An operator key spends from its block only inside the owner's limits, and the owner can revoke that key at any time.
 
 **Live dashboard (Mezo testnet):** https://jaydearcadian.github.io/blocks-and-pockets/  
+The site opens on a landing page. The dashboard is at `#/app`, and any `?vault=` link opens it directly.  
 **Repo:** https://github.com/Jaydearcadian/blocks-and-pockets
 
 Built on [Mezo](https://mezo.org) for the AKINDO Mezo Builders Wave 2 (Track 1, DeFi). The vault holds one Mezo Trove (BTC collateral, MUSD debt) and splits the borrowed MUSD into "blocks". Each block has its own cash, its own recipients and its own spending limits.
@@ -63,7 +64,7 @@ forge test          # 40 tests, about 45 s; the fork tests read the public Mezo 
 cd app
 npm ci
 npm run typecheck
-npm test            # 138 tests
+npm test            # 142 tests
 npm run build
 npm run dev         # http://127.0.0.1:5173
 ```

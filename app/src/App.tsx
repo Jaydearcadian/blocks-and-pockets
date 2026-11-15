@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import demoRecord from './demo-record.json';
 import { ActionsSection } from './ActionsPanel';
+import Landing from './Landing';
+import { routeFor } from './route';
 import { CHAIN_ID, DEMO_VAULT, IS_DEMO_VAULT, RPC_URL, VAULT, VAULT_WARNING } from './config';
 import { balancesSubtitle, vaultNotice } from './guide';
 import { useNow, useSnapshot, useVaultStatus, useVerification } from './hooks';
@@ -42,16 +44,28 @@ const VIEW_NOTES: Record<string, string> = {
 // Another vault has no checkpoints, so it opens on the live view.
 const DEFAULT_VIEW = IS_DEMO_VAULT ? 'setup' : 'live';
 
+function subscribeHash(onChange: () => void): () => void {
+  window.addEventListener('hashchange', onChange);
+  return () => window.removeEventListener('hashchange', onChange);
+}
+
 export default function App() {
+  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash);
+  return routeFor(hash, window.location.search) === 'landing' ? <Landing /> : <AppRoute />;
+}
+
+function AppRoute() {
   const status = useVaultStatus();
   if (status.state === 'ok') return <Dashboard />;
   return (
     <>
       <main className="app">
-        <section className="hero" id="top">
+        <section className="hero hero-slim" id="top">
           <div className="hero-copy">
-            <p className="kicker accent">Mezo testnet · testnet only</p>
-            <h1 id="hero-title">Blocks &amp; Pockets</h1>
+            <a className="back-link" href="#/">
+              ← Blocks &amp; Pockets
+            </a>
+            <h1 id="hero-title">Vault check</h1>
           </div>
         </section>
         {status.state === 'checking' ? (
@@ -86,8 +100,9 @@ function Dashboard() {
   const notice = vaultNotice(VAULT);
 
   return (
-    <>
-      <TopBar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
+    <div className="shell">
+      <Sidebar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
+      <div className="shell-main">
       <main className="app">
         <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
         {VAULT_WARNING && (
@@ -168,11 +183,12 @@ function Dashboard() {
         )}
       </main>
       <Footer />
-    </>
+      </div>
+    </div>
   );
 }
 
-function TopBar({
+function Sidebar({
   live,
   snap,
   failing,
@@ -184,36 +200,34 @@ function TopBar({
   checkedAt?: number;
 }) {
   return (
-    <header className="topbar">
-      <div className="topbar-inner">
-        <a className="brand" href="#top">
-          <Logo />
-          <span className="brand-text">
-            <strong>Blocks &amp; Pockets</strong>
-            <small>Testnet dashboard</small>
+    <aside className="sidebar">
+      <a className="brand" href="#/">
+        <Logo />
+        <span className="brand-text">
+          <strong>Blocks &amp; Pockets</strong>
+          <small>Testnet dashboard</small>
+        </span>
+      </a>
+      <nav className="nav" aria-label="Page sections">
+        {NAV_ITEMS.map((n) => (
+          <a key={n.id} href={`#${n.id}`}>
+            {n.label}
+          </a>
+        ))}
+      </nav>
+      <div className="status">
+        {live ? (
+          <span className="live">
+            <span className="dot" aria-hidden="true" />
+            Live
           </span>
-        </a>
-        <nav className="nav" aria-label="Page sections">
-          {NAV_ITEMS.map((n) => (
-            <a key={n.id} href={`#${n.id}`}>
-              {n.label}
-            </a>
-          ))}
-        </nav>
-        <div className="status">
-          {live ? (
-            <span className="live">
-              <span className="dot" aria-hidden="true" />
-              Live
-            </span>
-          ) : (
-            <Chip tone="violet">Replay</Chip>
-          )}
-          {snap && <Chip tone="muted">Block {snap.block.toLocaleString('en-US')}</Chip>}
-          <Updated live={live} failing={failing} checkedAt={checkedAt} />
-        </div>
+        ) : (
+          <Chip tone="violet">Replay</Chip>
+        )}
+        {snap && <Chip tone="muted">Block {snap.block.toLocaleString('en-US')}</Chip>}
+        <Updated live={live} failing={failing} checkedAt={checkedAt} />
       </div>
-    </header>
+    </aside>
   );
 }
 
@@ -239,7 +253,7 @@ function Hero({ snap, refusals }: { snap?: Snapshot; refusals?: number }) {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-copy">
         <p className="kicker accent">Mezo testnet · testnet only</p>
-        <h1 id="hero-title">Blocks &amp; Pockets</h1>
+        <h1 id="hero-title">Vault overview</h1>
         <p className="lead">
           One Bitcoin-backed loan, split into blocks of spending money. An operator key spends from its block only inside
           the owner&apos;s limits, and the owner can revoke that key at any time.
