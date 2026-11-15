@@ -8,3 +8,11 @@ app/dist/
 
 # Python bytecode.
 __pycache__/
+
+# Dev-only scratch: wallet bridge tooling, local fork logs, and local env files.
+scripts/wallet-e2e/
+logs/anvil-fork*.log
+logs/fork-*
+logs/wallet-e2e-*
+app/.env
+app/.env.local
