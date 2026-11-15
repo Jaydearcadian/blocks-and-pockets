@@ -28,6 +28,19 @@ export const client = createPublicClient({
 
 const recipientSet = parseAbiItem('event RecipientSet(uint256 indexed blockId, address indexed to, bool allowed)');
 
+// Mezo's RPC refuses an eth_getLogs range longer than 10,000 blocks. Each window stays under that limit.
+const LOG_WINDOW = 9_000n;
+
+// Inclusive windows that cover from..to in order, with no gaps or overlaps. Empty when from is after to.
+export function logWindows(from: bigint, to: bigint): [bigint, bigint][] {
+  const windows: [bigint, bigint][] = [];
+  for (let start = from; start <= to; start += LOG_WINDOW) {
+    const end = start + LOG_WINDOW - 1n;
+    windows.push([start, end < to ? end : to]);
+  }
+  return windows;
+}
+
 type AtBlock = { blockNumber?: bigint };
 const at = (blockNumber?: bigint): AtBlock => (blockNumber === undefined ? {} : { blockNumber });
 
@@ -38,6 +51,7 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
   const V = { address: VAULT, abi: vaultAbi } as const;
 
   const [
+    owner,
     ratioBps,
     threshold,
     blockCount,
@@ -59,6 +73,7 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
     vaultBtc,
     ownerBtc,
   ] = await Promise.all([
+    client.readContract({ ...V, functionName: 'owner', ...o }),
     client.readContract({ ...V, functionName: 'targetRatioBps', ...o }),
     client.readContract({ ...V, functionName: 'approvalThreshold', ...o }),
     client.readContract({ ...V, functionName: 'blockCount', ...o }),
@@ -92,13 +107,13 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
     ),
   );
 
-  // Payee allowlist from RecipientSet events. The last event for a block and payee wins.
-  const logs = await client.getLogs({
-    address: VAULT,
-    event: recipientSet,
-    fromBlock: deployBlock,
-    toBlock: blockNumber ?? 'latest',
-  });
+  // Payee allowlist from RecipientSet events. The last event for a block and payee wins, so the windows
+  // are read in block order.
+  const last = head.number ?? blockNumber ?? deployBlock;
+  const logs = [];
+  for (const [fromBlock, toBlock] of logWindows(deployBlock, last)) {
+    logs.push(...(await client.getLogs({ address: VAULT, event: recipientSet, fromBlock, toBlock })));
+  }
   const allowed = new Map<string, { addr: string; ok: boolean }>();
   for (const log of logs) {
     const { blockId, to, allowed: ok } = log.args;
@@ -139,6 +154,7 @@ export async function readSnapshot(blockNumber: bigint | undefined, deployBlock:
   return {
     block: Number(head.number ?? 0n),
     timestamp: Number(head.timestamp),
+    owner,
     troveActive,
     coll: position[0],
     principal: position[1],
@@ -179,7 +195,7 @@ export async function retryRead<T>(read: () => Promise<T>, tries = 4): Promise<T
 }
 
 // Revert data from a viem error chain. Nested errors keep it in `data`, or in `data.data`.
-function revertData(err: unknown): Hex | undefined {
+export function revertData(err: unknown): Hex | undefined {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let cur: any = err;
   for (let depth = 0; depth < 10 && cur; depth++) {

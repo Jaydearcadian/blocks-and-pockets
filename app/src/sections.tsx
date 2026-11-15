@@ -200,21 +200,24 @@ export function PaymentsTable({
   );
 }
 
-export function PipelineSteps({ counts }: { counts: Record<number, number> }) {
+// Counts are refusals from the demo record. Other vaults pass none, and the count line is left out.
+export function PipelineSteps({ counts }: { counts?: Record<number, number> }) {
   return (
     <ol className="pipeline">
       {PIPELINE.map((s, i) => {
         const step = i + 1;
-        const n = counts[step] ?? 0;
+        const n = counts?.[step] ?? 0;
         return (
           <li key={s.title} className="card pipe-step">
             <span className="pipe-num">{step}</span>
             <div>
               <h4>{s.title}</h4>
               <p className="muted small">{s.rule}</p>
-              <p className={`small ${n > 0 ? 'refused-count' : 'muted'}`}>
-                {n > 0 ? `${n} refused in the record` : 'No refusals in the record'}
-              </p>
+              {counts && (
+                <p className={`small ${n > 0 ? 'refused-count' : 'muted'}`}>
+                  {n > 0 ? `${n} refused in the record` : 'No refusals in the record'}
+                </p>
+              )}
             </div>
           </li>
         );

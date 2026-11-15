@@ -20,6 +20,26 @@ export const vaultAbi = parseAbi([
   'function groupCapacity() view returns (uint256)',
   'function moneyblocks(uint256 blockId) view returns (string name, bool exists, bool cross, uint256 cash, uint256 reserved, uint256 debtCap, uint256 principal, uint256 interest, address operator, bool mandateActive, uint64 expiry, uint256 perTxCap, uint256 totalCap, uint256 committed, uint256 spent)',
   'function payments(uint256 paymentId) view returns (uint256 blockId, address to, uint256 amount, bytes32 evidence, uint8 status)',
+  // Writes. Signatures match src/MoneyblocksVault.sol.
+  'function createMoneyblock(string name, bool cross, uint256 debtCap) returns (uint256 blockId)',
+  'function setRecipient(uint256 blockId, address to, bool allowed)',
+  'function grantMandate(uint256 blockId, address operator, uint256 perTxCap, uint256 totalCap, uint64 expiry)',
+  'function revokeMandate(uint256 blockId)',
+  'function setApprovalThreshold(uint256 amount)',
+  'function fundPocket(uint256 blockId, uint256 amount)',
+  'function fundOverhead(uint256 amount)',
+  'function recoverUnallocatedMUSD(address to)',
+  'function sweepBTC(address to)',
+  'function requestTransfer(uint256 blockId, address to, uint256 amount, bytes32 evidence) returns (uint256 paymentId)',
+  'function approvePayment(uint256 paymentId)',
+  'function cancelPayment(uint256 paymentId)',
+  'function openGroup(uint256 blockId, uint256 amount) payable',
+  'function addCollateral() payable',
+  'function borrow(uint256 blockId, uint256 amount)',
+  'function repay(uint256 blockId, uint256 amount)',
+  'function accrue()',
+  'function closeGroup()',
+  'function sweepResidualMUSD(address to) returns (uint256 amount)',
   'event RecipientSet(uint256 indexed blockId, address indexed to, bool allowed)',
   'error NotOwner()',
   'error NotOperator(uint256 blockId)',
@@ -53,6 +73,10 @@ export const vaultAbi = parseAbi([
   'error ZeroAddress()',
 ]);
 
-export const erc20Abi = parseAbi(['function balanceOf(address account) view returns (uint256)']);
+export const erc20Abi = parseAbi([
+  'function balanceOf(address account) view returns (uint256)',
+  'function allowance(address owner, address spender) view returns (uint256)',
+  'function approve(address spender, uint256 amount) returns (bool)',
+]);
 
 export const priceFeedAbi = parseAbi(['function fetchPrice() view returns (uint256)']);

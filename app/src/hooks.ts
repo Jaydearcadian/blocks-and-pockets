@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { readSnapshot, retryRead, verifyRow } from './chain';
 import { DEPLOY_BLOCK, POLL_MS } from './config';
 import type { RecordRow, Snapshot, Verified } from './model';
@@ -13,17 +13,23 @@ function describe(err: unknown): string {
 }
 
 // Live view (atBlock undefined) polls the newest block. A checkpoint is read at its block until it loads.
-export function useSnapshot(atBlock: bigint | undefined): ChainState {
+// Each change of refreshKey reads again at once, and keeps the last good read on screen meanwhile.
+export function useSnapshot(atBlock: bigint | undefined, refreshKey = 0): ChainState {
   const [state, setState] = useState<ChainState>({});
+  const reload = useRef<() => void>(() => undefined);
 
   useEffect(() => {
     let active = true;
     let busy = false;
+    let queued = false;
     let loaded = false;
     setState({});
 
-    const load = async () => {
-      if (busy) return;
+    const load = async (): Promise<void> => {
+      if (busy) {
+        queued = true;
+        return;
+      }
       busy = true;
       try {
         const snap = await retryRead(() => readSnapshot(atBlock, DEPLOY_BLOCK));
@@ -34,8 +40,13 @@ export function useSnapshot(atBlock: bigint | undefined): ChainState {
       } finally {
         busy = false;
       }
+      if (queued && active) {
+        queued = false;
+        await load();
+      }
     };
 
+    reload.current = () => void load();
     void load();
     const timer = window.setInterval(
       () => {
@@ -45,9 +56,14 @@ export function useSnapshot(atBlock: bigint | undefined): ChainState {
     );
     return () => {
       active = false;
+      reload.current = () => undefined;
       window.clearInterval(timer);
     };
   }, [atBlock]);
+
+  useEffect(() => {
+    if (refreshKey > 0) reload.current();
+  }, [refreshKey]);
 
   return state;
 }

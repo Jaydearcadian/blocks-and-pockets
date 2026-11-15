@@ -1,0 +1,13 @@
+
+ RUN  v3.2.7 /root/moneyblocks-spike/app
+
+ ✓ src/actions.test.ts (36 tests) 18ms
+ ✓ src/model.test.ts (26 tests) 27ms
+ ✓ src/txflow.test.ts (12 tests) 25ms
+ ✓ src/wallet.test.ts (13 tests) 10ms
+
+ Test Files  4 passed (4)
+      Tests  87 passed (87)
+   Start at  16:44:00
+   Duration  982ms (transform 231ms, setup 0ms, collect 1.39s, tests 80ms, environment 1ms, prepare 215ms)
+

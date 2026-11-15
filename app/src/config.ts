@@ -1,11 +1,20 @@
+import { isAddress } from 'viem';
+
 export const CHAIN_ID = 31611;
 export const RPC_URL = 'https://rpc.test.mezo.org';
 export const EXPLORER_URL = 'https://explorer.test.mezo.org';
 export const POLL_MS = 20_000;
-// The vault's deploy block. Payee events are read from here.
-export const DEPLOY_BLOCK = 16777200n;
 
-export const VAULT = '0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641' as const;
+// The dashboard shows the demo vault unless VITE_VAULT_ADDRESS names another testnet vault.
+// VITE_DEPLOY_BLOCK is that vault's deploy block. Payee events are read from there.
+export const DEMO_VAULT = '0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641' as const;
+const env = import.meta.env as Record<string, string | undefined>;
+const vaultOverride = env.VITE_VAULT_ADDRESS?.trim();
+if (vaultOverride && !isAddress(vaultOverride)) throw new Error('VITE_VAULT_ADDRESS is not an address');
+export const VAULT = (vaultOverride || DEMO_VAULT) as `0x${string}`;
+export const IS_DEMO_VAULT = VAULT.toLowerCase() === DEMO_VAULT.toLowerCase();
+export const DEPLOY_BLOCK = BigInt(env.VITE_DEPLOY_BLOCK?.trim() || '16777200');
+
 export const MUSD = '0x118917a40FAF1CD7a13dB0Ef56C86De7973Ac503' as const;
 export const PRICE_FEED = '0x86bCF0841622a5dAC14A313a15f96A95421b9366' as const;
 export const BORROWER_OPERATIONS = '0xCdF7028ceAB81fA0C6971208e83fa7872994beE5' as const;

@@ -37,6 +37,7 @@ export type PaymentView = {
 export type Snapshot = {
   block: number;
   timestamp: number;
+  owner: string;
   troveActive: boolean;
   coll: bigint;
   principal: bigint;
@@ -241,6 +242,42 @@ export function refusalText(name: string, args: readonly unknown[] = []): { titl
       return { title: `Block ${big(0)} still reserves ${amt(big(1))} for a pending payment` };
     case 'PaymentNotPending':
       return { title: `Payment ${big(0)} is not pending` };
+    case 'NotOwner':
+      return { title: 'Only the owner can do this' };
+    case 'ZeroAmount':
+      return { title: 'The amount must be more than zero' };
+    case 'InvalidMandate':
+      return { title: 'The mandate needs an operator and an expiry in the future' };
+    case 'BlockNotFound':
+      return { title: `Block ${big(0)} does not exist` };
+    case 'BlockNotCross':
+      return { title: `Block ${big(0)} is a prefunded slice, not a shared-Trove block` };
+    case 'GroupNotOpen':
+      return { title: 'No group Trove is open' };
+    case 'GroupAlreadyOpen':
+      return { title: 'A group Trove is already open' };
+    case 'LedgerDirty':
+      return { title: 'The ledger still tracks an earlier group' };
+    case 'InterestUnsettled':
+      return { title: `Block ${big(0)} cannot cover ${amt(big(1))} of interest from ${amt(big(2))} free` };
+    case 'RepayExceedsPrincipal':
+      return { title: `Repaying ${amt(big(1))} is more than block ${big(0)}'s ${amt(big(2))} principal` };
+    case 'GroupStillOpen':
+      return { title: 'The group is still open. Close it first' };
+    case 'NoGroupClosed':
+      return { title: 'No group has closed yet' };
+    case 'ZeroAddress':
+      return { title: 'The address is the zero address' };
+    case 'TransferFailed':
+      return { title: 'A MUSD transfer failed' };
+    case 'SendFailed':
+      return { title: 'Sending BTC failed' };
+    case 'PendingRewards':
+      return { title: 'Mezo reports pending rewards, so the ledger waits' };
+    case 'LedgerMismatch':
+      return { title: "The vault's ledger does not match Mezo" };
+    case 'CashMismatch':
+      return { title: "The vault's MUSD does not match its ledger" };
     default:
       return { title: name };
   }
