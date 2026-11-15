@@ -1,7 +1,7 @@
 {
   "summary": {
-    "generated_utc": "2026-11-15 12:22:11",
-    "chain_head": 16795998,
+    "generated_utc": "2026-11-15 12:48:42",
+    "chain_head": 16796379,
     "scan_from": 16794930,
     "transactions": 113,
     "succeeded": 58,
@@ -350,7 +350,7 @@
       "PendingRewards",
       "TransferFailed"
     ],
-    "elapsed_s": 24.3
+    "elapsed_s": 27.6
   },
   "transactions": [
     {
