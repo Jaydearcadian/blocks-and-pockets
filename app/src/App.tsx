@@ -4,6 +4,8 @@ import { ActionsSection } from './ActionsPanel';
 import { CHAIN_ID, IS_DEMO_VAULT, RPC_URL } from './config';
 import { useNow, useSnapshot, useVerification } from './hooks';
 import { BlockCard, ContractList, PaymentsTable, PipelineSteps, RecordTable, TieOutList } from './sections';
+import { NAV } from './nav';
+import { Glossary, StartHere } from './StartHere';
 import { Callout, Chip, Kpi, Logo, Section, Spinner, Stack, type Tone } from './ui';
 import { useWallet } from './wallet';
 import {
@@ -23,18 +25,6 @@ import {
 const demo = demoRecord as DemoRecord;
 // The demo record describes the demo vault only. Other vaults show no record and no demo counts.
 const DEMO_ROWS: RecordRow[] = IS_DEMO_VAULT ? demo.rows : [];
-
-const NAV = [
-  { id: 'trove', label: 'Trove' },
-  { id: 'balances', label: 'Balances' },
-  { id: 'blocks', label: 'Blocks' },
-  { id: 'payments', label: 'Payments' },
-  { id: 'actions', label: 'Actions' },
-  { id: 'guardrails', label: 'Checks' },
-  { id: 'record', label: 'Record' },
-  { id: 'tieouts', label: 'Tie-outs' },
-  { id: 'contracts', label: 'Contracts' },
-];
 
 const NAV_ITEMS = IS_DEMO_VAULT ? NAV : NAV.filter((n) => n.id !== 'record');
 
@@ -67,6 +57,7 @@ export default function App() {
       <TopBar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
       <main className="app">
         <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
+        <StartHere />
         {IS_DEMO_VAULT && <Replay view={view} onPick={setView} />}
         {snap ? (
           <>
@@ -116,6 +107,7 @@ export default function App() {
             >
               <TieOutList items={tieOuts(snap)} />
             </Section>
+            <Glossary />
             <Section id="contracts" title="Contracts" subtitle={`Mezo testnet, chain ${CHAIN_ID}. Explorer links open in a new tab.`}>
               <ContractList />
             </Section>
