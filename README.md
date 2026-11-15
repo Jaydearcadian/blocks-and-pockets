@@ -33,7 +33,7 @@ The contract is `src/MoneyblocksVault.sol` (670 lines, Solidity 0.8.24, 30 custo
 
 | Vault | Address | Role |
 |---|---|---|
-| Live-run vault | [`0x4c716Be7F97EaC8B3dc1c5593649a387751C9835`](https://explorer.test.mezo.org/address/0x4c716Be7F97EaC8B3dc1c5593649a387751C9835) | The 15 Nov live run. Closed at the end, balances swept to zero. |
+| Live-run vault | [`0x4c716Be7F97EaC8B3dc1c5593649a387751C9835`](https://explorer.test.mezo.org/address/0x4c716Be7F97EaC8B3dc1c5593649a387751C9835) ([open in the dashboard](https://jaydearcadian.github.io/blocks-and-pockets/?vault=0x4c716Be7F97EaC8B3dc1c5593649a387751C9835&from=16794952)) | The 15 Nov live run. Closed at the end, balances swept to zero. |
 | Fresh vault | [`0x26c046472294Cf3F147e82E36217dE68609bc08B`](https://explorer.test.mezo.org/address/0x26c046472294Cf3F147e82E36217dE68609bc08B) | Wallet-bridge check on 14 Nov. Closed. |
 | Demo vault | [`0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641`](https://explorer.test.mezo.org/address/0xeb5feb3be4252a27fFF7cffdCfd0cE3DbBDD1641) | The dashboard's default vault (37 recorded rows, 7 refused). Empty. |
 
