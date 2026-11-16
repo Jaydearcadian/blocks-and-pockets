@@ -14,7 +14,7 @@ From the repo root:
 
 ```sh
 forge build
-forge test                      # 40 tests, about 45 s. The fork tests read https://rpc.test.mezo.org.
+forge test                      # 48 tests, about 45 s. The fork tests read https://rpc.test.mezo.org.
 scripts/check-vault-artifact.sh      # run after any contract change; fails if app/src/vaultArtifact.json is stale
 python3 scripts/live_run_check.py   # read-only, expects "15 of 15" PASS; rewrites logs/live-run/transactions.md
 ```
@@ -24,7 +24,7 @@ From `app/`:
 ```sh
 npm ci
 npm run typecheck
-npm test                        # vitest, node environment, logic tests only (142)
+npm test                        # vitest, node environment, logic tests only (145)
 npm run build                   # typecheck, then vite build
 npm run dev                     # http://127.0.0.1:5173
 ```
@@ -35,7 +35,7 @@ All of these must exit 0 before you commit.
 
 - `src/MoneyblocksVault.sol`: the vault. `src/TroveVaultSpike.sol`: the earlier spike.
 - `test/`: Foundry tests (`MoneyblocksSlice.t.sol`, `MoneyblocksGroupFork.t.sol`, `TroveVaultFork.t.sol`).
-- `app/src/`: React, TypeScript and viem. `config.ts` holds chain and contract addresses. `chain.ts` and `model.ts` read and derive state. `txflow.ts` and `actions.ts` build wallet transactions behind a review step.
+- `app/src/`: React, TypeScript, viem, wagmi and RainbowKit (`wagmiConfig.ts`, `useWallet.ts`, `testWallet.ts`). `config.ts` holds chain and contract addresses. `chain.ts` and `model.ts` read and derive state. `txflow.ts` and `actions.ts` build wallet transactions behind a review step.
 - `logs/live-run/`: evidence from the 15 Nov live run. Treat as a record. Regenerate only with the checker.
 - `scripts/`: demo and live-run tooling. `live_run.py` sends transactions.
 

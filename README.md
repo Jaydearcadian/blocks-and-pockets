@@ -52,7 +52,11 @@ This reads the public testnet RPC, decodes the chain and compares it with the ru
 
 Actions on a vault are limited to its owner and operator wallets, so a visitor cannot act on the demo vault. The dashboard's Actions section has a **Deploy my vault** card instead. Connect a Mezo testnet wallet, deploy a fresh copy of the contract (testnet gas only), open the link it gives you, and you are the owner. You can then create blocks, set payees, grant mandates (you can name your own address as the operator) and change the approval threshold. Moving MUSD needs MUSD in your wallet, and opening a Trove group needs about 0.048 BTC.
 
-How well this is tested: on a local fork of Mezo testnet, with the price feed mocked (its oracle does not run on a fork) and an injected test wallet, I deployed a vault from the dashboard, opened it by link, was recognised as its owner, and created a block through the review step. A fork cannot run repay or close, so those owner actions were not tried this way. It has **not** been run with a consumer wallet or as a live testnet deployment from the hosted page. Before any non-demo vault is opened, the page compares its on-chain code with the compiled contract and refuses look-alikes; unit tests cover that check, the link parsing and the deploy request.
+The wallet button (sidebar) uses [RainbowKit](https://rainbowkit.com) and [wagmi](https://wagmi.sh). The dialog lists browser wallets (MetaMask, Rabby, Coinbase Wallet, any injected wallet). Mobile wallets through WalletConnect are off until a `VITE_WALLETCONNECT_PROJECT_ID` is set, and the hosted build has none.
+
+**Try the wallet actions without a real wallet.** `scripts/local-wallet/start.sh` starts a local fork of Mezo testnet where anvil signs for the owner and operator addresses, so no key is involved and nothing reaches the public network. Run the dashboard with `VITE_RPC_URL=http://127.0.0.1:8545` and `VITE_TEST_WALLET_ACCOUNTS=<owner>,<operator>` (see `app/.env.example`), then choose "Local test wallet" in the connect dialog. That option exists only when the page and the RPC are both on this machine.
+
+How well this is tested: on a local fork of Mezo testnet, with the price feed mocked (its oracle does not run on a fork) and an injected test wallet, I deployed a vault from the dashboard, opened it by link, was recognised as its owner, and created a block through the review step. A fork cannot run repay or close, so those owner actions were not tried this way. The same connect, review and sign path was run again after the move to RainbowKit and wagmi, with the local test wallet on a fork (a block was created). It has **not** been run with a consumer wallet such as MetaMask or as a live testnet deployment from the hosted page. Before any non-demo vault is opened, the page compares its on-chain code with the compiled contract and refuses look-alikes; unit tests cover that check, the link parsing and the deploy request.
 
 ## Build and test
 
@@ -60,11 +64,11 @@ Needs Node 26 with npm, and [Foundry](https://getfoundry.sh) 1.9 or newer (forge
 
 ```sh
 forge build
-forge test          # 40 tests, about 45 s; the fork tests read the public Mezo testnet RPC
+forge test          # 48 tests, about 45 s; the fork tests read the public Mezo testnet RPC
 cd app
 npm ci
 npm run typecheck
-npm test            # 142 tests
+npm test            # 145 tests
 npm run build
 npm run dev         # http://127.0.0.1:5173
 ```
@@ -77,11 +81,15 @@ To open another testnet vault, add `?vault=0x…&from=<deploy block>` to the pag
 |---|---|
 | `src/MoneyblocksVault.sol` | The vault contract. |
 | `src/TroveVaultSpike.sol` | The earlier one-Trove spike. |
-| `test/` | Foundry tests: 14 slice, 22 group fork (oracle mocked), 4 earlier spike fork. |
+| `test/` | Foundry tests: 19 slice, 25 group fork (oracle mocked), 4 earlier spike fork. |
 | `app/` | React + TypeScript + viem dashboard. Reads the chain directly. |
 | `scripts/live_run.py` | The runner that produced the live run. It sends testnet transactions. Do not run `run` without the owner's wallets. |
 | `scripts/live_run_check.py` | The read-only checker. |
+| `scripts/local-wallet/` | Starts a local fork of Mezo testnet for trying wallet actions with no real wallet. |
 | `logs/live-run/` | Live-run record: report, JSON, ledger, run log, dashboard capture. |
+| `docs/THREAT-MODEL.md` | Roles, defences, what is not covered, and each custom error mapped to its tests and live refusals. |
+| `SECURITY.md` | How to report a problem, key handling, known limits. |
+| `feedback.md` | Notes for Mezo from this build. |
 | `docs/superpowers/` | Design and plan for the judge-ready push. |
 
 ## Limits and what is not built

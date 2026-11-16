@@ -1,8 +1,8 @@
-import { useState, useSyncExternalStore } from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useState } from 'react';
 import demoRecord from './demo-record.json';
 import { ActionsSection } from './ActionsPanel';
-import Landing from './Landing';
-import { routeFor } from './route';
+import { WalletProviders } from './WalletProviders';
 import { CHAIN_ID, DEMO_VAULT, IS_DEMO_VAULT, RPC_URL, VAULT, VAULT_WARNING } from './config';
 import { balancesSubtitle, vaultNotice } from './guide';
 import { useNow, useSnapshot, useVaultStatus, useVerification } from './hooks';
@@ -10,7 +10,7 @@ import { BlockCard, ContractList, PaymentsTable, PipelineSteps, RecordTable, Tie
 import { NAV } from './nav';
 import { Glossary, StartHere } from './StartHere';
 import { Callout, Chip, Kpi, Logo, Section, Spinner, Stack, type Tone } from './ui';
-import { useWallet } from './wallet';
+import { useWallet } from './useWallet';
 import {
   collateralRatioBps,
   fmtAmount,
@@ -44,14 +44,12 @@ const VIEW_NOTES: Record<string, string> = {
 // Another vault has no checkpoints, so it opens on the live view.
 const DEFAULT_VIEW = IS_DEMO_VAULT ? 'setup' : 'live';
 
-function subscribeHash(onChange: () => void): () => void {
-  window.addEventListener('hashchange', onChange);
-  return () => window.removeEventListener('hashchange', onChange);
-}
-
-export default function App() {
-  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash);
-  return routeFor(hash, window.location.search) === 'landing' ? <Landing /> : <AppRoute />;
+export default function DashboardApp() {
+  return (
+    <WalletProviders>
+      <AppRoute />
+    </WalletProviders>
+  );
 }
 
 function AppRoute() {
@@ -215,6 +213,9 @@ function Sidebar({
           </a>
         ))}
       </nav>
+      <div className="wallet-slot">
+        <ConnectButton label="Connect wallet" accountStatus="address" chainStatus="none" showBalance={false} />
+      </div>
       <div className="status">
         {live ? (
           <span className="live">
