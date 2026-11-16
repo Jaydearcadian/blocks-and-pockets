@@ -34,7 +34,10 @@ touch "$tmp/.nojekyll"
 cd "$tmp"
 git init -q -b gh-pages
 git add -A
-git commit -q -m "Publish dashboard build"
+# The throwaway repo has no identity of its own, so it takes the author set in this repo.
+name="$(git -C "$root" config user.name)"
+email="$(git -C "$root" config user.email)"
+git -c user.name="$name" -c user.email="$email" commit -q -m "Publish dashboard build"
 git remote add origin "$(git -C "$root" remote get-url origin)"
 git push -q --force origin gh-pages
 echo "published gh-pages for ${repo}"
