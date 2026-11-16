@@ -138,9 +138,29 @@ contract MoneyblocksGroupForkTest {
         vault.borrow(s, 10e18);
     }
 
+    function testDrawRequiresAnOpenGroup() public {
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.GroupNotOpen.selector));
+        vault.borrow(a, 10e18);
+    }
+
     // ---------------------------------------------------------------------
     // Interest, repayment, shortfall, and close
     // ---------------------------------------------------------------------
+
+    function testRepayAbovePrincipalRejects() public {
+        _open();
+        vm.expectRevert(
+            abi.encodeWithSelector(MoneyblocksVault.RepayExceedsPrincipal.selector, a, 2_000e18, 1_801.8e18)
+        );
+        vault.repay(a, 2_000e18);
+    }
+
+    function testCloseRefusedWhileABlockCannotCoverItsDebt() public {
+        _open();
+        // Block A borrowed 1,800 and owes 1,801.8 with the fee. Its cash is 1,800, so it is short.
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.DebtNotCovered.selector, a, 1_801.8e18, 1_800e18));
+        vault.closeGroup();
+    }
 
     function testInterestSplitsAndRepayPaysInterestFirst() public {
         _fundMUSD();

@@ -182,4 +182,48 @@ contract MoneyblocksSliceTest {
         vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.NotOwner.selector));
         vault.grantMandate(pocket, STRANGER, 1_000e18, 1_000e18, uint64(block.timestamp + 1 days));
     }
+
+    function testGrantMandateRejectsPastExpiryAndZeroOperator() public {
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.InvalidMandate.selector));
+        vault.grantMandate(pocket, OPERATOR, 800e18, 2_000e18, uint64(block.timestamp));
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.InvalidMandate.selector));
+        vault.grantMandate(pocket, address(0), 800e18, 2_000e18, uint64(block.timestamp + 1 days));
+    }
+
+    function testUnknownBlockRejects() public {
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.BlockNotFound.selector, 99));
+        vault.setRecipient(99, VENDOR, true);
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.BlockNotFound.selector, 99));
+        vault.fundPocket(99, 1e18);
+    }
+
+    function testZeroAmountRejects() public {
+        vm.prank(OPERATOR);
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.ZeroAmount.selector));
+        vault.requestTransfer(pocket, VENDOR, 0, bytes32("invoice-18"));
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.ZeroAmount.selector));
+        vault.fundPocket(pocket, 0);
+    }
+
+    function testRegrantKeepsWhatWasAlreadyCommitted() public {
+        vm.prank(OPERATOR);
+        vault.requestTransfer(pocket, VENDOR, 400e18, bytes32("invoice-19"));
+        // A new grant sets new limits but does not reset what the block has already committed.
+        vault.grantMandate(pocket, OPERATOR, 800e18, 500e18, uint64(block.timestamp + 30 days));
+        vm.prank(OPERATOR);
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.MandateTotalCapExceeded.selector, 101e18, 100e18));
+        vault.requestTransfer(pocket, VENDOR, 101e18, bytes32("invoice-20"));
+    }
+
+    function testPendingPaymentCannotBeApprovedAfterExpiry() public {
+        vm.prank(OPERATOR);
+        uint256 id = vault.requestTransfer(pocket, VENDOR, 600e18, bytes32("invoice-21"));
+        vm.warp(block.timestamp + 31 days);
+        vm.expectRevert(abi.encodeWithSelector(MoneyblocksVault.MandateExpired.selector, pocket));
+        vault.approvePayment(id);
+        // The owner can still cancel it and release the reservation.
+        vault.cancelPayment(id);
+        (, uint256 reserved, , ) = vault.bucketOf(pocket);
+        require(reserved == 0, "reservation released");
+    }
 }
