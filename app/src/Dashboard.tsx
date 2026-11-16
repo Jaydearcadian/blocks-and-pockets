@@ -101,6 +101,9 @@ function Dashboard() {
     <div className="shell">
       <Sidebar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
       <div className="shell-main">
+      <header className="topbar">
+        <ConnectButton label="Connect wallet" accountStatus="address" chainStatus="icon" showBalance={false} />
+      </header>
       <main className="app">
         <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
         {VAULT_WARNING && (
@@ -213,9 +216,6 @@ function Sidebar({
           </a>
         ))}
       </nav>
-      <div className="wallet-slot">
-        <ConnectButton label="Connect wallet" accountStatus="address" chainStatus="none" showBalance={false} />
-      </div>
       <div className="status">
         {live ? (
           <span className="live">

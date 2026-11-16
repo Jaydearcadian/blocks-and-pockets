@@ -1141,6 +1141,11 @@ code {
     margin: 0 0 0 auto;
     padding: 6px 10px;
   }
+
+  .topbar {
+    position: static;
+    padding: 8px 16px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -1961,11 +1966,17 @@ code {
   .lp-window, .lp-seg { animation: none; }
 }
 
-.wallet-slot {
-  padding: 12px 16px 0;
-}
-.wallet-slot button {
-  font-family: inherit;
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 56px;
+  padding: 8px 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
 }
 
 .route-loading {
