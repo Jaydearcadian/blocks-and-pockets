@@ -21,4 +21,4 @@ Notes from building Blocks & Pockets on Mezo testnet (chain 31611) for the AKIND
 
 - Publish the testnet contract addresses and ABIs in one machine-readable file.
 - Document how a contract owner is expected to handle a liquidated Trove. This vault does not model it, because there is no way to exercise it safely on testnet.
-- Offer contract source verification on the testnet explorer, with the solc settings that Mezo's own contracts use. (Whether this works for `via_ir` builds is untested here.)
+- Say in the docs that Blockscout source verification works on the testnet explorer for a `via_ir` build. It did here with `forge verify-contract --verifier blockscout --verifier-url https://api.explorer.test.mezo.org/api/` (solc 0.8.24, 200 optimizer runs, `--via-ir`).

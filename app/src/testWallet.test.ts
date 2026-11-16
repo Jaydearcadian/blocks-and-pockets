@@ -87,6 +87,19 @@ describe('test wallet requests', () => {
     expect(() => w.use(5)).toThrow(/No test account/);
   });
 
+  it('announces a chain change made in the wallet, and then refuses to send', async () => {
+    const { w } = wallet();
+    await w.request({ method: 'eth_requestAccounts' });
+    const changed = vi.fn();
+    w.on?.('chainChanged', changed);
+    w.setChain(1);
+    expect(changed).toHaveBeenCalledWith('0x1');
+    expect(await w.request({ method: 'eth_chainId' })).toBe('0x1');
+    await expect(
+      w.request({ method: 'eth_sendTransaction', params: [{ from: OWNER }] }),
+    ).rejects.toMatchObject({ code: 4901 });
+  });
+
   it('does not send before the page connects', async () => {
     const { w } = wallet();
     await expect(

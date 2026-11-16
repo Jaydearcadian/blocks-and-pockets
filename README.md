@@ -40,6 +40,8 @@ The contract is `src/MoneyblocksVault.sol` (669 lines, Solidity 0.8.24, 30 custo
 
 **Live run, 15 Nov 2026:** 113 owner and operator transactions, **58 succeeded and 55 were refused on purpose** (each refusal tests a guard). All 19 write functions succeeded at least once. 26 of the 30 custom errors were reached on chain. Not reached: `LedgerDirty`, `LedgerMismatch`, `PendingRewards`, `TransferFailed`. Liquidation was not exercised. Every transaction, with its decoded call, result and explorer link, is in [`logs/live-run/transactions.md`](logs/live-run/transactions.md).
 
+The live-run vault's source is verified on the Mezo testnet explorer (Blockscout, solc 0.8.24, `via_ir`, 200 optimizer runs): open its [Contract tab](https://explorer.test.mezo.org/address/0x4c716Be7F97EaC8B3dc1c5593649a387751C9835?tab=contract). The explorer lists the other two vaults as the same contract by matching bytecode, not as separately verified.
+
 ### Check it yourself (read-only)
 
 ```sh
@@ -68,7 +70,7 @@ forge test          # 48 tests, about 45 s; the fork tests read the public Mezo 
 cd app
 npm ci
 npm run typecheck
-npm test            # 145 tests
+npm test            # 146 tests
 npm run build
 npm run dev         # http://127.0.0.1:5173
 ```
@@ -86,7 +88,7 @@ To open another testnet vault, add `?vault=0x…&from=<deploy block>` to the pag
 | `scripts/live_run.py` | The runner that produced the live run. It sends testnet transactions. Do not run `run` without the owner's wallets. |
 | `scripts/live_run_check.py` | The read-only checker. |
 | `scripts/local-wallet/` | Starts a local fork of Mezo testnet for trying wallet actions with no real wallet. |
-| `logs/live-run/` | Live-run record: report, JSON, ledger, run log, dashboard capture. |
+| `logs/live-run/` | Live-run record: report, JSON, ledger, run log, dashboard capture. `logs/README.md` says which other logs are evidence and which are old working output. |
 | `docs/THREAT-MODEL.md` | Roles, defences, what is not covered, and each custom error mapped to its tests and live refusals. |
 | `SECURITY.md` | How to report a problem, key handling, known limits. |
 | `feedback.md` | Notes for Mezo from this build. |

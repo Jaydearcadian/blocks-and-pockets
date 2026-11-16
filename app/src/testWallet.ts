@@ -17,6 +17,8 @@ export type TestWalletOptions = {
 export type TestWallet = Eip1193Provider & {
   // Makes another listed account the active one and announces it, as a wallet's account switcher would.
   use: (index: number) => void;
+  // Moves the wallet to another chain and announces it, as a user switching network in the wallet would.
+  setChain: (id: number) => void;
 };
 
 const BLOCKED = /^(eth_sign|eth_signTypedData|personal_)/;
@@ -112,6 +114,10 @@ export function createTestWallet(options: TestWalletOptions): TestWallet {
     },
     removeListener(event, fn) {
       listeners[event] = (listeners[event] ?? []).filter((f) => f !== fn);
+    },
+    setChain(id) {
+      chain = id;
+      emit('chainChanged', toHex(chain));
     },
     use(index) {
       if (!Number.isInteger(index) || index < 0 || index >= accounts.length) {

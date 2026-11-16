@@ -1,4 +1,5 @@
 import { lazy, Suspense, useSyncExternalStore } from 'react';
+import { ErrorBoundary } from './ErrorBoundary';
 import Landing from './Landing';
 import { routeFor } from './route';
 
@@ -15,7 +16,9 @@ export default function App() {
   if (routeFor(hash, window.location.search) === 'landing') return <Landing />;
   return (
     <Suspense fallback={<div className="route-loading">Loading the dashboard</div>}>
-      <Dashboard />
+      <ErrorBoundary>
+        <Dashboard />
+      </ErrorBoundary>
     </Suspense>
   );
 }
