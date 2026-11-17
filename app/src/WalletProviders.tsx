@@ -8,7 +8,7 @@ import { buildWagmiConfig } from './wagmiConfig';
 const config = buildWagmiConfig();
 const queryClient = new QueryClient();
 const theme = lightTheme({
-  accentColor: '#4338ca',
+  accentColor: '#1f5c45',
   accentColorForeground: '#ffffff',
   borderRadius: 'medium',
   fontStack: 'system',

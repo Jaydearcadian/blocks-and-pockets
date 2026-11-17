@@ -11,14 +11,18 @@ function subscribeHash(onChange: () => void): () => void {
   return () => window.removeEventListener('hashchange', onChange);
 }
 
+// One element for every render, so a hash change between dashboard views does not re-render the wallet providers.
+// Re-rendering them makes wagmi's Hydrate update RainbowKit state mid-render.
+const dashboard = (
+  <Suspense fallback={<div className="route-loading">Loading the dashboard</div>}>
+    <ErrorBoundary>
+      <Dashboard />
+    </ErrorBoundary>
+  </Suspense>
+);
+
 export default function App() {
   const hash = useSyncExternalStore(subscribeHash, () => window.location.hash);
   if (routeFor(hash, window.location.search) === 'landing') return <Landing />;
-  return (
-    <Suspense fallback={<div className="route-loading">Loading the dashboard</div>}>
-      <ErrorBoundary>
-        <Dashboard />
-      </ErrorBoundary>
-    </Suspense>
-  );
+  return dashboard;
 }

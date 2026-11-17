@@ -57,16 +57,18 @@ export function Section({
   children,
 }: {
   id: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   children: ReactNode;
 }) {
   return (
     <section id={id} className="section">
-      <header className="section-head">
-        <h2>{title}</h2>
-        {subtitle && <p className="muted">{subtitle}</p>}
-      </header>
+      {title && (
+        <header className="section-head">
+          <h2>{title}</h2>
+          {subtitle && <p className="muted">{subtitle}</p>}
+        </header>
+      )}
       {children}
     </section>
   );

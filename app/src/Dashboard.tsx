@@ -1,5 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from 'react';
 import demoRecord from './demo-record.json';
 import { ActionsSection } from './ActionsPanel';
 import { WalletProviders } from './WalletProviders';
@@ -7,7 +7,6 @@ import { CHAIN_ID, DEMO_VAULT, IS_DEMO_VAULT, RPC_URL, VAULT, VAULT_WARNING } fr
 import { balancesSubtitle, vaultNotice } from './guide';
 import { useNow, useSnapshot, useVaultStatus, useVerification } from './hooks';
 import { BlockCard, ContractList, PaymentsTable, PipelineSteps, RecordTable, TieOutList } from './sections';
-import { NAV } from './nav';
 import { Glossary, StartHere } from './StartHere';
 import { Callout, Chip, Kpi, Logo, Section, Spinner, Stack, type Tone } from './ui';
 import { useWallet } from './useWallet';
@@ -24,12 +23,48 @@ import {
   type RecordRow,
   type Snapshot,
 } from './model';
+import { nextView, parseHash, viewHref, viewsFor, type View, type ViewId } from './views';
 
 const demo = demoRecord as DemoRecord;
 // The demo record describes the demo vault only. Other vaults show no record and no demo counts.
 const DEMO_ROWS: RecordRow[] = IS_DEMO_VAULT ? demo.rows : [];
 
-const NAV_ITEMS = IS_DEMO_VAULT ? NAV : NAV.filter((n) => n.id !== 'record');
+const VIEW_LIST = viewsFor(IS_DEMO_VAULT);
+
+function subscribeHash(onChange: () => void): () => void {
+  window.addEventListener('hashchange', onChange);
+  return () => window.removeEventListener('hashchange', onChange);
+}
+
+function useView(): { view: ViewId; section?: string } {
+  const hash = useSyncExternalStore(subscribeHash, () => window.location.hash, () => '');
+  return parseHash(hash);
+}
+
+// Scrolls once per view or section change: to the top for a view, to the section for an old anchor once it renders.
+function useScrollOnNavigate(view: ViewId, section: string | undefined, ready: boolean) {
+  const done = useRef('');
+  useEffect(() => {
+    const key = `${view}|${section ?? ''}`;
+    if (done.current === key) return;
+    if (section) {
+      const el = document.getElementById(section);
+      if (!el) return;
+      el.scrollIntoView({ block: 'start' });
+    } else {
+      window.scrollTo({ top: 0 });
+    }
+    done.current = key;
+  }, [view, section, ready]);
+}
+
+function scrollToSection(e: MouseEvent<HTMLAnchorElement>, id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+}
 
 const VIEW_NOTES: Record<string, string> = {
   live: 'The vault as of the newest Mezo testnet block, which is after the demo. Refreshes every 20 seconds.',
@@ -86,115 +121,176 @@ function AppRoute() {
 const shortVault = (a: string): string => `${a.slice(0, 8)}…${a.slice(-6)}`;
 
 function Dashboard() {
-  const [view, setView] = useState(DEFAULT_VIEW);
+  const [point, setPoint] = useState(DEFAULT_VIEW);
   const [refresh, setRefresh] = useState(0);
+  const { view, section } = useView();
+  const current = VIEW_LIST.find((v) => v.id === view) ?? VIEW_LIST[0];
+  const next = nextView(view);
   const wallet = useWallet();
-  const checkpoint = IS_DEMO_VAULT ? demo.checkpoints.find((c) => c.id === view) : undefined;
+  const checkpoint = IS_DEMO_VAULT ? demo.checkpoints.find((c) => c.id === point) : undefined;
   const live = checkpoint === undefined;
   const { snap, error, checkedAt } = useSnapshot(checkpoint ? BigInt(checkpoint.block) : undefined, refresh);
   const verified = useVerification(DEMO_ROWS);
   const refusals = DEMO_ROWS.filter((r) => r.result === 'refused').length;
   const steps = refusalSteps(DEMO_ROWS, verified);
   const notice = vaultNotice(VAULT);
+  useScrollOnNavigate(view, section, Boolean(snap));
 
   return (
     <div className="shell">
-      <Sidebar live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
+      <Sidebar view={current} live={live} snap={snap} failing={Boolean(error)} checkedAt={checkedAt} />
       <div className="shell-main">
-      <header className="topbar">
-        <ConnectButton label="Connect wallet" accountStatus="address" chainStatus="icon" showBalance={false} />
-      </header>
-      <main className="app">
-        <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} />
-        {VAULT_WARNING && (
-          <Callout tone="warn" title="Link adjusted">
-            {VAULT_WARNING}
-          </Callout>
-        )}
-        {notice && (
-          <Callout tone="info" title={notice.title}>
-            {notice.body}
-            {notice.recordUrl && (
-              <>
-                {' '}
-                <a href={notice.recordUrl} target="_blank" rel="noreferrer">
-                  Read the full transaction list.
-                </a>
-              </>
-            )}
-          </Callout>
-        )}
-        <StartHere />
-        {IS_DEMO_VAULT && <Replay view={view} onPick={setView} />}
-        {snap ? (
-          <>
-            {error && <Callout tone="warn" title="Latest read failed">Showing the last good read. Retrying.</Callout>}
-            <TroveSection snap={snap} />
-            <BalancesSection snap={snap} />
-            <Section
-              id="blocks"
-              title="Blocks"
-              subtitle="Shared Trove blocks draw on the group debt. A prefunded slice holds its own MUSD, paid out only under its mandate."
-            >
-              <div className="block-grid">
-                {snap.blocks.map((b, i) => (
-                  <BlockCard key={b.id} block={b} nowSeconds={snap.timestamp} delay={i * 80} />
-                ))}
-              </div>
-            </Section>
-            <Section
-              id="payments"
-              title="Payments"
-              subtitle={`Operator payments run through the same checks. Payments above ${fmtAmount(snap.threshold)} MUSD wait for the owner.`}
-            >
-              <PaymentsTable payments={snap.payments} blocks={snap.blocks} threshold={snap.threshold} />
-            </Section>
-            <ActionsSection snap={snap} live={live} wallet={wallet} onDone={() => setRefresh((n) => n + 1)} />
-            <Section
-              id="guardrails"
-              title="Eight checks on every payment"
-              subtitle="In the order the contract runs them. A failed check stops the payment and reverts the transaction."
-            >
-              <PipelineSteps counts={IS_DEMO_VAULT ? steps : undefined} />
-            </Section>
-            {IS_DEMO_VAULT && (
-              <Section
-                id="record"
-                title="On-chain record"
-                subtitle="Every transaction in the demo. Each receipt is checked against Mezo, and each refusal reason is decoded from chain data."
-              >
-                <RecordTable rows={demo.rows} verified={verified} phases={demo.phases} />
-                <p className="muted small source-line">Source logs: {demo.sources.join(', ')}.</p>
-              </Section>
-            )}
-            <Section
-              id="tieouts"
-              title="Ledger tie-outs"
-              subtitle="Five checks that the vault's books agree with Mezo and with each other. They run on every read."
-            >
-              <TieOutList items={tieOuts(snap)} />
-            </Section>
-            <Glossary />
-            <Section id="contracts" title="Contracts" subtitle={`Mezo testnet, chain ${CHAIN_ID}. Explorer links open in a new tab.`}>
-              <ContractList owner={snap.owner} isDemo={IS_DEMO_VAULT} />
-            </Section>
-          </>
-        ) : (
-          <Loading error={error} block={checkpoint?.block} />
-        )}
-      </main>
-      <Footer />
+        <header className="topbar">
+          {IS_DEMO_VAULT && <CheckpointPicker point={point} onPick={setPoint} />}
+          <div className="topbar-wallet">
+            <ConnectButton label="Connect wallet" accountStatus="address" chainStatus="icon" showBalance={false} />
+          </div>
+        </header>
+        <main className="app" aria-labelledby="hero-title">
+          {view === 'overview' ? <Hero snap={snap} refusals={IS_DEMO_VAULT ? refusals : undefined} /> : <ViewHead view={current} />}
+          {VAULT_WARNING && (
+            <Callout tone="warn" title="Link adjusted">
+              {VAULT_WARNING}
+            </Callout>
+          )}
+          {view === 'overview' && notice && (
+            <Callout tone="info" title={notice.title}>
+              {notice.body}
+              {notice.recordUrl && (
+                <>
+                  {' '}
+                  <a href={notice.recordUrl} target="_blank" rel="noreferrer">
+                    Read the full transaction list.
+                  </a>
+                </>
+              )}
+            </Callout>
+          )}
+          {view === 'overview' && <StartHere />}
+          {view === 'overview' && IS_DEMO_VAULT && <Replay view={point} onPick={setPoint} />}
+          {snap ? (
+            <>
+              {error && <Callout tone="warn" title="Latest read failed">Showing the last good read. Retrying.</Callout>}
+              {view === 'overview' && (
+                <>
+                  <TroveSection snap={snap} />
+                  <BalancesSection snap={snap} />
+                </>
+              )}
+              {view === 'blocks' && (
+                <>
+                  <Section
+                    id="blocks"
+                    title="Blocks"
+                    subtitle="Shared Trove blocks draw on the group debt. A prefunded slice holds its own MUSD, paid out only under its mandate."
+                  >
+                    <div className="block-grid">
+                      {snap.blocks.map((b, i) => (
+                        <BlockCard key={b.id} block={b} nowSeconds={snap.timestamp} delay={i * 80} />
+                      ))}
+                    </div>
+                  </Section>
+                  <Section
+                    id="payments"
+                    title="Payments"
+                    subtitle={`Operator payments run through the same checks. Payments above ${fmtAmount(snap.threshold)} MUSD wait for the owner.`}
+                  >
+                    <PaymentsTable payments={snap.payments} blocks={snap.blocks} threshold={snap.threshold} />
+                  </Section>
+                </>
+              )}
+              {view === 'actions' && (
+                <ActionsSection snap={snap} live={live} wallet={wallet} onDone={() => setRefresh((n) => n + 1)} />
+              )}
+              {view === 'verify' && (
+                <>
+                  <Section
+                    id="guardrails"
+                    title="Eight checks on every payment"
+                    subtitle="In the order the contract runs them. A failed check stops the payment and reverts the transaction."
+                  >
+                    <PipelineSteps counts={IS_DEMO_VAULT ? steps : undefined} />
+                  </Section>
+                  {IS_DEMO_VAULT && (
+                    <Section
+                      id="record"
+                      title="On-chain record"
+                      subtitle="Every transaction in the demo. Each receipt is checked against Mezo, and each refusal reason is decoded from chain data."
+                    >
+                      <RecordTable rows={demo.rows} verified={verified} phases={demo.phases} />
+                      <p className="muted small source-line">Source logs: {demo.sources.join(', ')}.</p>
+                    </Section>
+                  )}
+                  <Section
+                    id="tieouts"
+                    title="Ledger tie-outs"
+                    subtitle="Five checks that the vault's books agree with Mezo and with each other. They run on every read."
+                  >
+                    <TieOutList items={tieOuts(snap)} />
+                  </Section>
+                </>
+              )}
+              {view === 'reference' && (
+                <>
+                  <Glossary />
+                  <Section id="contracts" title="Contracts" subtitle={`Mezo testnet, chain ${CHAIN_ID}. Explorer links open in a new tab.`}>
+                    <ContractList owner={snap.owner} isDemo={IS_DEMO_VAULT} />
+                  </Section>
+                </>
+              )}
+            </>
+          ) : (
+            <Loading error={error} block={checkpoint?.block} />
+          )}
+          {next && (
+            <a className="pager" href={viewHref(next.id)}>
+              <span className="pager-label">Next</span>
+              <strong>
+                {next.title} <span aria-hidden="true">→</span>
+              </strong>
+              <span className="pager-blurb">{next.blurb}</span>
+            </a>
+          )}
+        </main>
+        <Footer />
       </div>
     </div>
   );
 }
 
+function ViewHead({ view }: { view: View }) {
+  return (
+    <section className="view-head" id="top">
+      <h1 id="hero-title">{view.title}</h1>
+      <p className="lead">{view.blurb}</p>
+    </section>
+  );
+}
+
+function CheckpointPicker({ point, onPick }: { point: string; onPick: (id: string) => void }) {
+  return (
+    <label className="point-picker">
+      <span>Viewing</span>
+      <select value={point} onChange={(e) => onPick(e.target.value)}>
+        <option value="live">Live, newest block</option>
+        {demo.checkpoints.map((c, i) => (
+          <option key={c.id} value={c.id}>
+            Step {i + 1}: {c.label} (block {c.block.toLocaleString('en-US')})
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
 function Sidebar({
+  view,
   live,
   snap,
   failing,
   checkedAt,
 }: {
+  view: View;
   live: boolean;
   snap?: Snapshot;
   failing: boolean;
@@ -209,12 +305,26 @@ function Sidebar({
           <small>Testnet dashboard</small>
         </span>
       </a>
-      <nav className="nav" aria-label="Page sections">
-        {NAV_ITEMS.map((n) => (
-          <a key={n.id} href={`#${n.id}`}>
-            {n.label}
-          </a>
-        ))}
+      <nav className="nav" aria-label="Dashboard views">
+        {VIEW_LIST.map((v) => {
+          const on = v.id === view.id;
+          return (
+            <div key={v.id} className="nav-group">
+              <a href={viewHref(v.id)} aria-current={on ? 'page' : undefined}>
+                {v.label}
+              </a>
+              {on && v.sections.length > 1 && (
+                <div className="nav-sub">
+                  {v.sections.map((s) => (
+                    <a key={s.id} href={`#${s.id}`} onClick={(e) => scrollToSection(e, s.id)}>
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </nav>
       <div className="status">
         {live ? (
@@ -260,8 +370,8 @@ function Hero({ snap, refusals }: { snap?: Snapshot; refusals?: number }) {
           the owner&apos;s limits, and the owner can revoke that key at any time.
         </p>
         <p className="muted small">
-          Every number on this page is read from Mezo testnet at the block shown. The Actions section sends owner and
-          operator transactions from a connected testnet wallet, and each one is checked with Mezo first.
+          Every number here is read from Mezo testnet at the block shown. The Actions view sends owner and operator
+          transactions from a connected testnet wallet, and each one is checked with Mezo first.
         </p>
       </div>
       <div className="hero-stats">

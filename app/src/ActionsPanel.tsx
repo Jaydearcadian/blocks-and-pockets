@@ -137,11 +137,7 @@ export function ActionsSection({
   );
 
   return (
-    <Section
-      id="actions"
-      title="Wallet actions"
-      subtitle="Owner and operator actions on this vault. Testnet only. Each action is checked with Mezo first, so a refused action sends nothing."
-    >
+    <Section id="actions">
       <WalletBar wallet={wallet} ctx={ctx} />
       {!owner && ops.length === 0 && <OwnVault wallet={wallet} />}
       {!live && (
