@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 
 export type Tone = 'ok' | 'warn' | 'bad' | 'info' | 'muted' | 'btc' | 'violet';
 
@@ -82,21 +82,23 @@ export function Callout({ tone, title, children }: { tone: Tone; title: string; 
 }
 
 export function Logo() {
+  // Unique ids: a gradient defined inside a hidden copy (display: none) would leave the visible copies unpainted.
+  const id = useId();
   return (
     <svg className="logo" viewBox="0 0 40 40" aria-hidden="true">
       <defs>
-        <linearGradient id="lg-a" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={`${id}a`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#7dd3fc" />
           <stop offset="1" stopColor="#5eead4" />
         </linearGradient>
-        <linearGradient id="lg-b" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#fbbf24" />
           <stop offset="1" stopColor="#f7931a" />
         </linearGradient>
       </defs>
       <rect x="4" y="4" width="32" height="32" rx="10" fill="#0b1222" stroke="rgba(255,255,255,0.12)" />
-      <rect x="9" y="8" width="14" height="10" rx="3" fill="url(#lg-a)" />
-      <rect x="9" y="21" width="22" height="11" rx="3" fill="url(#lg-b)" />
+      <rect x="9" y="8" width="14" height="10" rx="3" fill={`url(#${id}a)`} />
+      <rect x="9" y="21" width="22" height="11" rx="3" fill={`url(#${id}b)`} />
       <rect x="25" y="21" width="6" height="11" rx="2" fill="#0b1222" opacity="0.35" />
     </svg>
   );
